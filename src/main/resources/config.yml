@@ -1,0 +1,17 @@
+
+# Worlds where XP boosts wont be given even if the player has permission
+disabled-worlds:
+  - lobby
+  - mining
+
+# Requires permission 'qxpboost.active'
+# Then permission 'qxpboost.<boost>' dictates the exp multiplier
+# Create whatever boost you want
+boosts:
+  default: 1.25
+  double: 2
+  triple: 3
+  vip: 1.5
+#  mvp: 2.5
+#  legend: 5
+#  god: 10
