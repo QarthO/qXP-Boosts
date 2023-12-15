@@ -20,10 +20,10 @@ exp-sources:
   - UNKNOWN
   - VILLAGER_TRADE
 
-# Requires permission 'qxpboost.player' in order to receive an active boost
+# Requires permission 'qxpboosts.player' in order to receive an active boost
 requires-permission: true
 
-# Give the permission 'qxpboost.boost.<boost-name>' for the player to receive the boost when its active
+# Give the permission 'qxpboosts.boost.<boost-name>' for the player to receive the boost when its active
 # Note: A player can only have 1 boost at a time
 boosts:
   default: 1.25

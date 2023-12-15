@@ -6,15 +6,15 @@ import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class qXPBoosts extends JavaPlugin {
+public final class qXpBoosts extends JavaPlugin {
 
-    private static qXPBoosts instance;
+    private static qXpBoosts instance;
     public qConfig config;
     public qLogger logger;
 
     public BoostManager boostManager;
 
-    public static qXPBoosts getInstance(){
+    public static qXpBoosts getInstance(){
         return instance;
     }
 

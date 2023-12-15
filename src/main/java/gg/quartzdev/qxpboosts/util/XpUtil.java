@@ -5,7 +5,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-public class ExpUtil {
+public class XpUtil {
 
     public static void givePlayer(Player player, int amountGained, double multiplier, boolean chat, boolean actionBar, Sound sound){
 
@@ -16,7 +16,7 @@ public class ExpUtil {
         MiniMessage mm = MiniMessage.miniMessage();
 
         if(chat) {
-            String message = Language.EXP_CHAT_GAIN.toString()
+            String message = Language.XP_CHAT_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<boost-name>", boost.getName())
@@ -26,7 +26,7 @@ public class ExpUtil {
         }
 
         if(actionBar){
-            String message = Language.EXP_ACTIONBAR_GAIN.toString()
+            String message = Language.XP_ACTIONBAR_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<boost-name>", boost.getName())
