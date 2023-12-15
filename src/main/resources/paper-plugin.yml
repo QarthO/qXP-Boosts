@@ -1,0 +1,4 @@
+name: qExpBoosts
+version: '${project.version}'
+main: gg.quartzdev.qexpboosts.qExpBoosts
+api-version: '1.20'
