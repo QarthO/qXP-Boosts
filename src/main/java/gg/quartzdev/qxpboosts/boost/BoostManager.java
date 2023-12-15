@@ -1,6 +1,6 @@
-package gg.quartzdev.qexpboosts.boost;
+package gg.quartzdev.qxpboosts.boost;
 
-import gg.quartzdev.qexpboosts.qPermission;
+import gg.quartzdev.qxpboosts.qPermission;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
@@ -34,9 +34,6 @@ public class BoostManager {
             }
 
         }
-
-
-
     }
 
 }

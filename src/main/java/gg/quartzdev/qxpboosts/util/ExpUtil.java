@@ -1,0 +1,42 @@
+package gg.quartzdev.qxpboosts.util;
+
+import gg.quartzdev.qxpboosts.boost.Boost;
+import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Sound;
+import org.bukkit.entity.Player;
+
+public class ExpUtil {
+
+    public static void givePlayer(Player player, int amountGained, double multiplier, boolean chat, boolean actionBar, Sound sound){
+
+        Boost boost = new Boost("", 1);
+
+        double bonus = amountGained * multiplier;
+        player.giveExp((int) bonus);
+        MiniMessage mm = MiniMessage.miniMessage();
+
+        if(chat) {
+            String message = Language.EXP_CHAT_GAIN.toString()
+                    .replaceAll("<xp>", String.valueOf(bonus))
+                    .replaceAll("<player>", player.getName())
+                    .replaceAll("<boost-name>", boost.getName())
+                    .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+                    .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
+            player.sendMessage(mm.deserialize(message));
+        }
+
+        if(actionBar){
+            String message = Language.EXP_ACTIONBAR_GAIN.toString()
+                    .replaceAll("<xp>", String.valueOf(bonus))
+                    .replaceAll("<player>", player.getName())
+                    .replaceAll("<boost-name>", boost.getName())
+                    .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+                    .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
+            player.sendActionBar(mm.deserialize(message));
+        }
+
+        if(sound != null)
+            player.playSound(player.getLocation(), sound, 1.0F, 1.0F);
+
+    }
+}

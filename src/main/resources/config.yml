@@ -4,14 +4,31 @@ disabled-worlds:
   - lobby
   - mining
 
-# Requires permission 'qxpboost.active'
-# Then permission 'qxpboost.<boost>' dictates the exp multiplier
-# Create whatever boost you want
+# https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
+# List of XP sources that will be boosted
+# If you don't want the xp from a source to be boosted, just comment it out (put # in front)
+exp-sources:
+  - BLOCK_BREAK
+  - BREED
+  - CUSTOM
+  - ENTITY_DEATH
+  - EXP_BOTTLE
+  - FISHING
+  - FURNACE
+  - GRINDSTONE
+  - PLAYER_DEATH
+  - UNKNOWN
+  - VILLAGER_TRADE
+
+# Requires permission 'qxpboost.player' in order to receive an active boost
+requires-permission: true
+
+# Give the permission 'qxpboost.boost.<boost-name>' for the player to receive the boost when its active
+# Note: A player can only have 1 boost at a time
 boosts:
   default: 1.25
   double: 2
   triple: 3
-  vip: 1.5
-#  mvp: 2.5
-#  legend: 5
-#  god: 10
+#  vip: 5
+#  legend: 10
+#  <boost-name>: <multiplier>

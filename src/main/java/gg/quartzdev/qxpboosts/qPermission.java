@@ -1,4 +1,4 @@
-package gg.quartzdev.qexpboosts;
+package gg.quartzdev.qxpboosts;
 
 public enum qPermission {
 

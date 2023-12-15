@@ -1,4 +1,4 @@
-package gg.quartzdev.qexpboosts.listeners;
+package gg.quartzdev.qxpboosts.listeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

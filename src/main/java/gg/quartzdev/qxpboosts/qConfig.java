@@ -1,32 +1,29 @@
-package gg.quartzdev.qexpboosts;
+package gg.quartzdev.qxpboosts;
 
-import gg.quartzdev.qexpboosts.util.Language;
-import gg.quartzdev.qexpboosts.util.qLogger;
+import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.EntityType;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class qConfig {
 
-    qExpBoosts plugin;
+    qXPBoosts plugin;
     qLogger logger;
     FileConfiguration file;
 
     //    CONFIG OPTIONS
     String CONFIG_VERSION;
     boolean CHECK_UPDATES;
+    boolean REQUIRES_PERMISSION = true;
     Set<World> DISABLED_WORLDS;
-    boolean PLAYER_REQUIRES_PERMISSION = true;
 
     public qConfig() {
-        this.plugin = qExpBoosts.getInstance();
+        this.plugin = qXPBoosts.getInstance();
         this.logger = plugin.logger;
 
         this.file = plugin.getConfig();
@@ -76,7 +73,20 @@ public class qConfig {
     }
 
     public void loadPlayerRequiresPermission(){
-        this.PLAYER_REQUIRES_PERMISSION = this.file.getBoolean("player-requires-permission");
+        this.REQUIRES_PERMISSION = this.file.getBoolean("requires-permission");
+    }
+
+    public boolean requiresPermission(){
+        return this.REQUIRES_PERMISSION;
+    }
+
+    public void loadXpSources(){
+
+        List<String> xpSourceNames = this.file.getStringList("xp-sources");
+        for(String xpSourceName : xpSourceNames){
+
+        }
+
     }
 
 }

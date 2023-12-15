@@ -1,20 +1,20 @@
-package gg.quartzdev.qexpboosts;
+package gg.quartzdev.qxpboosts;
 
-import gg.quartzdev.qexpboosts.boost.BoostManager;
-import gg.quartzdev.qexpboosts.listeners.PlayerPickupExpListener;
-import gg.quartzdev.qexpboosts.util.qLogger;
+import gg.quartzdev.qxpboosts.boost.BoostManager;
+import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
+import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class qExpBoosts extends JavaPlugin {
+public final class qXPBoosts extends JavaPlugin {
 
-    private static qExpBoosts instance;
+    private static qXPBoosts instance;
     public qConfig config;
     public qLogger logger;
 
     public BoostManager boostManager;
 
-    public static qExpBoosts getInstance(){
+    public static qXPBoosts getInstance(){
         return instance;
     }
 
