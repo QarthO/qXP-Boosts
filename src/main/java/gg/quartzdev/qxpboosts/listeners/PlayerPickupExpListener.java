@@ -30,6 +30,7 @@ public class PlayerPickupExpListener implements Listener {
 
         Player player = event.getPlayer();
         World world = player.getWorld();
+
 //        World check
         if(config.isDisabledWorld(world)) {
             return;

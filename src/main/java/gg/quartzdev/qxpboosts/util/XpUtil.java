@@ -2,6 +2,7 @@ package gg.quartzdev.qxpboosts.util;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
@@ -18,13 +19,14 @@ public class XpUtil {
         MiniMessage mm = MiniMessage.miniMessage();
 
         DecimalFormat format = new DecimalFormat("0.#");
+        String strMultiplier = format.format(multiplier);
 
         if(chat) {
             String message = Language.XP_CHAT_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<boost-name>", boost.getName())
-                    .replaceAll("<boost-multiplier>", format.format(multiplier))
+                    .replaceAll("<boost-multiplier>", strMultiplier)
                     .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
             player.sendMessage(mm.deserialize(message));
         }
@@ -34,7 +36,7 @@ public class XpUtil {
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<boost-name>", boost.getName())
-                    .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+                    .replaceAll("<boost-multiplier>", strMultiplier)
                     .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
             player.sendActionBar(mm.deserialize(message));
         }

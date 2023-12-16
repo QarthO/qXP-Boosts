@@ -3,8 +3,8 @@ package gg.quartzdev.qxpboosts.util;
 public enum Language {
 
 //    Plugin info
-    CONSOLE_PREFIX("<gray>[<red>q<aqua>ExpBoosts<gray>]"),
-    CHAT_PREFIX("<red>q<aqua>ExpBoosts <bold><gray>></bold>"),
+    CONSOLE_PREFIX("<gray>[<red>q<aqua>XP-Boosts<gray>]"),
+    CHAT_PREFIX("<red>q<aqua>XP-Boosts <bold><gray>></bold>"),
     PLUGIN_INFO("<prefix> <green>Running version <gray><version></gray>"),
     RELOAD_COMPLETE("<prefix> <green>Config reloaded"),
 

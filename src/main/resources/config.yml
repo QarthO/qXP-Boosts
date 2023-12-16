@@ -7,7 +7,7 @@ disabled-worlds:
 # https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
 # List of XP sources that will be boosted
 # If you don't want the xp from a source to be boosted, just comment it out (put # in front)
-exp-sources:
+xp-sources:
   - BLOCK_BREAK
   - BREED
   - CUSTOM
