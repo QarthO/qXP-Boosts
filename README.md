@@ -1,13 +1,13 @@
 <p align="center">
-<a  href="https://modrinth.com/plugin/qExpBoosts" target="_blank">
+<a  href="https://modrinth.com/plugin/qXP-Boosts" target="_blank">
 <img alt="Modrinth Download Link" src="https://img.shields.io/badge/Download-00AF5C?logo=modrinth&logoColor=white&style=for-the-badge" height="32"></a>
  <a href="https://www.quartzdev.gg/discord/" target="_blank">
 <img alt="Discord Invite" src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white&style=for-the-badge" height="32"></a>
- <a href="https://github.com/QarthO/qExpBoosts" target="_blank">
+ <a href="https://github.com/QarthO/qXP-Boosts" target="_blank">
 <img alt="GitHub Source Code" src="https://img.shields.io/badge/Source-181717?logo=github&logoColor=white&style=for-the-badge" height="32"></a>
  <a href="https://www.quartzdev.gg/donate/" target="_blank">
 <img alt="Paypal Donation Link" src="https://img.shields.io/badge/Donate-00457C?logo=paypal&logoColor=white&style=for-the-badge" height="32"></a>
- <a href="https://modrinth.com/plugin/qExpBoosts/versions" target="_blank">
+ <a href="https://modrinth.com/plugin/qXP-Boosts/versions" target="_blank">
 <img alt="Supported Versions: 1.20-1.20.2" src="https://img.shields.io/badge/1.20.2-blue?style=for-the-badge&label=Minecraft Versions" height="32"></a>
 </p>
 
@@ -31,4 +31,4 @@
 
 This plugin uses <a href="https://bstats.org/" target="_blank">bStats</a>. You can opt-out in the bStats config
 <p align="center">
-<a href="https://bstats.org/plugin/bukkit/qGP-WitherTrust/" target="_blank"><img alt="bStats qGP-WitherTrust" src="https://bstats.org/signatures/bukkit/qGP-WitherTrust.svg"></a></p>
+<a href="https://bstats.org/plugin/bukkit/qXP-Boosts/" target="_blank"><img alt="bStats qGP-WitherTrust" src="https://bstats.org/signatures/bukkit/qXP-Boosts.svg"></a></p>

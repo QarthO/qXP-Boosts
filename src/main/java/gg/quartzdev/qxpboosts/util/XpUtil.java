@@ -5,22 +5,26 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
+
 public class XpUtil {
 
     public static void givePlayer(Player player, int amountGained, double multiplier, boolean chat, boolean actionBar, Sound sound){
 
-        Boost boost = new Boost("", 1);
+        Boost boost = new Boost("", 2);
 
         double bonus = amountGained * multiplier;
         player.giveExp((int) bonus);
         MiniMessage mm = MiniMessage.miniMessage();
+
+        DecimalFormat format = new DecimalFormat("0.#");
 
         if(chat) {
             String message = Language.XP_CHAT_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<boost-name>", boost.getName())
-                    .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+                    .replaceAll("<boost-multiplier>", format.format(multiplier))
                     .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
             player.sendMessage(mm.deserialize(message));
         }

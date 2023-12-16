@@ -1,9 +1,11 @@
 package gg.quartzdev.qxpboosts;
 
+import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.ExperienceOrb;
 
@@ -102,6 +104,15 @@ public class qConfig {
 
     public boolean isBoostedXpSource(ExperienceOrb.SpawnReason xpSource){
         return this.XP_SOURCES.contains(xpSource);
+    }
+
+    public Set<Boost> getBoosts(){
+        Set<Boost> boosts = new HashSet<>();
+        ConfigurationSection boostsSection = this.file.getConfigurationSection("boosts");
+        for(String boostName : boostsSection.getKeys(false)){
+            boosts.add(new Boost(boostName, (double) boostsSection.get(boostName)));
+        }
+        return boosts;
     }
 
 }

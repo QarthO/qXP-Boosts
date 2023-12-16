@@ -15,7 +15,14 @@ public enum Language {
 
 //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><boost-multiplier>x <green>XP"),
-    XP_CHAT_GAIN("<prefix> <green>Gained <blue><boost-multiplier>x <green>XP");
+    XP_CHAT_GAIN("<prefix> <green>Gained <blue><boost-multiplier>x <green>XP"),
+
+//    Boost
+    BOOST_INFO("<purple>   <boost-name> - <boost-status>"),
+    BOOST_STATUS_ACTIVE("<green>Active"),
+    BOOST_STATUS_DISABLED("<red>Disabled");
+
+
 
     private String message;
 
