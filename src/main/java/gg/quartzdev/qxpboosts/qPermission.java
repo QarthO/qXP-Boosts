@@ -2,9 +2,9 @@ package gg.quartzdev.qxpboosts;
 
 public enum qPermission {
 
-    PLAYER("qexpboosts.player"),
-    BOOST_DOUBLE("qexpboosts.boost.double"),
-    BOOST_TRIPLE("qexpboosts.boost.double");
+    PLAYER("qxpboosts.player"),
+    BOOST_DOUBLE("qxpboosts.boost.double"),
+    BOOST_TRIPLE("qxpboosts.boost.triple");
 
     private String permission;
 

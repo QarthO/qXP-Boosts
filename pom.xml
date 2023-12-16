@@ -9,7 +9,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>qExpBoosts</name>
+    <name>qXP-Boosts</name>
 
     <properties>
         <java.version>1.8</java.version>
