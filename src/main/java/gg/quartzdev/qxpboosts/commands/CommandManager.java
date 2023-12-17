@@ -30,9 +30,17 @@ public class CommandManager extends Command {
     @Override
     public boolean execute(@NotNull CommandSender sender, @NotNull String labelOrAlias, @NotNull String[] args) {
 
-        if(args.length >= 1)
-            if(args[0].equalsIgnoreCase("reload"))
+        if(args.length >= 1) {
+            if (args[0].equalsIgnoreCase("reload")) {
                 return (new CMDreload(args[0], labelOrAlias)).run(sender, args);
+            }
+            if (args[0].equalsIgnoreCase("list")) {
+                return (new CMDlist(args[0], labelOrAlias)).run(sender, args);
+            }
+//            if (args[0].equalsIgnoreCase("enable")) {
+//                return (new CMDreload(args[0], labelOrAlias)).run(sender, args);
+//            }
+        }
 
         return (new CMD(null, labelOrAlias)).run(sender, args);
 
