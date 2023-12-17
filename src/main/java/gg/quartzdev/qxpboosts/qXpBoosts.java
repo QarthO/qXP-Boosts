@@ -1,6 +1,7 @@
 package gg.quartzdev.qxpboosts;
 
 import gg.quartzdev.qxpboosts.boost.BoostManager;
+import gg.quartzdev.qxpboosts.commands.CommandManager;
 import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bstats.bukkit.Metrics;
@@ -32,6 +33,8 @@ public final class qXpBoosts extends JavaPlugin {
         this.boostManager = new BoostManager();
 
         registerHandlers();
+
+        new CommandManager(this.getPluginMeta().getName().toLowerCase());
     }
 
     @Override

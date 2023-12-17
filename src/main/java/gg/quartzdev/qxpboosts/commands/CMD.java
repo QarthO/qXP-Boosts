@@ -5,18 +5,17 @@ import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
-public class CMDreload extends qCMD {
+public class CMD extends qCMD {
 
-    public CMDreload(String name, String label) {
+    public CMD(String name, String label) {
         super(name, label);
         this.permissionGroup = "qxpboosts.admin";
-        this.permissionNode = "qxpboosts.command.reload";
+        this.permissionNode = "qxpboosts.command.info";
     }
 
     @Override
     public boolean logic(CommandSender sender, String[] args) {
-        qXpBoosts.getInstance().config.reload();
-        qUtil.sendMessage(sender, Language.RELOAD_COMPLETE);
+        qUtil.sendMessage(sender, Language.PLUGIN_INFO.parse("version", qXpBoosts.getInstance().getPluginMeta().getVersion()));
         return true;
     }
 
