@@ -1,5 +1,7 @@
 package gg.quartzdev.qxpboosts.commands;
 
+import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -37,9 +39,15 @@ public class CommandManager extends Command {
             if (args[0].equalsIgnoreCase("list")) {
                 return (new CMDlist(args[0], labelOrAlias)).run(sender, args);
             }
-//            if (args[0].equalsIgnoreCase("enable")) {
-//                return (new CMDreload(args[0], labelOrAlias)).run(sender, args);
-//            }
+            if (args[0].equalsIgnoreCase("enable")) {
+                return (new CMDenable(args[0], labelOrAlias)).run(sender, args);
+            }
+            if (args[0].equalsIgnoreCase("disable")) {
+                return (new CMDdisable(args[0], labelOrAlias)).run(sender, args);
+            }
+
+            qUtil.sendMessage(sender, Language.ERROR_CMD_NOT_FOUND.parse("cmd", args[0]));
+            return false;
         }
 
         return (new CMD(null, labelOrAlias)).run(sender, args);

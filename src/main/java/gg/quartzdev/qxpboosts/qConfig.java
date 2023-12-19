@@ -11,6 +11,7 @@ import org.bukkit.entity.ExperienceOrb;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 
 public class qConfig {
@@ -110,7 +111,7 @@ public class qConfig {
         Set<Boost> boosts = new HashSet<>();
         ConfigurationSection boostsSection = this.file.getConfigurationSection("boosts");
         for(String boostName : boostsSection.getKeys(false)){
-            boosts.add(new Boost(boostName, boostsSection.getDouble(boostName)));
+            boosts.add(new Boost(boostName.toLowerCase(Locale.ROOT), boostsSection.getDouble(boostName)));
         }
         return boosts;
     }

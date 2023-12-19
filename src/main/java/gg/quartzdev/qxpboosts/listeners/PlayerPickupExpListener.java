@@ -7,6 +7,7 @@ import gg.quartzdev.qxpboosts.qConfig;
 import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.XpUtil;
+import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -54,6 +55,7 @@ public class PlayerPickupExpListener implements Listener {
         }
 
 //        XP dropped from mobs from a spawner aren't boosted
+//        TODO: Add config option for this
         if(xpSource.equals(ExperienceOrb.SpawnReason.ENTITY_DEATH)){
             UUID entityId = xpOrb.getSourceEntityId();
             if(entityId != null){
@@ -70,11 +72,13 @@ public class PlayerPickupExpListener implements Listener {
 
         Boost boost = boostManager.getBoost(player);
 
+        if(!boostManager.isActive(boost)){
+            return;
+        }
+
         int amount = xpOrb.getExperience();
 
-        double multiplier = 2.0;
-
-        XpUtil.givePlayer(player, amount, multiplier, false, true, null);
+        XpUtil.givePlayer(player, amount, boost.getMultiplier(), false, true, null);
 
     }
 

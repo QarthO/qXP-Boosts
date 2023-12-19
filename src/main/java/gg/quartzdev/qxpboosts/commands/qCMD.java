@@ -16,6 +16,7 @@ public abstract class qCMD {
     public qCMD(String name, String label){
         this.name = name;
         this.label = label;
+        this.commandSyntax = "/" + label + " " + name;
     }
     public boolean run(CommandSender sender, String[] args){
         //        checks permission

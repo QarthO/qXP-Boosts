@@ -18,7 +18,7 @@ public class XpUtil {
         player.giveExp((int) bonus);
         MiniMessage mm = MiniMessage.miniMessage();
 
-        DecimalFormat format = new DecimalFormat("0.#");
+        DecimalFormat format = new DecimalFormat("0.##");
         String strMultiplier = format.format(multiplier);
 
         if(chat) {

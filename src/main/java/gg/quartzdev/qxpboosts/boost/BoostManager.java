@@ -5,8 +5,10 @@ import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.apache.commons.lang3.text.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -21,7 +23,6 @@ public class BoostManager {
     HashMap<String, Boost> boostsMap;
     HashMap<Player, Boost> playerTracker;
     Set<Boost> activeBoosts;
-    Boost defaultBoost;
 
 
     public BoostManager(){
@@ -32,7 +33,6 @@ public class BoostManager {
         this.boostsMap = new HashMap<>();
         this.playerTracker = new HashMap<>();
         this.activeBoosts = new HashSet<>();
-        this.defaultBoost = new Boost("default", 1.25);
 
         this.loadBoosts();
     }
@@ -41,10 +41,16 @@ public class BoostManager {
 
         Boost boost = playerTracker.get(player);
 
-        if(boost == null)
-            boost = defaultBoost;
+        if(boost == null) {
+            player.sendMessage("boost not found, assinging default boost");
+            boost = boostsMap.get("default");
+        }
 
         return boost;
+    }
+
+    public @Nullable Boost getBoost(String boostName){
+        return boostsMap.get(boostName);
     }
 
     public boolean isActive(Boost boost){
@@ -68,8 +74,6 @@ public class BoostManager {
 
     public Set<String> listBoosts(){
         Set<String> boostList = new HashSet<>();
-
-        boostList.add(this.getBoostInfo(this.defaultBoost));
 
         for(Boost boost : boostsMap.values())
             boostList.add(this.getBoostInfo(boost));

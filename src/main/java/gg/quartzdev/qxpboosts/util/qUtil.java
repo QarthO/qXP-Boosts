@@ -39,5 +39,4 @@ public class qUtil {
                 Placeholder.parsed("prefix", Language.CHAT_PREFIX.get())
         );
     }
-
 }
