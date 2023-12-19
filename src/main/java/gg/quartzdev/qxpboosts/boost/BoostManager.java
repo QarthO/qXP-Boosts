@@ -18,9 +18,9 @@ public class BoostManager {
     qConfig config;
     qLogger logger;
 
-    HashMap<String, Boost> boosts;
+    HashMap<String, Boost> boostsMap;
     HashMap<Player, Boost> playerTracker;
-    HashMap<Boost, Boolean> boostTracker;
+    Set<Boost> activeBoosts;
     Boost defaultBoost;
 
 
@@ -29,10 +29,12 @@ public class BoostManager {
         this.config = this.plugin.config;
         this.logger = this.plugin.logger;
 
-        this.boosts = new HashMap<>();
+        this.boostsMap = new HashMap<>();
         this.playerTracker = new HashMap<>();
-        this.boostTracker = new HashMap<>();
+        this.activeBoosts = new HashSet<>();
         this.defaultBoost = new Boost("default", 1.25);
+
+        this.loadBoosts();
     }
 
     public @NotNull Boost getBoost(Player player){
@@ -46,19 +48,22 @@ public class BoostManager {
     }
 
     public boolean isActive(Boost boost){
-        return boostTracker.get(boost);
+        return activeBoosts.contains(boost);
     }
 
     public void enable(Boost boost){
-        boostTracker.put(boost, true);
+        activeBoosts.add(boost);
     }
 
     public void disable(Boost boost){
-        boostTracker.put(boost, false);
+        activeBoosts.remove(boost);
     }
 
     public void loadBoosts(){
-
+        Set<Boost> boosts = this.config.getBoosts();
+        for(Boost boost : boosts){
+            this.boostsMap.put(boost.getName(), boost);
+        }
     }
 
     public Set<String> listBoosts(){
@@ -66,7 +71,7 @@ public class BoostManager {
 
         boostList.add(this.getBoostInfo(this.defaultBoost));
 
-        for(Boost boost : boosts.values())
+        for(Boost boost : boostsMap.values())
             boostList.add(this.getBoostInfo(boost));
 
         return boostList;
@@ -74,18 +79,13 @@ public class BoostManager {
 
     public String getBoostInfo(Boost boost){
 
-        String boostStatus = Language.BOOST_STATUS_ERROR.toString();
+        String boostStatus = (this.isActive(boost)) ? Language.BOOST_STATUS_ACTIVE.toString() : Language.BOOST_STATUS_DISABLED.toString();
 
-        if(boostTracker.get(boost) != null)
-            boostStatus = (boostTracker.get(boost)) ? Language.BOOST_STATUS_ACTIVE.toString() : Language.BOOST_STATUS_DISABLED.toString();
-
-        String bootInfo = Language.BOOST_INFO.toString()
+        return Language.BOOST_INFO.toString()
                 .replaceAll("<boost-name>", WordUtils.capitalizeFully(boost.getName()))
-                .replaceAll("<boost-multiplier>", String.valueOf(defaultBoost.getMultiplier()))
-                .replaceAll("<boost-status>", boostStatus)
-                .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
+                .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+                .replaceAll("<boost-status>", boostStatus);
 
-        return bootInfo;
     }
 
 }

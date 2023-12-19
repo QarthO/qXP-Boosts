@@ -18,7 +18,7 @@ public enum Language {
     XP_CHAT_GAIN("<prefix> <green>Gained <blue><boost-multiplier>x <green>XP"),
 
 //    Boost
-    BOOST_INFO("<purple>   <boost-name> - <boost-multiplier> - <boost-status>"),
+    BOOST_INFO("<dark_purple>  <boost-name> <gray>-</gray> <green><boost-multiplier></green> <gray>-</gray> <boost-status>"),
     BOOST_STATUS_ERROR("<red>Error"),
     BOOST_STATUS_ACTIVE("<green>Active"),
     BOOST_STATUS_DISABLED("<red>Disabled");

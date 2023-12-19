@@ -110,7 +110,7 @@ public class qConfig {
         Set<Boost> boosts = new HashSet<>();
         ConfigurationSection boostsSection = this.file.getConfigurationSection("boosts");
         for(String boostName : boostsSection.getKeys(false)){
-            boosts.add(new Boost(boostName, (double) boostsSection.get(boostName)));
+            boosts.add(new Boost(boostName, boostsSection.getDouble(boostName)));
         }
         return boosts;
     }
