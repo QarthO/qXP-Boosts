@@ -51,5 +51,5 @@ triple:
 lucky:
   multiplier: 100
   chance: .01
-
-
+  notify:
+    sound: UI_TOAST_CHALLENGE_COMPLETE
