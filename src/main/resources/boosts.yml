@@ -1,0 +1,42 @@
+# qXP-Boosts Boosts config
+# https://wiki.quartzdev.gg/mc/qxp-boosts/boosts.yml
+
+
+#<boost-name>:
+#  multiplier: <boost-multiplier>
+#  active: <true/false>
+#  chance: <0-100>%
+#  xp-sources:
+#    - https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
+#    - Can use 'ALL' instead of listing out each one
+#  mob-xp:
+#    - https://jd.papermc.io/paper/1.20/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+#    - You can also put except: <spawn-reason>
+
+# Default boost (required)
+# > This boost (when active) is used if a player has permission 'qxpboosts.player' but no other boosts
+default:
+  multiplier: 1.25
+  chance: 100
+  active: true
+  xp:
+    - ALL
+    - except: EXP_BOTTLE
+  mob-xp:
+    - ALL
+    - except: SPAWNER
+    - except: EXP_BOTTLE
+
+# Custom Boosts
+# These are just examples, but feel free to add any custom boost you want
+# > If you don't define all the options, the custom boost will use the defaults for that specific option
+# > Example: Since the 'double' boost does not have 'xp-sources' defined, it will default to ALL
+double:
+  multiplier: 2
+  active: false
+triple:
+  multiplier: 3
+  chance: 100
+  active: false
+
+
