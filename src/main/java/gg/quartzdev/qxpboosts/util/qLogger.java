@@ -5,16 +5,18 @@ import org.bukkit.Bukkit;
 public class qLogger {
     private final String CONSOLE_PREFIX = "<gray>[<red>q<aqua>MobsDropEggs<gray>]<reset>";
 
-    public qLogger(){
-
-    }
-
-
     /**
      * Logs a general message
      * @param msg
      */
     public void log(String msg){
+        qUtil.sendMessage(Bukkit.getConsoleSender(), msg);
+    }
+    /**
+     * Logs a general message
+     * @param msg
+     */
+    public void log(Language msg){
         qUtil.sendMessage(Bukkit.getConsoleSender(), msg);
     }
 

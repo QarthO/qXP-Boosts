@@ -1,55 +1,54 @@
-# qXP-Boosts Boosts config
-# https://wiki.quartzdev.gg/mc/qxp-boosts/boosts.yml
+# qXP-Boosts Boosts
 
-
-#<boost-name>:
-#  multiplier: <boost-multiplier>
-#  active: <true/false>
-#  chance: <0-100> (percentage, can use decimals)
-#  xp-sources:
-#    - https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
-#    - Can use 'ALL' instead of listing out each one
-#  mob-xp:
-#    - https://jd.papermc.io/paper/1.20/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
-#    - You can also put except: <spawn-reason>
-#notify: Should a player be notified when they receive bonus xp from a boost (Configurable in 'messages.yml')
-#  chat: <true/false>
-#  action-bar: <true/false>
-#  sound: https://jd.papermc.io/paper/1.20/org/bukkit/Sound.html
+# <boost-name>:
+#   ==: Boost <-- this is required
+#   multiplier: <boost-multiplier>
+#   active: <true/false>
+#   chance: <0-100> (percentage, can use decimals)
+#   xp-sources:
+#     - https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
+#     - Can use 'ALL' instead of listing out each one
+#   mob-sources:
+#     - https://jd.papermc.io/paper/1.20/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+#     - You can also put except: <spawn-reason>
+# notify: Should a player be notified when they receive bonus xp from a boost (Configurable in 'messages.yml')
+#   chat: <true/false>
+#   action-bar: <true/false>
+#   sound: https://jd.papermc.io/paper/1.20/org/bukkit/Sound.html
 
 # Default boost (required)
 # > This boost (when active) is used if a player has permission 'qxpboosts.player' but no other boosts
 default:
+  ==: Boost
   multiplier: 1.25
-  chance: 100
   active: true
-  xp:
-    - ALL
-    - except: EXP_BOTTLE
-  mob-xp:
-    - ALL
-    - except: SPAWNER
-    - except: EXP_BOTTLE
+  chance: 100
   notify:
     chat: false
     action-bar: true
     sound: NONE
+  xp-sources:
+    - ALL
+    - except: EXP_BOTTLE
+  mob-sources:
+    - ALL
+    - except: SPAWNER
+    - except: EXP_BOTTLE
 
 # Custom Boosts
 # These are just examples, but feel free to add/remove any custom boost you want
-# > If you don't define all the options, the custom boost will fall back to the default for that option
-# > Example: Since the 'double' boost does not have 'xp-sources' defined, it will default to (ALL, except: EXP_BOTTLE)
-# To give a player a boost, you must give them the permission: 'qxpboosts.boost.<boost-name>' (ie. 'qxboosts.boost.double')
+# It's easier to use in-game commands to create/modify boosts
+# Boost Permission: 'qxpboosts.boost.<boost-name>' (ie. 'qxboosts.boost.double')
 
-double:
-  multiplier: 2
-  active: false
-triple:
-  multiplier: 3
-  chance: 100
-  active: false
-lucky:
-  multiplier: 100
-  chance: .01
-  notify:
-    sound: UI_TOAST_CHALLENGE_COMPLETE
+#double:
+#  multiplier: 2
+#  active: false
+#triple:
+#  multiplier: 3
+#  active: false
+#  chance: 100
+#lucky:
+#  multiplier: 100
+#  chance: .01
+#  notify:
+#    sound: UI_TOAST_CHALLENGE_COMPLETE

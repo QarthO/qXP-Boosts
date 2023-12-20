@@ -3,11 +3,10 @@ package gg.quartzdev.qxpboosts.listeners;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
-import gg.quartzdev.qxpboosts.qConfig;
+import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.XpUtil;
-import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -78,7 +77,7 @@ public class PlayerPickupExpListener implements Listener {
 
         int amount = xpOrb.getExperience();
 
-        XpUtil.givePlayer(player, amount, boost.getMultiplier(), false, true, null);
+        XpUtil.givePlayer(player, amount, boost, false, true, null);
 
     }
 

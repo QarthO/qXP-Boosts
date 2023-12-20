@@ -28,6 +28,10 @@ public class qUtil {
 
     }
 
+    public static void sendActionBar(Player player, String message){
+        player.sendActionBar(parse(message, false));
+    }
+
     private static Component parse(String message, boolean isConsole){
         MiniMessage mm =MiniMessage.miniMessage();
 

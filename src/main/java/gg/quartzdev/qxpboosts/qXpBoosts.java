@@ -3,6 +3,7 @@ package gg.quartzdev.qxpboosts;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.commands.CommandManager;
 import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
+import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;

@@ -10,16 +10,13 @@ import java.text.DecimalFormat;
 
 public class XpUtil {
 
-    public static void givePlayer(Player player, int amountGained, double multiplier, boolean chat, boolean actionBar, Sound sound){
+    public static void givePlayer(Player player, int amountGained, Boost boost, boolean chat, boolean actionBar, Sound sound){
 
-        Boost boost = new Boost("", 2);
-
-        double bonus = amountGained * multiplier;
+        double bonus = amountGained * boost.getMultiplier();
         player.giveExp((int) bonus);
-        MiniMessage mm = MiniMessage.miniMessage();
 
         DecimalFormat format = new DecimalFormat("0.##");
-        String strMultiplier = format.format(multiplier);
+        String strMultiplier = format.format(boost.getMultiplier());
 
         if(chat) {
             String message = Language.XP_CHAT_GAIN.toString()
@@ -28,7 +25,7 @@ public class XpUtil {
                     .replaceAll("<boost-name>", boost.getName())
                     .replaceAll("<boost-multiplier>", strMultiplier)
                     .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
-            player.sendMessage(mm.deserialize(message));
+            qUtil.sendMessage(player, message);
         }
 
         if(actionBar){
@@ -38,7 +35,7 @@ public class XpUtil {
                     .replaceAll("<boost-name>", boost.getName())
                     .replaceAll("<boost-multiplier>", strMultiplier)
                     .replaceAll("<prefix>", Language.CHAT_PREFIX.name());
-            player.sendActionBar(mm.deserialize(message));
+            qUtil.sendActionBar(player, message);
         }
 
         if(sound != null)

@@ -1,6 +1,7 @@
-package gg.quartzdev.qxpboosts;
+package gg.quartzdev.qxpboosts.storage;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
+import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;

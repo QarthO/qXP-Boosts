@@ -15,6 +15,12 @@ public enum Language {
     ERROR_BOOST_NOT_FOUND("<prefix> <red>Error: Boost not found: '<yellow><boost></yellow>'"),
     ERROR_CMD_NOT_FOUND("<prefix> <red>Error: Command not found: '<yellow><cmd></yellow>'"),
 
+//    File
+    ERROR_CREATE_FILE(""),
+    ERROR_SAVE_FILE(""),
+    FILE_CREATED("<green>Created file: '<yellow><file></yellow>'"),
+    ERROR_BOOST_LOAD_EXCEPTION("<red>Error: Boost loading failed. Contact @ www.quartzdev.gg/discord"),
+
 //    Syntax
     SYNTAX_ENABLE("<prefix> <red>Syntax: /<label> enable <boost>"),
     SYNTAX_DISABLE("<prefix> <red>Syntax: /<label> disable <boost>"),
