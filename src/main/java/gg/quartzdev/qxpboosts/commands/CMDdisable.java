@@ -42,8 +42,11 @@ public class CMDdisable extends qCMD {
         }
 
 //        Enables boost
-        boostManager.disable(boost);
+        boost.disable();
         qUtil.sendMessage(sender, Language.BOOST_DISABLED.parse("boost", boost.getName()));
+
+//        Saves to storage
+        this.boostManager.saveBoost(boost);
 
         return true;
     }

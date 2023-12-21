@@ -10,10 +10,12 @@ public enum Language {
 
 //    ERRORS
     ERROR_NO_PERMISSION("<prefix> <red>Error: You don't have access to that command"),
-    ERROR_XP_SOURCE_NOT_FOUND("<prefix> <red>Error: xp source not found: '<yellow><xp-source></yellow>'"),
+    ERROR_XP_SOURCE_NOT_FOUND("<prefix> <red>Error: XP source not found: '<yellow><xp-source></yellow>'"),
+    ERROR_MOB_SOURCE_NOT_FOUND("<prefix> <red>Error: Mob source not found: '<yellow><mob-source></yellow>'"),
     ERROR_WORLD_NOT_FOUND("<prefix> <red>Error: World not found: '<yellow><world></yellow>'"),
     ERROR_BOOST_NOT_FOUND("<prefix> <red>Error: Boost not found: '<yellow><boost></yellow>'"),
     ERROR_CMD_NOT_FOUND("<prefix> <red>Error: Command not found: '<yellow><cmd></yellow>'"),
+    ERROR_CORRUPT_FILE("<prefix> <red>Error: Corrupt file: '<yellow><file></yellow>'<newline>Please reset the file. Contact us at https://www.quartzdev.gg/discord/ if issue persists"),
 
 //    File
     ERROR_CREATE_FILE(""),
@@ -33,9 +35,10 @@ public enum Language {
     XP_CHAT_GAIN("<prefix> <green>Gained <blue><boost-multiplier>x <green>XP"),
 
 //    Boost
-    BOOST_ENABLED("<prefix> <green>Enabled boost: '<yellow><boost></yellow>'"),
-    BOOST_DISABLED("<prefix> <green>Disabled boost: '<yellow><boost></yellow>'"),
-    BOOST_INFO("<dark_purple>  <boost-name> <gray>-</gray> <green><boost-multiplier></green> <gray>-</gray> <boost-status>"),
+    BOOST_ENABLED("<prefix> <green>Enabled boost: <yellow><boost></yellow>"),
+    BOOST_DISABLED("<prefix> <green>Disabled boost: <yellow><boost></yellow>"),
+    BOOST_INFO_HEADER("<prefix> <blue>List of all loaded boosts"),
+    BOOST_INFO_LINE("<dark_purple>       <boost-name> <gray>- <gold><boost-multiplier></gold> -</gray> <boost-status>"),
     BOOST_STATUS_ERROR("<red>Error"),
     BOOST_STATUS_ACTIVE("<green>Active"),
     BOOST_STATUS_DISABLED("<red>Disabled");

@@ -15,7 +15,7 @@ public class YMLboosts extends qYML{
 
     public @NotNull Set<Boost> loadAll(){
         Set<Boost> boosts = new HashSet<>();
-        Set<String> boostNames = this.config.getKeys(false);
+        Set<String> boostNames = this.getBoostsSection().getKeys(false);
         if(boostNames.isEmpty()){
 //            should never get here
 //            TODO: reset boosts.yml (maybe rename broken)
@@ -23,34 +23,41 @@ public class YMLboosts extends qYML{
         }
 
         for(String boostName : boostNames){
-            Object boostData = this.config.get()
-
+            Boost boost = load(boostName);
+            if(boost != null){
+                boosts.add(boost);
+            }
         }
-
-
 
         return boosts;
     }
 
-    public void save(Boost boost){
-
-    }
-
     public Boost load(String boostName){
-        Boost boost = new Boost("", 1.0);
+        Object boostData = this.getBoostsSection().get(boostName);
+        if(!(boostData instanceof Boost)){
+            this.logger.error(Language.ERROR_BOOST_LOAD_EXCEPTION);
+            return null;
+        }
+        Boost boost = (Boost) boostData;
+        boost.initName(boostName);
         return boost;
     }
 
+    public void save(Boost boost){
+        String name = boost.getName();
+        this.config.set("boosts.", boost);
+        this.saveFile();
+    }
+
     private @NotNull ConfigurationSection getBoostsSection(){
-        ConfigurationSection configArenaSection = this.config.getConfigurationSection("boosts");
-        if(configArenaSection == null) {
+        ConfigurationSection configBoostSection = this.config.getConfigurationSection("boosts");
+        if(configBoostSection == null) {
 //            logger.error(Language.ERROR_READ_FILE.setFile(file.getName()));
             ConfigurationSection boostsSection = config.createSection("boosts");
             this.saveFile();
             return boostsSection;
         }
-        Set<String> boostNames = (Set<String>) configArenaSection.getKeys(false);
-        return configArenaSection;
+        return configBoostSection;
     }
 
 

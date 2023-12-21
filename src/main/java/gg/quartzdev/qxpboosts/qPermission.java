@@ -3,8 +3,7 @@ package gg.quartzdev.qxpboosts;
 public enum qPermission {
 
     PLAYER("qxpboosts.player"),
-    BOOST_DOUBLE("qxpboosts.boost.double"),
-    BOOST_TRIPLE("qxpboosts.boost.triple");
+    BOOST("qxpboosts.boost.");
 
     private String permission;
 
@@ -16,4 +15,7 @@ public enum qPermission {
         return this.permission;
     }
 
+    public String boost(String boostName){
+        return this.permission + boostName;
+    }
 }

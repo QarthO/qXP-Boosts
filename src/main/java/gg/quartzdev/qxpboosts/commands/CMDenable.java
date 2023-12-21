@@ -46,8 +46,11 @@ public class CMDenable extends qCMD {
         }
 
 //        Enables boost
-        boostManager.enable(boost);
+        boost.enable();
         qUtil.sendMessage(sender, Language.BOOST_ENABLED.parse("boost", boost.getName()));
+
+//        Saves to storage
+        this.boostManager.saveBoost(boost);
 
         return true;
     }

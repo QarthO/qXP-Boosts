@@ -1,5 +1,6 @@
 package gg.quartzdev.qxpboosts;
 
+import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.commands.CommandManager;
 import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
@@ -7,9 +8,13 @@ import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class qXpBoosts extends JavaPlugin {
+
+    static {
+    }
 
     private static qXpBoosts instance;
     public qConfig config;
@@ -24,6 +29,8 @@ public final class qXpBoosts extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        ConfigurationSerialization.registerClass(Boost.class, "qBoost");
 
 //        bStats.org Metrics
         int pluginId = 20504;
@@ -46,4 +53,5 @@ public final class qXpBoosts extends JavaPlugin {
     private void registerHandlers(){
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupExpListener(), this);
     }
+
 }

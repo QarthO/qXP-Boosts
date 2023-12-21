@@ -18,16 +18,18 @@ public abstract class qYML {
     YamlConfiguration config;
     String schemaVersion = "1.0";
 
-    public qYML(String name){
+    public qYML(String fileName){
         this.plugin = qXpBoosts.getInstance();
         this.logger = this.plugin.logger;
-        this.file = loadFile(name + ".yml");
+        this.file = loadFile(fileName);
+//        this.plugin.saveResource(fileName, true);
     }
 
     private File loadFile(String name){
         File file = new File(plugin.getDataFolder(), name);
         try {
             if(file.createNewFile()){
+                this.plugin.saveResource(name, true);
                 logger.log(Language.FILE_CREATED.parse("file", file.getName()));
             }
             this.config = YamlConfiguration.loadConfiguration(file);

@@ -22,7 +22,7 @@ public class CMDlist extends qCMD{
     public boolean logic(CommandSender sender, String[] args) {
 //        Boost list
         Set<String> boostList = qXpBoosts.getInstance().boostManager.listBoosts();
-        String message = String.join("<reset><newline>", boostList);
+        String message = Language.BOOST_INFO_HEADER.get() +"<reset><newline>" + String.join("<reset><newline>", boostList);
         qUtil.sendMessage(sender, message);
 
         return false;

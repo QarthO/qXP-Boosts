@@ -1,5 +1,7 @@
 package gg.quartzdev.qxpboosts.boost;
 
+import gg.quartzdev.qxpboosts.qPermission;
+import gg.quartzdev.qxpboosts.storage.YMLboosts;
 import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.Language;
@@ -19,9 +21,8 @@ public class BoostManager {
     qConfig config;
     qLogger logger;
 
+    YMLboosts boostStorage;
     HashMap<String, Boost> boostsMap;
-    HashMap<Player, Boost> playerTracker;
-    Set<Boost> activeBoosts;
 
 
     public BoostManager(){
@@ -29,20 +30,22 @@ public class BoostManager {
         this.config = this.plugin.config;
         this.logger = this.plugin.logger;
 
+        this.boostStorage = new YMLboosts("boosts.yml");
         this.boostsMap = new HashMap<>();
-        this.playerTracker = new HashMap<>();
-        this.activeBoosts = new HashSet<>();
-
         this.loadBoosts();
     }
 
     public @NotNull Boost getBoost(Player player){
+        Boost boost = boostsMap.get("default");
+        player.sendMessage("using default");
 
-        Boost boost = playerTracker.get(player);
-
-        if(boost == null) {
-            player.sendMessage("boost not found, assinging default boost");
-            boost = boostsMap.get("default");
+//        Checks player permissions if they have any of the custom boosts
+        for(String boostName : boostsMap.keySet()){
+            if(player.hasPermission(qPermission.BOOST.boost(boostName))){
+                boost = boostsMap.get(boostName);
+                player.sendMessage("nevermind player has boost: " + boostName);
+                break;
+            }
         }
 
         return boost;
@@ -52,20 +55,12 @@ public class BoostManager {
         return boostsMap.get(boostName);
     }
 
-    public boolean isActive(Boost boost){
-        return activeBoosts.contains(boost);
-    }
-
-    public void enable(Boost boost){
-        activeBoosts.add(boost);
-    }
-
-    public void disable(Boost boost){
-        activeBoosts.remove(boost);
+    public boolean isActive(String boostName){
+        return boostsMap.get(boostName).isActive();
     }
 
     public void loadBoosts(){
-        Set<Boost> boosts = this.config.getBoosts();
+        Set<Boost> boosts = this.boostStorage.loadAll();
         for(Boost boost : boosts){
             this.boostsMap.put(boost.getName(), boost);
         }
@@ -82,13 +77,22 @@ public class BoostManager {
 
     public String getBoostInfo(Boost boost){
 
-        String boostStatus = (this.isActive(boost)) ? Language.BOOST_STATUS_ACTIVE.toString() : Language.BOOST_STATUS_DISABLED.toString();
+        String boostStatus = (boost.isActive()) ? Language.BOOST_STATUS_ACTIVE.toString() : Language.BOOST_STATUS_DISABLED.toString();
 
-        return Language.BOOST_INFO.toString()
-                .replaceAll("<boost-name>", WordUtils.capitalizeFully(boost.getName()))
-                .replaceAll("<boost-multiplier>", String.valueOf(boost.getMultiplier()))
+        int spaces = 10;
+        return Language.BOOST_INFO_LINE.toString()
+                .replaceAll("<boost-name>", formattedInfoValue(WordUtils.capitalizeFully(boost.getName()), spaces))
+                .replaceAll("<boost-multiplier>", formattedInfoValue(String.valueOf(boost.getMultiplier()), 5))
                 .replaceAll("<boost-status>", boostStatus);
 
+    }
+
+    public void saveBoost(Boost boost){
+        this.boostStorage.save(boost);
+    }
+
+    private String formattedInfoValue(String string, int spaces){
+        return String.format("%-" + spaces + "s", string.substring(0, Math.min(string.length(), spaces)));
     }
 
 }
