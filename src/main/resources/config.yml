@@ -1,34 +1,7 @@
-
 # Worlds where XP boosts wont be given even if the player has permission
 disabled-worlds:
   - lobby
   - mining
 
-# https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
-# List of XP sources that will be boosted
-# If you don't want the xp from a source to be boosted, just comment it out (put # in front)
-xp-sources:
-  - BLOCK_BREAK
-  - BREED
-  - CUSTOM
-  - ENTITY_DEATH
-  - EXP_BOTTLE
-  - FISHING
-  - FURNACE
-  - GRINDSTONE
-  - PLAYER_DEATH
-  - UNKNOWN
-  - VILLAGER_TRADE
-
 # Requires permission 'qxpboosts.player' in order to receive an active boost
 requires-permission: true
-
-# Give the permission 'qxpboosts.boost.<boost-name>' for the player to receive the boost when its active
-# Note: A player can only have 1 boost at a time
-boosts:
-  default: 1.25
-  double: 2
-  triple: 3
-#  vip: 5
-#  legend: 10
-#  <boost-name>: <multiplier>

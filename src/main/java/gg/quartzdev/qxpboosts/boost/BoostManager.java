@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -64,6 +65,30 @@ public class BoostManager {
         for(Boost boost : boosts){
             this.boostsMap.put(boost.getName(), boost);
         }
+    }
+
+    public Set<String> getBoostNames(){
+        return boostsMap.keySet();
+    }
+
+    public Set<String> getActiveBoostNames(){
+        Set<String> activeBoostNames = new HashSet<>();
+        for(Boost boost : boostsMap.values()){
+            if(boost.isActive()){
+                activeBoostNames.add(boost.getName());
+            }
+        }
+        return activeBoostNames;
+    }
+
+    public Set<String> getDisabledBoostNames(){
+        Set<String> disabledBoostNames = new HashSet<>();
+        for(Boost boost : boostsMap.values()){
+            if(!boost.isActive()){
+                disabledBoostNames.add(boost.getName());
+            }
+        }
+        return disabledBoostNames;
     }
 
     public Set<String> listBoosts(){

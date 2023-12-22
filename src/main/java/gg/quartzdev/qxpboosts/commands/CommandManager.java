@@ -1,5 +1,6 @@
 package gg.quartzdev.qxpboosts.commands;
 
+import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
@@ -9,6 +10,7 @@ import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -63,6 +65,19 @@ public class CommandManager extends Command {
         if(args.length == 1){
             StringUtil.copyPartialMatches(args[0], commandsList, completions);
         }
+
+        if(args.length == 2){
+            if(args[0].equalsIgnoreCase("enable")){
+                StringUtil.copyPartialMatches(args[1], qXpBoosts.getInstance().boostManager.getDisabledBoostNames(), completions);
+            }
+            if(args[0].equalsIgnoreCase("disable")){
+                StringUtil.copyPartialMatches(args[1], qXpBoosts.getInstance().boostManager.getActiveBoostNames(), completions);
+            }
+            if(args[0].equalsIgnoreCase("info")){
+                StringUtil.copyPartialMatches(args[1], qXpBoosts.getInstance().boostManager.getBoostNames(), completions);
+            }
+        }
+
         Collections.sort(completions);
         return completions;
     }
