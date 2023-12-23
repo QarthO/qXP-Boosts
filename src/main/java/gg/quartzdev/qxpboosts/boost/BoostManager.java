@@ -6,15 +6,14 @@ import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qLogger;
+import gg.quartzdev.qxpboosts.util.qUtil;
 import org.apache.commons.lang3.text.WordUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class BoostManager {
 
@@ -24,7 +23,6 @@ public class BoostManager {
 
     YMLboosts boostStorage;
     HashMap<String, Boost> boostsMap;
-
 
     public BoostManager(){
         this.plugin = qXpBoosts.getInstance();
@@ -38,13 +36,11 @@ public class BoostManager {
 
     public @NotNull Boost getBoost(Player player){
         Boost boost = boostsMap.get("default");
-        player.sendMessage("using default");
 
 //        Checks player permissions if they have any of the custom boosts
         for(String boostName : boostsMap.keySet()){
             if(player.hasPermission(qPermission.BOOST.boost(boostName))){
                 boost = boostsMap.get(boostName);
-                player.sendMessage("nevermind player has boost: " + boostName);
                 break;
             }
         }
@@ -118,6 +114,22 @@ public class BoostManager {
 
     private String formattedInfoValue(String string, int spaces){
         return String.format("%-" + spaces + "s", string.substring(0, Math.min(string.length(), spaces)));
+    }
+
+    public void createBoost(String boostName, double multiplier){
+        Boost boost = new Boost(boostName, multiplier);
+        Boost defaultBoost = boostsMap.get("default");
+        boost.xpSources = EnumSet.copyOf(defaultBoost.xpSources);
+        boost.mobSources = EnumSet.copyOf(defaultBoost.mobSources);
+
+        boostsMap.put(boostName, boost);
+        this.saveBoost(boost);
+    }
+
+    public void reload(){
+        boostsMap.clear();
+        boostStorage.reload();
+        this.loadBoosts();
     }
 
 }

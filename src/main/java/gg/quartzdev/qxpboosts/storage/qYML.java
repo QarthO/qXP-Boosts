@@ -22,7 +22,6 @@ public abstract class qYML {
         this.plugin = qXpBoosts.getInstance();
         this.logger = this.plugin.logger;
         this.file = loadFile(fileName);
-//        this.plugin.saveResource(fileName, true);
     }
 
     private File loadFile(String name){
@@ -34,13 +33,12 @@ public abstract class qYML {
             }
             this.config = YamlConfiguration.loadConfiguration(file);
             List<String> notes = new ArrayList<>();
-            notes.add("Loaded with " + plugin.getName() + " v" + plugin.getPluginMeta().getVersion());
+            notes.add("Last loaded on " + plugin.getName() + " v" + plugin.getPluginVersion());
             if(this.config.get("schema-version") == null)
                 this.config.set("schema-version", this.schemaVersion);
             this.config.setComments("schema-version", notes);
             this.config.save(file);
         } catch(IOException e){
-//            Logger.error(e.getStackTrace());
             logger.error(Language.ERROR_CREATE_FILE.parse("file", file.getName()));
             return null;
         }
@@ -54,6 +52,10 @@ public abstract class qYML {
                 logger.error(Language.ERROR_SAVE_FILE.parse("file", this.file.getName()));
             }
         });
+    }
+
+    public void reload(){
+        this.loadFile(this.file.getName());
     }
 
 }

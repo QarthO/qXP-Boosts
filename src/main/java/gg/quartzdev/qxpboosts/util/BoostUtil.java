@@ -2,7 +2,6 @@ package gg.quartzdev.qxpboosts.util;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.qPermission;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
@@ -17,7 +16,7 @@ public class BoostUtil {
         double bonus = amountGained * boost.getMultiplier();
         player.giveExp((int) bonus);
 
-        DecimalFormat format = new DecimalFormat("0.##");
+        DecimalFormat format = new DecimalFormat("0.###");
         String strMultiplier = format.format(boost.getMultiplier());
 
         if(boost.sendsChat()) {
@@ -38,16 +37,18 @@ public class BoostUtil {
             qUtil.sendActionBar(player, message);
         }
 
-        if(boost.getSound() != null)
+        if(boost.getSound() != null) {
             player.playSound(player.getLocation(), boost.getSound(), 1.0F, 1.0F);
+        }
 
     }
 
-    public static Set<String> getPlayerBoostNames(Player player){
+    public static Set<String> getBoostNames(Player player){
         Set<String> boostNames = new HashSet<>();
 
 //        Gets each boost name from a player's permissions
         for(PermissionAttachmentInfo permInfo : player.getEffectivePermissions()){
+            if(!permInfo.getValue()) continue;
             String perm = permInfo.getPermission();
             if(perm.startsWith(qPermission.BOOST.getPermission())){
                 String boostName = perm.replaceFirst(qPermission.BOOST.getPermission(), "");

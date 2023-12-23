@@ -21,9 +21,9 @@ public class Boost implements ConfigurationSerializable {
     private boolean active;
     private double chance;
 
-    public final Set<ExperienceOrb.SpawnReason> xpSources;
+    public Set<ExperienceOrb.SpawnReason> xpSources;
 
-    public final Set<CreatureSpawnEvent.SpawnReason> mobSources;
+    public Set<CreatureSpawnEvent.SpawnReason> mobSources;
 
     private boolean chat;
     private boolean actionBar;
@@ -32,6 +32,7 @@ public class Boost implements ConfigurationSerializable {
     public Boost(String name, double multiplier){
         this.name = name;
         this.multiplier = multiplier;
+        this.chance = 100.0;
         this.chat = false;
         this.actionBar = true;
         this.sound = null;
@@ -41,7 +42,6 @@ public class Boost implements ConfigurationSerializable {
 
     //    Deserializes from boosts storage file
     public Boost(Map<String, Object> map){
-        this.name = (String) map.get("name");
         this.multiplier = (double) map.get("multiplier");
         this.active = (boolean) map.get("active");
         this.chance = (double) map.get("chance");

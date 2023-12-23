@@ -51,7 +51,7 @@ public class PlayerPickupExpListener implements Listener {
             return;
         }
 
-        Set<String> boostNames = BoostUtil.getPlayerBoostNames(player);
+        Set<String> boostNames = BoostUtil.getBoostNames(player);
 
         ExperienceOrb xpOrb = event.getExperienceOrb();
 

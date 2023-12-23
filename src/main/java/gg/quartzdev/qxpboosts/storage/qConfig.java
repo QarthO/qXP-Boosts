@@ -36,7 +36,6 @@ public class qConfig {
         this.plugin.saveDefaultConfig();
 
         this.DISABLED_WORLDS = new HashSet<>();
-        this.XP_SOURCES = new HashSet<>();
         this.loadAll();
 
     }
@@ -55,7 +54,6 @@ public class qConfig {
     private void loadAll() {
         this.loadCheckUpdates();
         this.loadDisabledWorlds();
-        this.loadXpSources();
         this.loadRequiresPermission();
     }
 
@@ -70,7 +68,7 @@ public class qConfig {
         for(String worldName : disabledWorldNames){
             World world = Bukkit.getWorld(worldName);
             if(world == null){
-                    logger.error(Language.ERROR_WORLD_NOT_FOUND.parse("world", worldName));
+//                    logger.error(Language.ERROR_WORLD_NOT_FOUND.parse("world", worldName));
             }
             else {
                 DISABLED_WORLDS.add(world);
@@ -88,33 +86,6 @@ public class qConfig {
 
     public boolean requiresPermission(){
         return this.REQUIRES_PERMISSION;
-    }
-
-    public void loadXpSources(){
-        XP_SOURCES.clear();
-        List<String> xpSourceNames = this.file.getStringList("xp-sources");
-        for(String xpSourceName : xpSourceNames){
-            try{
-                ExperienceOrb.SpawnReason xpSource = ExperienceOrb.SpawnReason.valueOf(xpSourceName);
-                this.XP_SOURCES.add(xpSource);
-            } catch(IllegalArgumentException exception){
-                logger.error(Language.ERROR_XP_SOURCE_NOT_FOUND.parse("xp-source", xpSourceName));
-            }
-        }
-
-    }
-
-    public boolean isBoostedXpSource(ExperienceOrb.SpawnReason xpSource){
-        return this.XP_SOURCES.contains(xpSource);
-    }
-
-    public Set<Boost> getBoosts(){
-        Set<Boost> boosts = new HashSet<>();
-        ConfigurationSection boostsSection = this.file.getConfigurationSection("boosts");
-        for(String boostName : boostsSection.getKeys(false)){
-            boosts.add(new Boost(boostName.toLowerCase(Locale.ROOT), boostsSection.getDouble(boostName)));
-        }
-        return boosts;
     }
 
 }

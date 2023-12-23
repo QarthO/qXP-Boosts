@@ -7,15 +7,19 @@ import org.bukkit.command.CommandSender;
 
 public class CMD extends qCMD {
 
-    public CMD(String name, String label) {
-        this.permissionGroup = "qxpboosts.admin";
-        this.permissionNode = "qxpboosts.command.info";
+    public CMD(String cmdName, String group) {
+        super(cmdName, group);
     }
 
     @Override
     public boolean logic(CommandSender sender, String label, String[] args) {
         qUtil.sendMessage(sender, Language.PLUGIN_INFO.parse("version", qXpBoosts.getInstance().getPluginMeta().getVersion()));
         return true;
+    }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        return null;
     }
 
 }

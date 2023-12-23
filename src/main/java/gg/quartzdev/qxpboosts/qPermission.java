@@ -2,6 +2,8 @@ package gg.quartzdev.qxpboosts;
 
 public enum qPermission {
 
+    PLUGIN_NAME("qxpboosts"),
+
     GROUP_PLAYER("qxpboosts.player"),
     GROUP_ADMIN("qxpboosts.admin"),
 

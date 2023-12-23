@@ -17,8 +17,8 @@ public class CMDenable extends qCMD {
 
     BoostManager boostManager;
 
-    public CMDenable(String name, String label) {
-        super(name, label);
+    public CMDenable(String cmdName, String group) {
+        super(cmdName, group);
         this.permissionGroup = "qxpboosts.admin";
         this.permissionNode = "qxpboosts.command.enable";
 
@@ -27,11 +27,11 @@ public class CMDenable extends qCMD {
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args) {
+    public boolean logic(CommandSender sender, String label,  String[] args) {
 
 //        Incorrect Syntax
         if(args.length != 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_ENABLE.parse("label", this.label));
+            qUtil.sendMessage(sender, Language.SYNTAX_ENABLE.parse("label", label));
             return false;
         }
 
@@ -56,12 +56,8 @@ public class CMDenable extends qCMD {
     }
 
     @Override
-    public Iterable<String> tabs(String[] args) {
-        if(args.length == 2){
-            return this.boostManager.getDisabledBoostNames();
-        }
-
-        return null;
+    public Iterable<String> getTabCompletions(String[] args) {
+        return args.length == 2 ? this.boostManager.getDisabledBoostNames() : null;
     }
 
 }

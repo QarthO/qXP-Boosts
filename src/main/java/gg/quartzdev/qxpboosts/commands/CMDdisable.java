@@ -13,8 +13,8 @@ public class CMDdisable extends qCMD {
 
     BoostManager boostManager;
 
-    public CMDdisable(String name, String label) {
-        super(name, label);
+    public CMDdisable(String cmdName, String group) {
+        super(cmdName, group);
         this.permissionGroup = "qxpboosts.admin";
         this.permissionNode = "qxpboosts.command.enable";
 
@@ -23,11 +23,11 @@ public class CMDdisable extends qCMD {
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args) {
 
 //        Incorrect Syntax
         if(args.length != 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_DISABLE.parse("label", this.label));
+            qUtil.sendMessage(sender, Language.SYNTAX_DISABLE.parse("label", label));
             return false;
         }
 
@@ -49,5 +49,10 @@ public class CMDdisable extends qCMD {
         this.boostManager.saveBoost(boost);
 
         return true;
+    }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        return args.length == 2 ? this.boostManager.getActiveBoostNames() : null;
     }
 }

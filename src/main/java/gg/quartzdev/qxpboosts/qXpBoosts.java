@@ -54,4 +54,9 @@ public final class qXpBoosts extends JavaPlugin {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupExpListener(), this);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
+    public String getPluginVersion(){
+        return this.getPluginMeta().getVersion();
+    }
+
 }

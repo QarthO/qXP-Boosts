@@ -29,6 +29,7 @@ public enum Language {
     SYNTAX_LIST("<prefix> <red>Syntax: /<label> list"),
     SYNTAX_INFO("<prefix> <red>Syntax: /<label> info <boost>"),
     SYNTAX_RELOAD("<prefix> <red>Syntax: /<label> reload"),
+    SYNTAX_CREATE("<prefix> <red>Syntax: /<label> create <boost> <multiplier>"),
 
 //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><boost-multiplier>x <green>XP"),
@@ -41,7 +42,8 @@ public enum Language {
     BOOST_INFO_LINE("<dark_purple>       <boost-name> <gray>- <gold><boost-multiplier></gold> -</gray> <boost-status>"),
     BOOST_STATUS_ERROR("<red>Error"),
     BOOST_STATUS_ACTIVE("<green>Active"),
-    BOOST_STATUS_DISABLED("<red>Disabled");
+    BOOST_STATUS_DISABLED("<red>Disabled"),
+    BOOST_CREATE("<prefix> <green>Boost created: <yellow><boost-name>");
 
 
 

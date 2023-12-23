@@ -45,14 +45,13 @@ public class YMLboosts extends qYML{
 
     public void save(Boost boost){
         String name = boost.getName();
-        this.config.set("boosts.", boost);
+        this.config.set("boosts." + name, boost);
         this.saveFile();
     }
 
     private @NotNull ConfigurationSection getBoostsSection(){
         ConfigurationSection configBoostSection = this.config.getConfigurationSection("boosts");
         if(configBoostSection == null) {
-//            logger.error(Language.ERROR_READ_FILE.setFile(file.getName()));
             ConfigurationSection boostsSection = config.createSection("boosts");
             this.saveFile();
             return boostsSection;
