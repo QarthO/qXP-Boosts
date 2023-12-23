@@ -43,6 +43,11 @@ public class YMLboosts extends qYML{
         return boost;
     }
 
+    public void delete(String boostName){
+        this.config.set("boosts." + boostName, null);
+        this.saveFile();
+    }
+
     public void save(Boost boost){
         String name = boost.getName();
         this.config.set("boosts." + name, boost);

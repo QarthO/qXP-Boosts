@@ -43,7 +43,9 @@ public enum Language {
     BOOST_STATUS_ERROR("<red>Error"),
     BOOST_STATUS_ACTIVE("<green>Active"),
     BOOST_STATUS_DISABLED("<red>Disabled"),
-    BOOST_CREATE("<prefix> <green>Boost created: <yellow><boost-name>");
+    BOOST_CREATE("<prefix> <green>Boost created: <yellow><boost-name>"),
+    BOOST_DELETE("<prefix> <green>Boost deleted: <yellow><boost-name>"),
+    ERROR_DELETE_DEFAULT("<prefix> <red> Error: You can't delete the default boost");
 
 
 

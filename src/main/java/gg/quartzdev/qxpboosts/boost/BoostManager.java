@@ -126,6 +126,15 @@ public class BoostManager {
         this.saveBoost(boost);
     }
 
+    public boolean deleteBoost(String boostName){
+        if(boostsMap.get(boostName) == null) {
+            return false;
+        }
+        boostsMap.remove(boostName);
+        boostStorage.delete(boostName);
+        return true;
+    }
+
     public void reload(){
         boostsMap.clear();
         boostStorage.reload();

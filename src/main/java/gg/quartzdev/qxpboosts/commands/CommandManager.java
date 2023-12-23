@@ -30,6 +30,7 @@ public class CommandManager extends Command {
         commandsMap.put("enable",   new CMDenable("enable", "admin"));
         commandsMap.put("disable",  new CMDdisable("disable", "admin"));
         commandsMap.put("list",     new CMDlist("list", "admin"));
+        commandsMap.put("delete",   new CMDdelete("delete", "admin"));
 //        commandsMap.put("info",     new CMDinfo("info", "player"));
 
         Bukkit.getCommandMap().register(name, this);
