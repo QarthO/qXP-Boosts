@@ -2,7 +2,9 @@ package gg.quartzdev.qxpboosts;
 
 public enum qPermission {
 
-    PLAYER("qxpboosts.player"),
+    GROUP_PLAYER("qxpboosts.player"),
+    GROUP_ADMIN("qxpboosts.admin"),
+
     BOOST("qxpboosts.boost.");
 
     private String permission;

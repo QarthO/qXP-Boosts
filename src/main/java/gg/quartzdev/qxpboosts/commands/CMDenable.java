@@ -55,4 +55,13 @@ public class CMDenable extends qCMD {
         return true;
     }
 
+    @Override
+    public Iterable<String> tabs(String[] args) {
+        if(args.length == 2){
+            return this.boostManager.getDisabledBoostNames();
+        }
+
+        return null;
+    }
+
 }

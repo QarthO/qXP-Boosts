@@ -10,24 +10,24 @@ import org.bukkit.util.StringUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 public class CommandManager extends Command {
 
     List<String> aliases = new ArrayList<>();
-    List<String> commandsList = new ArrayList<>();
+    HashMap<String, qCMD> commandsMap = new HashMap<>();
 
     public CommandManager(String name){
         super(name);
         aliases.add("xpboosts");
         super.setPermission("qxpboosts.command");
         super.setAliases(aliases);
-        commandsList.add("reload");
-        commandsList.add("list");
-        commandsList.add("enable");
-        commandsList.add("disable");
+        commandsMap.put("reload", new CMDreload("/<label> <cmd>"));
+//        commandsMap.add("list");
+//        commandsMap.add("enable");
+//        commandsMap.add("disable");
         Bukkit.getCommandMap().register(name, this);
     }
 

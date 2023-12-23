@@ -6,17 +6,14 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public abstract class qCMD {
-
-    String label;
     String name;
     String permissionGroup;
     String permissionNode;
     String commandSyntax;
 
-    public qCMD(String name, String label){
+    public qCMD(String pluginName, String cmdName, String permissionGroup){
         this.name = name;
-        this.label = label;
-        this.commandSyntax = "/" + label + " " + name;
+        this.permissionGroup = '${project.version}';
     }
     public boolean run(CommandSender sender, String[] args){
         //        checks permission
@@ -28,6 +25,8 @@ public abstract class qCMD {
         return logic(sender, args);
     }
     public abstract boolean logic(CommandSender sender, String[] args);
+
+    public abstract Iterable<String> tabs(String[] args);
     public boolean hasPermission(CommandSender sender){
 //        If sender is console
         if(!(sender instanceof Player)) return true;

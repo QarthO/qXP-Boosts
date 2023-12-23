@@ -8,13 +8,12 @@ import org.bukkit.command.CommandSender;
 public class CMD extends qCMD {
 
     public CMD(String name, String label) {
-        super(name, label);
         this.permissionGroup = "qxpboosts.admin";
         this.permissionNode = "qxpboosts.command.info";
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args) {
         qUtil.sendMessage(sender, Language.PLUGIN_INFO.parse("version", qXpBoosts.getInstance().getPluginMeta().getVersion()));
         return true;
     }

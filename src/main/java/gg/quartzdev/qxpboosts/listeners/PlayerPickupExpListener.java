@@ -17,7 +17,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
-import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.util.Set;
 import java.util.UUID;
@@ -48,7 +47,7 @@ public class PlayerPickupExpListener implements Listener {
         }
 
 //        Permission check
-        if(config.requiresPermission() && !player.hasPermission(qPermission.PLAYER.getPermission())){
+        if(config.requiresPermission() && !player.hasPermission(qPermission.GROUP_PLAYER.getPermission())){
             return;
         }
 
