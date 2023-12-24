@@ -31,7 +31,7 @@ public class CMDdelete extends qCMD{
             return false;
         }
 
-        String message = this.boostManager.deleteBoost(boostName) ?
+        Language message = this.boostManager.deleteBoost(boostName) ?
                 Language.BOOST_DELETE.parse("boost-name", boostName) :
                 Language.ERROR_BOOST_NOT_FOUND.parse("boost-name", boostName);
 

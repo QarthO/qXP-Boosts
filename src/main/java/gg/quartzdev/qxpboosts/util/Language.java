@@ -18,10 +18,10 @@ public enum Language {
     ERROR_CORRUPT_FILE("<prefix> <red>Error: Corrupt file: '<yellow><file></yellow>'<newline>Please reset the file. Contact us at https://www.quartzdev.gg/discord/ if issue persists"),
 
 //    File
-    ERROR_CREATE_FILE(""),
-    ERROR_SAVE_FILE(""),
-    FILE_CREATED("<green>Created file: '<yellow><file></yellow>'"),
-    ERROR_BOOST_LOAD_EXCEPTION("<red>Error: Boost loading failed. Contact @ www.quartzdev.gg/discord"),
+    ERROR_CREATE_FILE("<prefix> Error creating file: <yellow><file>"),
+    ERROR_SAVE_FILE("<prefix> Error saving file: <yellow><file>"),
+    FILE_CREATED("<prefix> <green>Created file: '<yellow><file></yellow>'"),
+    ERROR_BOOST_LOAD_EXCEPTION("<prefix> <red>Error: Boost loading failed. Contact @ www.quartzdev.gg/discord"),
 
 //    Syntax
     SYNTAX_ENABLE("<prefix> <red>Syntax: /<label> enable <boost>"),
@@ -30,6 +30,12 @@ public enum Language {
     SYNTAX_INFO("<prefix> <red>Syntax: /<label> info <boost>"),
     SYNTAX_RELOAD("<prefix> <red>Syntax: /<label> reload"),
     SYNTAX_CREATE("<prefix> <red>Syntax: /<label> create <boost> <multiplier>"),
+    SYNTAX_SET("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
+    SYNTAX_SET_MULTIPLIER("<prefix> <red>Syntax: /<label> set <boost> multiplier <multiplier>"),
+    SYNTAX_SET_CHANCE("<prefix> <red>Syntax: /<label> set <boost> chance <chance>"),
+    SYNTAX_SET_CHAT("<prefix> <red>Syntax: /<label> set <boost> chat <true/false>"),
+    SYNTAX_SET_ACTIONBAR("<prefix> <red>Syntax: /<label> set <boost> actionbar <true/false>"),
+    SYNTAX_SET_SOUND("<prefix> <red>Syntax: /<label> set <boost> sound <sound>"),
 
 //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><boost-multiplier>x <green>XP"),
@@ -45,9 +51,8 @@ public enum Language {
     BOOST_STATUS_DISABLED("<red>Disabled"),
     BOOST_CREATE("<prefix> <green>Boost created: <yellow><boost-name>"),
     BOOST_DELETE("<prefix> <green>Boost deleted: <yellow><boost-name>"),
-    ERROR_DELETE_DEFAULT("<prefix> <red> Error: You can't delete the default boost");
-
-
+    ERROR_DELETE_DEFAULT("<prefix> <red>Error: You can't delete the default boost"),
+    BOOST_SET_MULTIPLIER("<prefix> <green>Multiplier for <yellow><boost></yellow> has been set to <yellow><multiplier></yellow>");
 
     private String message;
 
@@ -64,7 +69,8 @@ public enum Language {
         return this.toString();
     }
 
-    public String parse(String placeholder, String value){
-        return message.replaceAll("<" + placeholder + ">", value);
+    public Language parse(String placeholder, String value){
+        this.message = this.message.replaceAll("<" + placeholder + ">", value);
+        return this;
     }
 }

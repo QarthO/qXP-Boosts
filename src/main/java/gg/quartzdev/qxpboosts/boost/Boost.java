@@ -72,6 +72,10 @@ public class Boost implements ConfigurationSerializable {
         this.mobSources = mobSources;
     }
 
+    public void setActionBar(boolean sendsActionBar){
+        this.actionBar = sendsActionBar;
+    }
+
     public void initName(String name){
         if(this.name != null) {
             qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_CORRUPT_FILE.parse("file", "boosts.yml"));
@@ -87,6 +91,9 @@ public class Boost implements ConfigurationSerializable {
 
     public double getMultiplier(){
         return this.multiplier;
+    }
+    public void setMultiplier(double multiplier){
+        this.multiplier = multiplier;
     }
 
     public boolean isActive(){

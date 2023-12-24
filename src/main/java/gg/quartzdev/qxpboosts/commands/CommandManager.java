@@ -1,5 +1,6 @@
 package gg.quartzdev.qxpboosts.commands;
 
+import gg.quartzdev.qxpboosts.commands.set.CMDset;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
@@ -31,6 +32,7 @@ public class CommandManager extends Command {
         commandsMap.put("disable",  new CMDdisable("disable", "admin"));
         commandsMap.put("list",     new CMDlist("list", "admin"));
         commandsMap.put("delete",   new CMDdelete("delete", "admin"));
+        commandsMap.put("set",      new CMDset("set", "admin"));
 //        commandsMap.put("info",     new CMDinfo("info", "player"));
 
         Bukkit.getCommandMap().register(name, this);
