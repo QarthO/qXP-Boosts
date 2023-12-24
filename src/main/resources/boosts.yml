@@ -4,6 +4,7 @@ schema-version: '1.0'
 
 # XP Sources: https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
 # Mob Sources: https://jd.papermc.io/paper/1.20/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+# Can use 'ALL' for all sources, then use a '!' in front exclude sources from ALL
 
 boosts:
   # Default boost (don't remove this)

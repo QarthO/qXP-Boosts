@@ -6,7 +6,7 @@
 
     <groupId>gg.quartzdev</groupId>
     <artifactId>qXP-Boosts</artifactId>
-    <version>1.0</version>
+    <version>1.0.1-ALPHA</version>
     <packaging>jar</packaging>
 
     <name>qXP-Boosts</name>
