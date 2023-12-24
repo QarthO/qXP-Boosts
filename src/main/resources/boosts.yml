@@ -17,46 +17,9 @@ boosts:
     sound: NONE
     xp-sources:
       - ALL
-      - except: FISHING
     mob-sources:
-      - BEEHIVE
-      - BREEDING
-      - BUILD_IRONGOLEM
-      - BUILD_SNOWMAN
-      - BUILD_WITHER
-      - COMMAND
-      - CURED
-      - CUSTOM
-      - DEFAULT
-      - DISPENSE_EGG
-      - DROWNED
-      - DUPLICATION
-      - EGG
-      - ENDER_PEARL
-      - EXPLOSION
-      - FROZEN
-      - INFECTION
-      - JOCKEY
-      - LIGHTNING
-      - METAMORPHOSIS
-      - MOUNT
-      - NATURAL
-      - NETHER_PORTAL
-      - OCELOT_BABY
-      - PATROL
-      - PIGLIN_ZOMBIFIED
-      - RAID
-      - REINFORCEMENTS
-      - SHEARED
-      - SHOULDER_ENTITY
-      - SILVERFISH_BLOCK
-      - SLIME_SPLIT
-      - SPAWNER
-      - SPAWNER_EGG
-      - SPELL
-      - TRAP
-      - VILLAGE_DEFENSE
-      - VILLAGE_INVASION
+      - ALL
+      - "!SPAWNER"
 # Custom boosts
   double:
     ==: qBoost
@@ -67,56 +30,10 @@ boosts:
     action-bar: true
     sound: NONE
     xp-sources:
-      - BLOCK_BREAK
-      - BREED
-      - CUSTOM
-      - ENTITY_DEATH
-      - EXP_BOTTLE
-      - FISHING
-      - FURNACE
-      - GRINDSTONE
-      - PLAYER_DEATH
-      - UNKNOWN
-      - VILLAGER_TRADE
+      - ALL
     mob-sources:
-      - BEEHIVE
-      - BREEDING
-      - BUILD_IRONGOLEM
-      - BUILD_SNOWMAN
-      - BUILD_WITHER
-      - COMMAND
-      - CURED
-      - CUSTOM
-      - DEFAULT
-      - DISPENSE_EGG
-      - DROWNED
-      - DUPLICATION
-      - EGG
-      - ENDER_PEARL
-      - EXPLOSION
-      - FROZEN
-      - INFECTION
-      - JOCKEY
-      - LIGHTNING
-      - METAMORPHOSIS
-      - MOUNT
-      - NATURAL
-      - NETHER_PORTAL
-      - OCELOT_BABY
-      - PATROL
-      - PIGLIN_ZOMBIFIED
-      - RAID
-      - REINFORCEMENTS
-      - SHEARED
-      - SHOULDER_ENTITY
-      - SILVERFISH_BLOCK
-      - SLIME_SPLIT
-      - SPAWNER
-      - SPAWNER_EGG
-      - SPELL
-      - TRAP
-      - VILLAGE_DEFENSE
-      - VILLAGE_INVASION
+      - ALL
+      - "!SPAWNER"
   triple:
     ==: qBoost
     multiplier: 3.0
@@ -126,112 +43,20 @@ boosts:
     action-bar: true
     sound: NONE
     xp-sources:
-      - BLOCK_BREAK
-      - BREED
-      - CUSTOM
-      - ENTITY_DEATH
-      - EXP_BOTTLE
-      - FISHING
-      - FURNACE
-      - GRINDSTONE
-      - PLAYER_DEATH
-      - UNKNOWN
-      - VILLAGER_TRADE
+      - ALL
     mob-sources:
-      - BEEHIVE
-      - BREEDING
-      - BUILD_IRONGOLEM
-      - BUILD_SNOWMAN
-      - BUILD_WITHER
-      - COMMAND
-      - CURED
-      - CUSTOM
-      - DEFAULT
-      - DISPENSE_EGG
-      - DROWNED
-      - DUPLICATION
-      - EGG
-      - ENDER_PEARL
-      - EXPLOSION
-      - FROZEN
-      - INFECTION
-      - JOCKEY
-      - LIGHTNING
-      - METAMORPHOSIS
-      - MOUNT
-      - NATURAL
-      - NETHER_PORTAL
-      - OCELOT_BABY
-      - PATROL
-      - PIGLIN_ZOMBIFIED
-      - RAID
-      - REINFORCEMENTS
-      - SHEARED
-      - SHOULDER_ENTITY
-      - SILVERFISH_BLOCK
-      - SLIME_SPLIT
-      - SPAWNER
-      - SPAWNER_EGG
-      - SPELL
-      - TRAP
-      - VILLAGE_DEFENSE
-      - VILLAGE_INVASION
-  vip-double:
+      - ALL
+      - "!SPAWNER"
+  lucky:
     ==: qBoost
-    multiplier: 2.0
+    multiplier: 1000
     active: true
-    chance: 100.0
+    chance: .01
     chat: false
     action-bar: true
-    sound: NONE
+    sound: UI_TOAST_CHALLENGE_COMPLETE
     xp-sources:
-      - BLOCK_BREAK
-      - BREED
-      - CUSTOM
-      - ENTITY_DEATH
-      - EXP_BOTTLE
-      - FISHING
-      - FURNACE
-      - GRINDSTONE
-      - PLAYER_DEATH
-      - UNKNOWN
-      - VILLAGER_TRADE
+      - ALL
     mob-sources:
-      - BEEHIVE
-      - BREEDING
-      - BUILD_IRONGOLEM
-      - BUILD_SNOWMAN
-      - BUILD_WITHER
-      - COMMAND
-      - CURED
-      - CUSTOM
-      - DEFAULT
-      - DISPENSE_EGG
-      - DROWNED
-      - DUPLICATION
-      - EGG
-      - ENDER_PEARL
-      - EXPLOSION
-      - FROZEN
-      - INFECTION
-      - JOCKEY
-      - LIGHTNING
-      - METAMORPHOSIS
-      - MOUNT
-      - NATURAL
-      - NETHER_PORTAL
-      - OCELOT_BABY
-      - PATROL
-      - PIGLIN_ZOMBIFIED
-      - RAID
-      - REINFORCEMENTS
-      - SHEARED
-      - SHOULDER_ENTITY
-      - SILVERFISH_BLOCK
-      - SLIME_SPLIT
-      - SPAWNER
-      - SPAWNER_EGG
-      - SPELL
-      - TRAP
-      - VILLAGE_DEFENSE
-      - VILLAGE_INVASION
+      - ALL
+      - "!SPAWNER"

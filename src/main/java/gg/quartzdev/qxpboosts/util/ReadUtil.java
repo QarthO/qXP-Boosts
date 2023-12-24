@@ -96,6 +96,7 @@ public class ReadUtil {
         EnumSet<ExperienceOrb.SpawnReason> xpSources;
         if(xpSourceNames.contains("ALL")){
             xpSources = EnumSet.allOf(ExperienceOrb.SpawnReason.class);
+            xpSourceNames.remove("ALL");
         } else {
             xpSources = EnumSet.noneOf(ExperienceOrb.SpawnReason.class);
         }
@@ -119,6 +120,7 @@ public class ReadUtil {
         EnumSet<CreatureSpawnEvent.SpawnReason> mobSources;
         if(mobSourceNames.contains("ALL")){
             mobSources = EnumSet.allOf(CreatureSpawnEvent.SpawnReason.class);
+            mobSourceNames.remove("ALL");
         } else {
             mobSources = EnumSet.noneOf(CreatureSpawnEvent.SpawnReason.class);
         }
