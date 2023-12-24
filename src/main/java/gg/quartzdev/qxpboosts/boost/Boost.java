@@ -1,6 +1,8 @@
 package gg.quartzdev.qxpboosts.boost;
 
 import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.ReadUtil;
+import gg.quartzdev.qxpboosts.util.WriteUtil;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -21,9 +23,9 @@ public class Boost implements ConfigurationSerializable {
     private boolean active;
     private double chance;
 
-    public Set<ExperienceOrb.SpawnReason> xpSources;
+    public EnumSet<ExperienceOrb.SpawnReason> xpSources;
 
-    public Set<CreatureSpawnEvent.SpawnReason> mobSources;
+    public EnumSet<CreatureSpawnEvent.SpawnReason> mobSources;
 
     private boolean chat;
     private boolean actionBar;
@@ -36,40 +38,20 @@ public class Boost implements ConfigurationSerializable {
         this.chat = false;
         this.actionBar = true;
         this.sound = null;
-        this.xpSources = new HashSet<>();
-        this.mobSources = new HashSet<>();
+        this.xpSources = EnumSet.noneOf(ExperienceOrb.SpawnReason.class);
+        this.mobSources = EnumSet.noneOf(CreatureSpawnEvent.SpawnReason.class);
     }
 
     //    Deserializes from boosts storage file
     public Boost(Map<String, Object> map){
-        this.multiplier = (double) map.get("multiplier");
-        this.active = (boolean) map.get("active");
-        this.chance = (double) map.get("chance");
-        this.chat = (boolean) map.get("chat");
-        this.actionBar = (boolean) map.get("action-bar");
-//        this.sound = (Sound) map.get("sound");
-        Set<ExperienceOrb.SpawnReason> xpSources = new HashSet<>();
-        List<String> xpSourceNames = (List<String>) map.get("xp-sources");
-        for(String xpSourceName : xpSourceNames){
-            try{
-                ExperienceOrb.SpawnReason xpSource = ExperienceOrb.SpawnReason.valueOf(xpSourceName);
-                xpSources.add(xpSource);
-            } catch(IllegalArgumentException exception){
-                qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_XP_SOURCE_NOT_FOUND.parse("xp-source", xpSourceName));
-            }
-        }
-        this.xpSources = xpSources;
-        Set<CreatureSpawnEvent.SpawnReason> mobSources = new HashSet<>();
-        List<String> mobSourceNames = (List<String>) map.get("mob-sources");
-        for(String mobSourceName : mobSourceNames){
-            try{
-                CreatureSpawnEvent.SpawnReason mobSource = CreatureSpawnEvent.SpawnReason.valueOf(mobSourceName);
-                mobSources.add(mobSource);
-            } catch(IllegalArgumentException exception){
-                qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_XP_SOURCE_NOT_FOUND.parse("mob-source", mobSourceName));
-            }
-        }
-        this.mobSources = mobSources;
+        this.multiplier = ReadUtil.getDouble(map.get("multiplier"));
+        this.active = ReadUtil.getBoolean(map.get("active"));
+        this.chance =  ReadUtil.getDouble(map.get("chance"));
+        this.chat = ReadUtil.getBoolean(map.get("chat"));
+        this.actionBar = ReadUtil.getBoolean(map.get("action-bar"));
+        this.sound = ReadUtil.getSound(map.get("sound"));
+        this.xpSources = ReadUtil.getXpSources(map.get("xp-sources"));
+        this.mobSources = ReadUtil.getMobSources(map.get("mob-sources"));
     }
 
     public void setActionBar(boolean sendsActionBar){
@@ -133,8 +115,8 @@ public class Boost implements ConfigurationSerializable {
         map.put("chat", this.chat);
         map.put("action-bar", this.actionBar);
         map.put("sound", this.sound);
-        map.put("xp-sources", this.xpSources.stream().map(ExperienceOrb.SpawnReason::name).collect(Collectors.toList()));
-        map.put("mob-sources", this.mobSources.stream().map(CreatureSpawnEvent.SpawnReason::name).collect(Collectors.toList()));
+        map.put("xp-sources", WriteUtil.getXpSourceList(this.xpSources));
+        map.put("mob-sources", WriteUtil.getMobSourceList(this.mobSources));
         return map;
     }
 

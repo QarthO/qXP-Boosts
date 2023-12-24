@@ -32,8 +32,8 @@ public class CMDdelete extends qCMD{
         }
 
         Language message = this.boostManager.deleteBoost(boostName) ?
-                Language.BOOST_DELETE.parse("boost-name", boostName) :
-                Language.ERROR_BOOST_NOT_FOUND.parse("boost-name", boostName);
+                Language.BOOST_DELETE.parse("boost", boostName) :
+                Language.ERROR_BOOST_NOT_FOUND.parse("boost", boostName);
 
         qUtil.sendMessage(sender, message);
         return true;

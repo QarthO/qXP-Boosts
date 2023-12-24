@@ -2,7 +2,9 @@
 # Loaded with qXP-Boosts v1.0
 schema-version: '1.0'
 
-# It's recommended to use commands to create/remove/edit boosts, and not modify these
+# XP Sources: https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
+# Mob Sources: https://jd.papermc.io/paper/1.20/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+
 boosts:
   # Default boost (don't remove this)
   default:
@@ -14,17 +16,8 @@ boosts:
     action-bar: true
     sound: NONE
     xp-sources:
-      - BLOCK_BREAK
-      - BREED
-      - CUSTOM
-      - ENTITY_DEATH
-      - EXP_BOTTLE
-      - FISHING
-      - FURNACE
-      - GRINDSTONE
-      - PLAYER_DEATH
-      - UNKNOWN
-      - VILLAGER_TRADE
+      - ALL
+      - except: FISHING
     mob-sources:
       - BEEHIVE
       - BREEDING

@@ -23,8 +23,8 @@ public class BoostUtil {
             String message = Language.XP_CHAT_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
-                    .replaceAll("<boost-name>", boost.getName())
-                    .replaceAll("<boost-multiplier>", strMultiplier);
+                    .replaceAll("<boost>", boost.getName())
+                    .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendMessage(player, message);
         }
 
@@ -32,8 +32,8 @@ public class BoostUtil {
             String message = Language.XP_ACTIONBAR_GAIN.toString()
                     .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
-                    .replaceAll("<boost-name>", boost.getName())
-                    .replaceAll("<boost-multiplier>", strMultiplier);
+                    .replaceAll("<name>", boost.getName())
+                    .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendActionBar(player, message);
         }
 

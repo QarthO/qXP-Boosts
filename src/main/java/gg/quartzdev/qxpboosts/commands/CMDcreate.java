@@ -36,7 +36,7 @@ public class CMDcreate extends qCMD {
         }
 
         this.boostManager.createBoost(boostName, multiplier);
-        qUtil.sendMessage(sender, Language.BOOST_CREATE.parse("boost-name", boostName));
+        qUtil.sendMessage(sender, Language.BOOST_CREATE.parse("boost", boostName));
         return true;
 
     }
