@@ -4,6 +4,7 @@ import com.jeff_media.morepersistentdatatypes.DataType;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
+import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.event.entity.CreatureSpawnEvent;
@@ -25,7 +26,8 @@ public class InventoryUtil {
         MiniMessage mm = MiniMessage.miniMessage();
 
 //        Display Name
-        Component component = mm.deserialize(source.name()).decoration(TextDecoration.ITALIC, false);
+        String name = source.name().replaceAll("_", " ");
+        Component component = mm.deserialize(WordUtils.capitalizeFully(name)).decoration(TextDecoration.ITALIC, false);
         itemMeta.displayName(component);
 
 //        Lore
