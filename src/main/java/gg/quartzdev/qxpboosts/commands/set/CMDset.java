@@ -73,9 +73,11 @@ public class CMDset extends qCMD {
                 break;
             case "xpsources":
                 qUtil.sendMessage(sender, "<prefix> open mob sources gui");
+                success = new EDITxpsources().run(sender, label, args, boost);
                 break;
             case "mobsources":
                 qUtil.sendMessage(sender, "<prefix> open mob sources gui");
+                success = new EDITmobsources().run(sender, label, args, boost);
                 break;
             default:
                 qUtil.sendMessage(sender, Language.SYNTAX_SET.parse("boost", boostName));

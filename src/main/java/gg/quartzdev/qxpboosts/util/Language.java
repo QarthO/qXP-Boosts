@@ -54,7 +54,8 @@ public enum Language {
     BOOST_DELETE("<prefix> <green>Boost deleted: <yellow><name>"),
     ERROR_DELETE_DEFAULT("<prefix> <red>Error: You can't delete the default boost"),
     BOOST_SET_MULTIPLIER("<prefix> <green>Multiplier for <yellow><boost></yellow> has been set to <yellow><multiplier></yellow>"),
-    ERROR_READ_FILE("<prefix> <red>Error: Incorrect syntax in file: <yellow><file>");
+    ERROR_READ_FILE("<prefix> <red>Error: Incorrect syntax in file: <yellow><file>"),
+    INVENTORY_TITLE_SOURCES("<bold><boost></bold> <source-type>");
 
     private String message;
 

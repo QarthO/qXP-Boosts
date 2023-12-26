@@ -102,9 +102,9 @@ public class BoostManager {
 
         int spaces = 10;
         return Language.BOOST_INFO_LINE.toString()
-                .replaceAll("<boost-name>", formattedInfoValue(WordUtils.capitalizeFully(boost.getName()), spaces))
-                .replaceAll("<boost-multiplier>", formattedInfoValue(String.valueOf(boost.getMultiplier()), 5))
-                .replaceAll("<boost-status>", boostStatus);
+                .replaceAll("<boost>", formattedInfoValue(WordUtils.capitalizeFully(boost.getName()), spaces))
+                .replaceAll("<multiplier>", formattedInfoValue(String.valueOf(boost.getMultiplier()), 5))
+                .replaceAll("<status>", boostStatus);
 
     }
 
