@@ -114,7 +114,7 @@ public class Boost implements ConfigurationSerializable {
         map.put("chance", this.chance);
         map.put("chat", this.chat);
         map.put("action-bar", this.actionBar);
-        map.put("sound", this.sound);
+        map.put("sound", WriteUtil.getSound(this.sound));
         map.put("xp-sources", WriteUtil.getXpSourceList(this.xpSources));
         map.put("mob-sources", WriteUtil.getMobSourceList(this.mobSources));
         return map;
