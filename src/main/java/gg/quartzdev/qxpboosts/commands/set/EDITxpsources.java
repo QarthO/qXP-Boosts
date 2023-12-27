@@ -7,8 +7,12 @@ import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 
 public class EDITxpsources extends qEDIT {
+    public EDITxpsources(String settingName, String valueSyntax) {
+        super(settingName, valueSyntax);
+    }
+
     @Override
-    public boolean run(CommandSender sender, String label, String[] args, Boost boost) {
+    public boolean logic(CommandSender sender, String[] args, Boost boost) {
         if(!(sender instanceof Player)){
             return false;
         }

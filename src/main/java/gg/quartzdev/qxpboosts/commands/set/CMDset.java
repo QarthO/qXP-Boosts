@@ -22,11 +22,11 @@ public class CMDset extends qCMD {
         super(cmdName, group);
         this.boostManager = qXpBoosts.getInstance().boostManager;
         this.setCmds = new HashSet<>();
-        setCmds.add("multiplier");
-        setCmds.add("chance");
-        setCmds.add("chat");
-        setCmds.add("actionbar");
-        setCmds.add("sound");
+//        setCmds.add("multiplier");
+//        setCmds.add("chance");
+//        setCmds.add("chat");
+//        setCmds.add("actionbar");
+//        setCmds.add("sound");
         setCmds.add("xpsources");
         setCmds.add("mobsources");
     }
@@ -38,7 +38,8 @@ public class CMDset extends qCMD {
 
 //        /xpboosts set
         if(args.length == 1){
-            qUtil.sendMessage(sender, Language.SYNTAX_SET);
+            qUtil.sendMessage(sender, Language.SYNTAX_SET
+                    .parse("label", label));
             return false;
         }
 
@@ -52,7 +53,9 @@ public class CMDset extends qCMD {
 
 //        /xpboosts set <boost-name>
         if(args.length == 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_SET.parse("boost", boostName));
+            qUtil.sendMessage(sender, Language.SYNTAX_SET
+                    .parse("label", label)
+                    .parse("boost", boostName));
             return false;
         }
 
@@ -60,24 +63,26 @@ public class CMDset extends qCMD {
         boolean success = false;
 
         switch(setting){
-            case "multiplier":
-                success = new EDITmultiplier().run(sender, label, args, boost);
-            case "chance":
-                break;
-            case "chat":
-                break;
-            case "actionbar":
-                break;
-            case "sound":
-                qUtil.sendMessage(sender, "<prefix> open sound");
-                break;
+//            case "multiplier":
+//                success = new EDITmultiplier("multiplier", "<multiplier>").run(sender, label, args, boost);
+//                break;
+//            case "chance":
+//                success = new EDITchance("chance", "<chance>").run(sender, label, args, boost);
+//                break;
+//            case "chat":
+//                success = new EDITchat("chat", "<true/false>").run(sender, label, args, boost);
+//                break;
+//            case "actionbar":
+//                success = new EDITactionbar("actionBar", "<true/false>").run(sender, label, args, boost);
+//                break;
+//            case "sound":
+//                success = new EDITsound("sound", "<true/false>").run(sender, label, args, boost);
+//                break;
             case "xpsources":
-                qUtil.sendMessage(sender, "<prefix> open mob sources gui");
-                success = new EDITxpsources().run(sender, label, args, boost);
+                success = new EDITxpsources("xpsources", "").run(sender, label, args, boost);
                 break;
             case "mobsources":
-                qUtil.sendMessage(sender, "<prefix> open mob sources gui");
-                success = new EDITmobsources().run(sender, label, args, boost);
+                success = new EDITmobsources("mobsources", "").run(sender, label, args, boost);
                 break;
             default:
                 qUtil.sendMessage(sender, Language.SYNTAX_SET.parse("boost", boostName));

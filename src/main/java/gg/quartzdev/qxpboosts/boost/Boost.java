@@ -86,8 +86,15 @@ public class Boost implements ConfigurationSerializable {
         return this.chance;
     }
 
+    public void setChance(double chance) {
+        this.chance = chance;
+    }
+
     public boolean sendsChat(){
         return this.chat;
+    }
+    public void setChat(boolean sendsChat){
+        this.chat = sendsChat;
     }
 
     public boolean sendsActionBar(){

@@ -43,7 +43,7 @@ public final class qXpBoosts extends JavaPlugin {
 
         registerHandlers();
 
-        new CommandManager(this.getPluginMeta().getName().toLowerCase());
+        new CommandManager("qxpboosts");
     }
 
     @Override

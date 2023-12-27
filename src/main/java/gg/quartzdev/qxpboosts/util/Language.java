@@ -32,11 +32,7 @@ public enum Language {
     SYNTAX_RELOAD("<prefix> <red>Syntax: /<label> reload"),
     SYNTAX_CREATE("<prefix> <red>Syntax: /<label> create <boost> <multiplier>"),
     SYNTAX_SET("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
-    SYNTAX_SET_MULTIPLIER("<prefix> <red>Syntax: /<label> set <boost> multiplier <multiplier>"),
-    SYNTAX_SET_CHANCE("<prefix> <red>Syntax: /<label> set <boost> chance <chance>"),
-    SYNTAX_SET_CHAT("<prefix> <red>Syntax: /<label> set <boost> chat <true/false>"),
-    SYNTAX_SET_ACTIONBAR("<prefix> <red>Syntax: /<label> set <boost> actionbar <true/false>"),
-    SYNTAX_SET_SOUND("<prefix> <red>Syntax: /<label> set <boost> sound <sound>"),
+    SYNTAX_SET_SETTING("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
 
 //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><multiplier>x <green>XP"),
@@ -46,14 +42,14 @@ public enum Language {
     BOOST_ENABLED("<prefix> <green>Enabled boost: <yellow><boost></yellow>"),
     BOOST_DISABLED("<prefix> <green>Disabled boost: <yellow><boost></yellow>"),
     BOOST_INFO_HEADER("<prefix> <blue>List of all loaded boosts"),
-    BOOST_INFO_LINE("<dark_purple>    <name> <gray>- <gold><multiplier></gold> -</gray> <status>"),
+    BOOST_INFO_LINE("<dark_purple>    <boost> <gray>- <gold><multiplier></gold> -</gray> <status>"),
     BOOST_STATUS_ERROR("<red>Error"),
     BOOST_STATUS_ACTIVE("<green>Active"),
     BOOST_STATUS_DISABLED("<red>Disabled"),
     BOOST_CREATE("<prefix> <green>Boost created: <yellow><name>"),
     BOOST_DELETE("<prefix> <green>Boost deleted: <yellow><name>"),
     ERROR_DELETE_DEFAULT("<prefix> <red>Error: You can't delete the default boost"),
-    BOOST_SET_MULTIPLIER("<prefix> <green>Multiplier for <yellow><boost></yellow> has been set to <yellow><multiplier></yellow>"),
+    BOOST_SET_SETTING("<prefix> <green><setting> for <yellow><boost></yellow> has been set to <yellow><value>"),
     ERROR_READ_FILE("<prefix> <red>Error: Incorrect syntax in file: <yellow><file>"),
     INVENTORY_TITLE_SOURCES("<bold><boost></bold> <source-type>");
 

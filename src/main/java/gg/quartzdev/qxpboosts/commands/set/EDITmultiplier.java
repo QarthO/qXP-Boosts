@@ -8,37 +8,29 @@ import org.bukkit.command.CommandSender;
 import java.util.Locale;
 
 public class EDITmultiplier extends qEDIT{
+    public EDITmultiplier(String settingName, String valueSyntax) {
+        super(settingName, valueSyntax);
+    }
+
     @Override
-    public boolean run(CommandSender sender, String label, String[] args, Boost boost) {
-//        /xpboosts args[0] args[1] args[2] args[3]
-//        /xpboosts set     boost   multiplier
+    public boolean logic(CommandSender sender, String[] args, Boost boost) {
         if(args.length !=4){
-            Language message = Language.SYNTAX_SET_MULTIPLIER
-                    .parse("label", label)
-                    .parse("boost", args[1]);
-            qUtil.sendMessage(sender, message);
+            this.sendSyntax(sender);
             return false;
         }
 
+//        Parse value
         double newMultiplier = -1;
         try{
-            newMultiplier = Double.parseDouble(args[3]);
+            newMultiplier = Double.parseDouble(this.value);
         } catch(NumberFormatException ignored){}
-
         if(newMultiplier < 0){
-            Language message = Language.SYNTAX_SET_MULTIPLIER
-                    .parse("label", label)
-                    .parse("boost", args[1]);
-            qUtil.sendMessage(sender, message);
+            this.sendSyntax(sender);
             return false;
         }
 
+//        Set value
         boost.setMultiplier(newMultiplier);
-        qUtil.sendMessage(sender, Language.BOOST_SET_MULTIPLIER
-                .parse("label", label)
-                .parse("boost", args[1])
-                .parse("multiplier", args[3]));
         return true;
-
     }
 }

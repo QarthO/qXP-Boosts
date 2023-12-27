@@ -8,8 +8,12 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 
 public class EDITmobsources extends qEDIT {
 
+    public EDITmobsources(String settingName, String valueSyntax) {
+        super(settingName, valueSyntax);
+    }
+
     @Override
-    public boolean run(CommandSender sender, String label, String[] args, Boost boost) {
+    public boolean logic(CommandSender sender, String[] args, Boost boost) {
         if(!(sender instanceof Player)){
             return false;
         }
