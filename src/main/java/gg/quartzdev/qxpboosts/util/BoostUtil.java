@@ -2,6 +2,7 @@ package gg.quartzdev.qxpboosts.util;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.qPermission;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
@@ -11,34 +12,28 @@ import java.util.Set;
 
 public class BoostUtil {
 
-    public static void givePlayerXp(Player player, int amountGained, Boost boost){
-
-        double bonus = amountGained * boost.getMultiplier();
-        player.giveExp((int) bonus);
+    public static void notifyPlayerGotBoost(
+            Player player, double multiplier, boolean sendsChat, boolean sendsActionBar, Sound sound){
 
         DecimalFormat format = new DecimalFormat("0.###");
-        String strMultiplier = format.format(boost.getMultiplier());
+        String strMultiplier = format.format(multiplier);
 
-        if(boost.sendsChat()) {
+        if(sendsChat) {
             String message = Language.XP_CHAT_GAIN.toString()
-                    .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
-                    .replaceAll("<boost>", boost.getName())
                     .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendMessage(player, message);
         }
 
-        if(boost.sendsActionBar()){
+        if(sendsActionBar){
             String message = Language.XP_ACTIONBAR_GAIN.toString()
-                    .replaceAll("<xp>", String.valueOf(bonus))
                     .replaceAll("<player>", player.getName())
-                    .replaceAll("<name>", boost.getName())
                     .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendActionBar(player, message);
         }
 
-        if(boost.getSound() != null) {
-            player.playSound(player.getLocation(), boost.getSound(), 1.0F, 1.0F);
+        if(sound!= null) {
+            player.playSound(player.getLocation(), sound, 1.0F, 1.0F);
         }
 
     }

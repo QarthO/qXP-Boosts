@@ -10,6 +10,7 @@ import gg.quartzdev.qxpboosts.util.BoostUtil;
 import gg.quartzdev.qxpboosts.util.Language;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.ExperienceOrb;
@@ -55,6 +56,12 @@ public class PlayerPickupExpListener implements Listener {
 
         ExperienceOrb xpOrb = event.getExperienceOrb();
 
+        double multiplier = 0;
+        double highestMultiplier = 0;
+        boolean sendActionBar = false;
+        boolean sendChat = false;
+        Sound sound = null;
+
         for(String boostName : boostNames){
             Boost boost = this.boostManager.getBoost(boostName);
             if(boost == null){
@@ -96,12 +103,31 @@ public class PlayerPickupExpListener implements Listener {
                 }
             }
 
-//            Give the player the extra xp from the boost
+//            Requirements passed all checks
             int amount = xpOrb.getExperience();
-            BoostUtil.givePlayerXp(player, amount, boost);
 
+//            Running multiplier total
+            multiplier+= boost.getMultiplier();
 
+//            Running notify
+            if(boost.sendsChat()) {
+                sendChat = true;
+            }
+            if(boost.sendsActionBar()) {
+                sendActionBar = true;
+            }
+
+//            Only will play the sound of the highest multiplier
+            highestMultiplier = Math.max(highestMultiplier, boost.getMultiplier());
+            if(boost.getSound() != null && boost.getMultiplier() == highestMultiplier){
+                sound = boost.getSound();
+            }
+
+            double bonus = amount * boost.getMultiplier();
+            player.giveExp((int) bonus);
         }
+
+        BoostUtil.notifyPlayerGotBoost(player, multiplier, sendChat, sendActionBar, sound);
 
     }
 

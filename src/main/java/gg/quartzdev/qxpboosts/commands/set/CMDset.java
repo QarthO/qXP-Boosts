@@ -75,9 +75,9 @@ public class CMDset extends qCMD {
 //            case "actionbar":
 //                success = new EDITactionbar("actionBar", "<true/false>").run(sender, label, args, boost);
 //                break;
-//            case "sound":
-//                success = new EDITsound("sound", "<true/false>").run(sender, label, args, boost);
-//                break;
+            case "sound":
+                success = new EDITsound("sound", "<true/false>").run(sender, label, args, boost);
+                break;
             case "xpsources":
                 success = new EDITxpsources("xpsources", "").run(sender, label, args, boost);
                 break;

@@ -39,6 +39,10 @@ public abstract class SettingsInventory implements InventoryHolder {
         this.inventory = Bukkit.createInventory(this, size, title);
     }
 
+    public void setInventory(Inventory inventory){
+        this.inventory = inventory;
+    }
+
     @Override
     public @NotNull Inventory getInventory() {
         return this.inventory;
