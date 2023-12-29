@@ -52,10 +52,10 @@ public class InventoryUtil {
 
         Component component = mm.deserialize("").decoration(TextDecoration.ITALIC, false);
         lore.add(component);
-        String status = isActive ? "<green>Active" : "<red>Disabled";
+        String status = isActive ? "<green>Enabled" : "<red>Disabled";
         component = mm.deserialize("<bold> <white>Current Status: " + status).decoration(TextDecoration.ITALIC, false);;
         lore.add(component);
-        status = isActive ? "disable" : "activate";
+        status = isActive ? "disable" : "enable";
         component = mm.deserialize("  <yellow>Click to " + status).decoration(TextDecoration.ITALIC, false);
         lore.add(component);
 

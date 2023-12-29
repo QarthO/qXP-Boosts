@@ -4,11 +4,9 @@ import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.storage.YMLboosts;
 import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qLogger;
-import gg.quartzdev.qxpboosts.util.qUtil;
 import org.apache.commons.lang3.text.WordUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -90,22 +88,12 @@ public class BoostManager {
     public Set<String> listBoosts(){
         Set<String> boostList = new HashSet<>();
 
-        for(Boost boost : boostsMap.values())
-            boostList.add(this.getBoostInfo(boost));
-
+        for(Boost boost : boostsMap.values()) {
+            String statusColor = boost.isActive() ? "<green>" : "<red>";
+            String interact = "<hover:show_text:'<light_purple>" + boost.getName() + " <gray>- <green>Click for info'><click:run_command:/xpboosts info " + boost.getName() + ">";
+            boostList.add(interact + statusColor + boost.getName() + "<reset>");
+        }
         return boostList;
-    }
-
-    public String getBoostInfo(Boost boost){
-
-        String boostStatus = (boost.isActive()) ? Language.BOOST_STATUS_ACTIVE.toString() : Language.BOOST_STATUS_DISABLED.toString();
-
-        int spaces = 10;
-        return Language.BOOST_INFO_LINE.toString()
-                .replaceAll("<boost>", formattedInfoValue(WordUtils.capitalizeFully(boost.getName()), spaces))
-                .replaceAll("<multiplier>", formattedInfoValue(String.valueOf(boost.getMultiplier()), 5))
-                .replaceAll("<status>", boostStatus);
-
     }
 
     public void saveBoost(Boost boost){

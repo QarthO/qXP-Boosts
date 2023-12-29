@@ -7,7 +7,7 @@ import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.util.BoostUtil;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
@@ -65,7 +65,7 @@ public class PlayerPickupExpListener implements Listener {
         for(String boostName : boostNames){
             Boost boost = this.boostManager.getBoost(boostName);
             if(boost == null){
-                qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+                qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
                 continue;
             }
 

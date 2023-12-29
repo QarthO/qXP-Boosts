@@ -1,7 +1,7 @@
 package gg.quartzdev.qxpboosts.commands;
 
 import gg.quartzdev.qxpboosts.commands.set.CMDset;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -33,7 +33,7 @@ public class CommandManager extends Command {
         commandsMap.put("list",     new CMDlist("list", "admin"));
         commandsMap.put("delete",   new CMDdelete("delete", "admin"));
         commandsMap.put("set",      new CMDset("set", "admin"));
-//        commandsMap.put("info",     new CMDinfo("info", "player"));
+        commandsMap.put("info",     new CMDinfo("info", "player"));
 
         Bukkit.getCommandMap().register(name, this);
     }
@@ -50,14 +50,12 @@ public class CommandManager extends Command {
         qCMD cmd = commandsMap.get(args[0]);
 
         if(cmd == null){
-            qUtil.sendMessage(sender, Language.ERROR_CMD_NOT_FOUND.parse("cmd", args[0]));
+            qUtil.sendMessage(sender, Messages.ERROR_CMD_NOT_FOUND.parse("cmd", args[0]));
             return false;
         }
 
 //        Run the command
         return cmd.run(sender, labelOrAlias, args);
-
-
     }
 
     @Override
@@ -72,10 +70,10 @@ public class CommandManager extends Command {
             qCMD cmd = commandsMap.get(args[0]);
 
             if(cmd == null) {
-                return null;
+                return completions;
             }
 
-            Iterable<String> rawCompletions = cmd.getTabCompletions(args);
+            Iterable<String> rawCompletions = cmd.getTabCompletions(sender, args);
             if(rawCompletions != null) {
                 StringUtil.copyPartialMatches(args[args.length-1], rawCompletions, completions);
             }

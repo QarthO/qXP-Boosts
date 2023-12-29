@@ -1,9 +1,9 @@
 package gg.quartzdev.qxpboosts.commands.set;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
-import gg.quartzdev.qxpboosts.util.Language;
-import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
+
+import java.util.Arrays;
 
 public class EDITchance extends qEDIT {
     public EDITchance(String settingName, String valueSyntax) {
@@ -13,7 +13,7 @@ public class EDITchance extends qEDIT {
     @Override
     public boolean logic(CommandSender sender, String[] args, Boost boost) {
         if(args.length !=4){
-            this.sendSyntax(sender);
+            this.sendSetSyntax(sender);
             return false;
         }
 
@@ -23,12 +23,21 @@ public class EDITchance extends qEDIT {
             chance = Double.parseDouble(this.value);
         } catch(NumberFormatException ignored){}
         if(chance < 0){
-            this.sendSyntax(sender);
+            this.sendSetSyntax(sender);
             return false;
         }
 
 //        Set value
         boost.setChance(chance);
         return true;
+    }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        if(args.length == 4){
+            String[] rawCompletions = {"<chance>"};
+            return Arrays.asList(rawCompletions);
+        }
+        return null;
     }
 }

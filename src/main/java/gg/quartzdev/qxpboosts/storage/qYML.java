@@ -1,7 +1,7 @@
 package gg.quartzdev.qxpboosts.storage;
 
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -29,7 +29,7 @@ public abstract class qYML {
         try {
             if(file.createNewFile()){
                 this.plugin.saveResource(name, true);
-                logger.log(Language.FILE_CREATED.parse("file", file.getName()));
+                logger.log(Messages.FILE_CREATED.parse("file", file.getName()));
             }
             this.config = YamlConfiguration.loadConfiguration(file);
             List<String> notes = new ArrayList<>();
@@ -39,7 +39,7 @@ public abstract class qYML {
             this.config.setComments("schema-version", notes);
             this.config.save(file);
         } catch(IOException e){
-            logger.error(Language.ERROR_CREATE_FILE.parse("file", file.getName()));
+            logger.error(Messages.ERROR_CREATE_FILE.parse("file", file.getName()));
             return null;
         }
         return file;
@@ -49,7 +49,7 @@ public abstract class qYML {
             try {
                 this.config.save(this.file);
             } catch(IOException e) {
-                logger.error(Language.ERROR_SAVE_FILE.parse("file", this.file.getName()));
+                logger.error(Messages.ERROR_SAVE_FILE.parse("file", this.file.getName()));
             }
         });
     }

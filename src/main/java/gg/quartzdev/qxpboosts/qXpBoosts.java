@@ -3,7 +3,6 @@ package gg.quartzdev.qxpboosts;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.commands.CommandManager;
-import gg.quartzdev.qxpboosts.inventory.PlayerInventoryManager;
 import gg.quartzdev.qxpboosts.inventory.pages.listeners.InventoryListener;
 import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
 import gg.quartzdev.qxpboosts.storage.qConfig;
@@ -23,7 +22,6 @@ public final class qXpBoosts extends JavaPlugin {
     public qLogger logger;
 
     public BoostManager boostManager;
-    public PlayerInventoryManager pim;
 
     public static qXpBoosts getInstance(){
         return instance;
@@ -42,7 +40,6 @@ public final class qXpBoosts extends JavaPlugin {
         this.logger = new qLogger();
         this.config = new qConfig();
         this.boostManager = new BoostManager();
-        this.pim = new PlayerInventoryManager();
 
         registerHandlers();
 

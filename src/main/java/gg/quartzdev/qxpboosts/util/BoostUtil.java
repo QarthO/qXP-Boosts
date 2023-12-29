@@ -1,6 +1,5 @@
 package gg.quartzdev.qxpboosts.util;
 
-import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.qPermission;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -19,14 +18,14 @@ public class BoostUtil {
         String strMultiplier = format.format(multiplier);
 
         if(sendsChat) {
-            String message = Language.XP_CHAT_GAIN.toString()
+            String message = Messages.XP_CHAT_GAIN.get()
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendMessage(player, message);
         }
 
         if(sendsActionBar){
-            String message = Language.XP_ACTIONBAR_GAIN.toString()
+            String message = Messages.XP_ACTIONBAR_GAIN.get()
                     .replaceAll("<player>", player.getName())
                     .replaceAll("<multiplier>", strMultiplier);
             qUtil.sendActionBar(player, message);

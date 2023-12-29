@@ -13,9 +13,10 @@ import java.util.stream.Collectors;
 public class ReadUtil {
 
     public static void logReadError(String dataType, String fileName){
-        qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_READ_FILE
+        qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_READ_FILE
                 .parse("file", fileName)
-                .parse("data-type", dataType));
+                .parse("data-type", dataType)
+        );
     }
 
     public static boolean getBoolean(Object data){
@@ -43,7 +44,7 @@ public class ReadUtil {
             }
             return Sound.valueOf(rawData.toUpperCase(Locale.ROOT));
         } catch(IllegalArgumentException exception){
-            qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_SOUND_NOT_FOUND.parse("sound", rawData).get());
+            qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_SOUND_NOT_FOUND.parse("sound", rawData).get());
             return null;
         }
     }
@@ -109,7 +110,7 @@ public class ReadUtil {
                     xpSources.add(xpSource);
                 }
             } catch(IllegalArgumentException exception){
-                qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_XP_SOURCE_NOT_FOUND.parse("xp-source", xpSourceName));
+                qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_XP_SOURCE_NOT_FOUND.parse("xp-source", xpSourceName));
             }
         }
         return xpSources;
@@ -133,7 +134,7 @@ public class ReadUtil {
                     mobSources.add(mobSource);
                 }
             } catch(IllegalArgumentException exception){
-                qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_MOB_SOURCE_NOT_FOUND.parse("mob-source", mobSourceName));
+                qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_MOB_SOURCE_NOT_FOUND.parse("mob-source", mobSourceName));
             }
         }
         return mobSources;

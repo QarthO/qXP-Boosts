@@ -15,11 +15,11 @@ public class qUtil {
             sender.sendMessage(parse(message, true));
     }
 
-    public static void sendMessage(CommandSender sender, Language message){
+    public static void sendMessage(CommandSender sender, Messages message){
         sendMessage(sender, message.get());
     }
 
-    public static void sendMessage(Player player, Language message){
+    public static void sendMessage(Player player, Messages message){
         sendMessage(player, message.get());
     }
 
@@ -37,10 +37,10 @@ public class qUtil {
 
         if(isConsole)
             return mm.deserialize(message,
-                    Placeholder.parsed("prefix", Language.CONSOLE_PREFIX.get())
+                    Placeholder.parsed("prefix", Messages.CONSOLE_PREFIX.get())
             );
         return mm.deserialize(message,
-                Placeholder.parsed("prefix", Language.CHAT_PREFIX.get())
+                Placeholder.parsed("prefix", Messages.CHAT_PREFIX.get())
         );
     }
 }

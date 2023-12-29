@@ -17,7 +17,7 @@ public class CMDedit extends qCMD{
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         return null;
     }
 }

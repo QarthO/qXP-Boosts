@@ -21,4 +21,9 @@ public class EDITmobsources extends qEDIT {
         return true;
     }
 
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        return null;
+    }
+
 }

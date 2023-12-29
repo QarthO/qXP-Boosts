@@ -3,7 +3,7 @@ package gg.quartzdev.qxpboosts.commands;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
@@ -27,7 +27,7 @@ public class CMDdisable extends qCMD {
 
 //        Incorrect Syntax
         if(args.length != 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_DISABLE.parse("label", label));
+            qUtil.sendMessage(sender, Messages.SYNTAX_DISABLE.parse("label", label));
             return false;
         }
 
@@ -37,13 +37,19 @@ public class CMDdisable extends qCMD {
 
 //        Boost not found
         if(boost == null){
-            qUtil.sendMessage(sender, Language.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+            return false;
+        }
+
+        if(!boost.isActive()){
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_ALREADY_DISABLED
+                    .parse("boost", boost.getName()));
             return false;
         }
 
 //        Enables boost
         boost.disable();
-        qUtil.sendMessage(sender, Language.BOOST_DISABLED.parse("boost", boost.getName()));
+        qUtil.sendMessage(sender, Messages.BOOST_DISABLED.parse("boost", boost.getName()));
 
 //        Saves to storage
         this.boostManager.saveBoost(boost);
@@ -52,7 +58,7 @@ public class CMDdisable extends qCMD {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         return args.length == 2 ? this.boostManager.getActiveBoostNames() : null;
     }
 }

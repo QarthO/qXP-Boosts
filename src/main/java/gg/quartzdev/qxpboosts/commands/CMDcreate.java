@@ -1,8 +1,9 @@
 package gg.quartzdev.qxpboosts.commands;
 
+import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
@@ -22,11 +23,19 @@ public class CMDcreate extends qCMD {
     public boolean logic(CommandSender sender, String label, String[] args) {
 
         if(args.length != 3){
-            qUtil.sendMessage(sender, Language.SYNTAX_CREATE.parse("label", label));
+            qUtil.sendMessage(sender, Messages.SYNTAX_CREATE.parse("label", label));
             return false;
         }
 
         String boostName = args[1];
+
+        Boost boost = this.boostManager.getBoost(boostName);
+        if(boost != null){
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_ALREADY_EXISTS
+                    .parse("boost", boostName));
+            return false;
+        }
+
         double multiplier = 0.0;
         try {
             multiplier = Double.parseDouble(args[2]);
@@ -36,13 +45,13 @@ public class CMDcreate extends qCMD {
         }
 
         this.boostManager.createBoost(boostName, multiplier);
-        qUtil.sendMessage(sender, Language.BOOST_CREATE.parse("boost", boostName));
+        qUtil.sendMessage(sender, Messages.BOOST_CREATE.parse("boost", boostName));
         return true;
 
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         Collection<String> rawCompletions = new ArrayList<>();
         if(args.length == 2){
             rawCompletions.add("<boost>");

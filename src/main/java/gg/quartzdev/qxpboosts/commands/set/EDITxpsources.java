@@ -19,4 +19,9 @@ public class EDITxpsources extends qEDIT {
         new SourcesPage((Player) sender, boost, ExperienceOrb.SpawnReason.class);
         return true;
     }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        return null;
+    }
 }

@@ -1,7 +1,7 @@
 package gg.quartzdev.qxpboosts.storage;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 
@@ -35,7 +35,7 @@ public class YMLboosts extends qYML{
     public Boost load(String boostName){
         Object boostData = this.getBoostsSection().get(boostName);
         if(!(boostData instanceof Boost)){
-            this.logger.error(Language.ERROR_BOOST_LOAD_EXCEPTION);
+            this.logger.error(Messages.ERROR_BOOST_LOAD_EXCEPTION);
             return null;
         }
         Boost boost = (Boost) boostData;

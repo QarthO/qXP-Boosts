@@ -3,7 +3,7 @@ package gg.quartzdev.qxpboosts.inventory.pages;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.inventory.SettingsInventory;
 import gg.quartzdev.qxpboosts.util.InventoryUtil;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -22,9 +22,8 @@ public class SourcesPage extends SettingsInventory {
     public <E extends Enum<E>> SourcesPage(Player player, Boost boost, Class<E> sourceType) {
         super(boost);
         this.sourceType = sourceType;
-        String title = Language.INVENTORY_TITLE_SOURCES.
-                parse("boost", WordUtils.capitalizeFully(boost.getName()))
-                .get();
+        String title = Messages.INVENTORY_TITLE_SOURCES.
+                parse("boost", WordUtils.capitalizeFully(boost.getName())).get();
         if(sourceType == ExperienceOrb.SpawnReason.class){
             this.sources = this.boost.xpSources;
             title = title.replaceAll("<source-type>", "XP-Sources");
@@ -66,7 +65,6 @@ public class SourcesPage extends SettingsInventory {
         this.boostManager.saveBoost(this.boost);
 
     }
-
     public <E extends Enum<E>> void fill(EnumSet<E> sources){
         if(!sources.stream().findAny().isPresent()){
             return;

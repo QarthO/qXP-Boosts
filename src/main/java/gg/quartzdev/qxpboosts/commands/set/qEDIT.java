@@ -1,13 +1,13 @@
 package gg.quartzdev.qxpboosts.commands.set;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
-import gg.quartzdev.qxpboosts.boost.BoostManager;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
+import java.util.Locale;
 
 public abstract class qEDIT {
 
@@ -24,7 +24,7 @@ public abstract class qEDIT {
     public boolean run(CommandSender sender, String label, String[] args, Boost boost){
 
 //        <prefix> <red>Syntax: /<label> set <boost> <setting> <value>
-        this.syntax = Language.SYNTAX_SET_SETTING
+        this.syntax = Messages.SYNTAX_SET_SETTING
                 .parse("label", label)
                 .parse("boost", boost.getName())
                 .parse("setting", this.settingName)
@@ -34,25 +34,29 @@ public abstract class qEDIT {
             this.value = args[3];
         }
 
-        qUtil.sendMessage(sender, "args:  <blue>" + Arrays.toString(args));
-        qUtil.sendMessage(sender, "Value:  <blue>" + this.value);
-
         if(!this.logic(sender, args, boost)){
             return false;
         }
 
+        if(this.settingName.equalsIgnoreCase("xpsources") ||
+           this.settingName.equalsIgnoreCase("mobsources")){
+            return true;
+        }
+
 //        Send success message
-        qUtil.sendMessage(sender, Language.BOOST_SET_SETTING
+        qUtil.sendMessage(sender, Messages.BOOST_SET_SETTING
                 .parse("label", label)
                 .parse("boost", boost.getName())
                 .parse("setting", WordUtils.capitalizeFully(this.settingName))
-                .parse("value", "poop"));
+                .parse("value", this.value));
         return true;
     }
 
     public abstract boolean logic(CommandSender sender, String[] args, Boost boost);
 
-    public void sendSyntax(CommandSender sender){
+    public abstract Iterable<String> getTabCompletions(String[] args);
+
+    public void sendSetSyntax(CommandSender sender){
         qUtil.sendMessage(sender, this.syntax);
     }
 

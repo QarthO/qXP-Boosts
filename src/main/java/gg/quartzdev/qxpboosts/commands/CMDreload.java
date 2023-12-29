@@ -3,7 +3,7 @@ package gg.quartzdev.qxpboosts.commands;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.storage.qConfig;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
@@ -25,12 +25,12 @@ public class CMDreload extends qCMD {
     public boolean logic(CommandSender sender, String label, String[] args) {
         config.reload();
         boostManager.reload();
-        qUtil.sendMessage(sender, Language.RELOAD_COMPLETE);
+        qUtil.sendMessage(sender, Messages.RELOAD_COMPLETE);
         return true;
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         return null;
     }
 

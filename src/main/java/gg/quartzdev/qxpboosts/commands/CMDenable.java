@@ -3,15 +3,11 @@ package gg.quartzdev.qxpboosts.commands;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
-import org.apache.commons.lang3.text.WordUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
-import java.util.Arrays;
 import java.util.Locale;
-import java.util.Set;
 
 public class CMDenable extends qCMD {
 
@@ -31,7 +27,7 @@ public class CMDenable extends qCMD {
 
 //        Incorrect Syntax
         if(args.length != 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_ENABLE.parse("label", label));
+            qUtil.sendMessage(sender, Messages.SYNTAX_ENABLE.parse("label", label));
             return false;
         }
 
@@ -41,13 +37,19 @@ public class CMDenable extends qCMD {
 
 //        Boost not found
         if(boost == null){
-            qUtil.sendMessage(sender, Language.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+            return false;
+        }
+
+        if(boost.isActive()){
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_ALREADY_ENABLED
+                    .parse("boost", boost.getName()));
             return false;
         }
 
 //        Enables boost
         boost.enable();
-        qUtil.sendMessage(sender, Language.BOOST_ENABLED.parse("boost", boost.getName()));
+        qUtil.sendMessage(sender, Messages.BOOST_ENABLED.parse("boost", boost.getName()));
 
 //        Saves to storage
         this.boostManager.saveBoost(boost);
@@ -56,7 +58,7 @@ public class CMDenable extends qCMD {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         return args.length == 2 ? this.boostManager.getDisabledBoostNames() : null;
     }
 

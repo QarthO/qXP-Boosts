@@ -1,11 +1,8 @@
 package gg.quartzdev.qxpboosts.commands;
 
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 
 import java.util.Set;
@@ -24,14 +21,17 @@ public class CMDlist extends qCMD{
     public boolean logic(CommandSender sender, String label, String[] args) {
 //        Boost list
         Set<String> boostList = qXpBoosts.getInstance().boostManager.listBoosts();
-        String message = Language.BOOST_INFO_HEADER.get() +"<reset><newline>" + String.join("<reset><newline>", boostList);
-        qUtil.sendMessage(sender, message);
+        String boosts = String.join(", ", boostList);
 
+        qUtil.sendMessage(sender, Messages.BOOST_LIST
+                .parse("boost-count", "" + boostList.size())
+                .parse("boost-list", boosts)
+        );
         return false;
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         return null;
     }
 

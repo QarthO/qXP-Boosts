@@ -4,31 +4,28 @@ import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.commands.qCMD;
 import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 public class CMDset extends qCMD {
 
     BoostManager boostManager;
-    Set<String> setCmds;
+    HashMap<String, qEDIT> subCmds;
 
     public CMDset(String cmdName, String group) {
         super(cmdName, group);
         this.boostManager = qXpBoosts.getInstance().boostManager;
-        this.setCmds = new HashSet<>();
-//        setCmds.add("multiplier");
-//        setCmds.add("chance");
-//        setCmds.add("chat");
-//        setCmds.add("actionbar");
-//        setCmds.add("sound");
-        setCmds.add("xpsources");
-        setCmds.add("mobsources");
+        this.subCmds = new HashMap<>();
+        subCmds.put("multiplier", new EDITmultiplier("multiplier", "<multiplier>"));
+        subCmds.put("chance", new EDITchance("chance", "<chance>"));
+        subCmds.put("chat", new EDITchat("chat", "<true/false>"));
+        subCmds.put("actionbar", new EDITactionbar("actionbar", "<true/false>"));
+        subCmds.put("sound", new EDITsound("sound", "<sound>"));
+        subCmds.put("xpsources", new EDITxpsources("xpsources", ""));
+        subCmds.put("mobsources", new EDITmobsources("mobsources", ""));
     }
 
 //    /command args[0]  args[1]     args[2]     args[3]
@@ -38,7 +35,7 @@ public class CMDset extends qCMD {
 
 //        /xpboosts set
         if(args.length == 1){
-            qUtil.sendMessage(sender, Language.SYNTAX_SET
+            qUtil.sendMessage(sender, Messages.SYNTAX_SET
                     .parse("label", label));
             return false;
         }
@@ -47,47 +44,27 @@ public class CMDset extends qCMD {
         String boostName = args[1].toLowerCase(Locale.ROOT);
         Boost boost = boostManager.getBoost(boostName);
         if(boost == null){
-            qUtil.sendMessage(sender, Language.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
+            qUtil.sendMessage(sender, Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
             return false;
         }
 
 //        /xpboosts set <boost-name>
         if(args.length == 2){
-            qUtil.sendMessage(sender, Language.SYNTAX_SET
+            qUtil.sendMessage(sender, Messages.SYNTAX_SET
                     .parse("label", label)
                     .parse("boost", boostName));
             return false;
         }
 
         String setting = args[2].toLowerCase(Locale.ROOT);
-        boolean success = false;
-
-        switch(setting){
-//            case "multiplier":
-//                success = new EDITmultiplier("multiplier", "<multiplier>").run(sender, label, args, boost);
-//                break;
-//            case "chance":
-//                success = new EDITchance("chance", "<chance>").run(sender, label, args, boost);
-//                break;
-//            case "chat":
-//                success = new EDITchat("chat", "<true/false>").run(sender, label, args, boost);
-//                break;
-//            case "actionbar":
-//                success = new EDITactionbar("actionBar", "<true/false>").run(sender, label, args, boost);
-//                break;
-            case "sound":
-                success = new EDITsound("sound", "<true/false>").run(sender, label, args, boost);
-                break;
-            case "xpsources":
-                success = new EDITxpsources("xpsources", "").run(sender, label, args, boost);
-                break;
-            case "mobsources":
-                success = new EDITmobsources("mobsources", "").run(sender, label, args, boost);
-                break;
-            default:
-                qUtil.sendMessage(sender, Language.SYNTAX_SET.parse("boost", boostName));
-                return false;
+        qEDIT edit = this.subCmds.get(setting);
+        if(edit == null){
+            qUtil.sendMessage(sender, Messages.SYNTAX_SET.parse("boost", boostName));
+            return false;
         }
+
+        boolean success = edit.run(sender, label, args, boost);
+
         if(success) {
             this.boostManager.saveBoost(boost);
         }
@@ -95,12 +72,20 @@ public class CMDset extends qCMD {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
         if(args.length == 2){
             return this.boostManager.getBoostNames();
         }
         if(args.length == 3){
-            return setCmds;
+            return subCmds.keySet();
+        }
+        if(args.length >= 4){
+            String setting = args[2].toLowerCase(Locale.ROOT);
+            qEDIT edit = this.subCmds.get(setting);
+            if(edit == null){
+                return null;
+            }
+            return edit.getTabCompletions(args);
         }
         return null;
     }

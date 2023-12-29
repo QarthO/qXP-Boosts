@@ -1,9 +1,9 @@
 package gg.quartzdev.qxpboosts.commands.set;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
-import gg.quartzdev.qxpboosts.util.Language;
-import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
+
+import java.util.Arrays;
 
 public class EDITactionbar extends qEDIT{
 
@@ -13,16 +13,25 @@ public class EDITactionbar extends qEDIT{
 
     @Override
     public boolean logic(CommandSender sender, String[] args, Boost boost) {
+//        /xpboosts set default actionbar true
         if(args.length !=4){
-            this.sendSyntax(sender);
+            this.sendSetSyntax(sender);
             return false;
         }
         if(this.value.equalsIgnoreCase("true") || this.value.equalsIgnoreCase("false")){
             boolean actionBar = Boolean.parseBoolean(this.value);
             boost.setActionBar(actionBar);
             return true;
-        } else {
-            return false;
         }
+        return false;
+    }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        if(args.length == 4){
+            String[] rawCompletions = {"true","false"};
+            return Arrays.asList(rawCompletions);
+        }
+        return null;
     }
 }

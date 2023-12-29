@@ -1,6 +1,6 @@
 package gg.quartzdev.qxpboosts.boost;
 
-import gg.quartzdev.qxpboosts.util.Language;
+import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.ReadUtil;
 import gg.quartzdev.qxpboosts.util.WriteUtil;
 import gg.quartzdev.qxpboosts.util.qUtil;
@@ -13,7 +13,6 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @SerializableAs("qBoost")
 public class Boost implements ConfigurationSerializable {
@@ -60,7 +59,7 @@ public class Boost implements ConfigurationSerializable {
 
     public void initName(String name){
         if(this.name != null) {
-            qUtil.sendMessage(Bukkit.getConsoleSender(), Language.ERROR_CORRUPT_FILE.parse("file", "boosts.yml"));
+            qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_CORRUPT_FILE.parse("file", "boosts.yml"));
             return;
         }
         this.name = name;
@@ -103,6 +102,9 @@ public class Boost implements ConfigurationSerializable {
 
     public Sound getSound(){
         return this.sound;
+    }
+    public void setSound(Sound sound){
+        this.sound = sound;
     }
 
     public void enable(){

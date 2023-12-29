@@ -1,11 +1,9 @@
 package gg.quartzdev.qxpboosts.commands.set;
 
 import gg.quartzdev.qxpboosts.boost.Boost;
-import gg.quartzdev.qxpboosts.util.Language;
-import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
-import java.util.Locale;
+import java.util.Arrays;
 
 public class EDITmultiplier extends qEDIT{
     public EDITmultiplier(String settingName, String valueSyntax) {
@@ -15,7 +13,7 @@ public class EDITmultiplier extends qEDIT{
     @Override
     public boolean logic(CommandSender sender, String[] args, Boost boost) {
         if(args.length !=4){
-            this.sendSyntax(sender);
+            this.sendSetSyntax(sender);
             return false;
         }
 
@@ -25,12 +23,21 @@ public class EDITmultiplier extends qEDIT{
             newMultiplier = Double.parseDouble(this.value);
         } catch(NumberFormatException ignored){}
         if(newMultiplier < 0){
-            this.sendSyntax(sender);
+            this.sendSetSyntax(sender);
             return false;
         }
 
 //        Set value
         boost.setMultiplier(newMultiplier);
         return true;
+    }
+
+    @Override
+    public Iterable<String> getTabCompletions(String[] args) {
+        if(args.length == 4){
+            String[] rawCompletions = {"<multiplier>"};
+            return Arrays.asList(rawCompletions);
+        }
+        return null;
     }
 }

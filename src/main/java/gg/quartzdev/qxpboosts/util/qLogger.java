@@ -16,7 +16,7 @@ public class qLogger {
      * Logs a general message
      * @param msg
      */
-    public void log(Language msg){
+    public void log(Messages msg){
         qUtil.sendMessage(Bukkit.getConsoleSender(), msg);
     }
 
@@ -37,7 +37,7 @@ public class qLogger {
 //        TODO: log errors to a file
     }
 
-    public void error(Language msg){
+    public void error(Messages msg){
         log("<red>" + msg.get());
 //        TODO: log errors to a file
     }
