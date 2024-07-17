@@ -51,6 +51,7 @@ public enum Messages {
     ERROR_BOOST_ALREADY_DISABLED("<prefix> <red>Error: <light_purple><boost> <red>already disabled"),
     ERROR_DELETE_DEFAULT("<prefix> <red>Error: You can't delete the default boost"),
     BOOST_SET_SETTING("<prefix> <yellow><setting><green> for <light_purple><boost></light_purple> has been set to <yellow><value>"),
+    BOOST_SET_SOURCE("<prefix> <yellow><source><green> has been <yellow><value><green> for <yellow><source_type>"),
     ERROR_READ_FILE("<prefix> <red>Error: Incorrect syntax in file: <yellow><file>"),
     INVENTORY_TITLE_SOURCES("<bold><boost></bold> <source-type>"),
     BOOST_LIST("<prefix> Available boosts (<boost-count>): <boost-list>"),

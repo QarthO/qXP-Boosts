@@ -4,6 +4,7 @@ import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.inventory.SettingsInventory;
 import gg.quartzdev.qxpboosts.util.InventoryUtil;
 import gg.quartzdev.qxpboosts.util.Messages;
+import gg.quartzdev.qxpboosts.util.qUtil;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -55,11 +56,11 @@ public class SourcesPage extends SettingsInventory {
         }
         if(this.sourceType == ExperienceOrb.SpawnReason.class){
             ExperienceOrb.SpawnReason source = InventoryUtil.getSource(this.key, item, ExperienceOrb.SpawnReason.class);
-            this.updateSources(item, this.boost.xpSources, source);
+            this.updateSources(item, this.boost.xpSources, source, (Player) event.getWhoClicked());
         }
         else if(this.sourceType == CreatureSpawnEvent.SpawnReason.class){
             CreatureSpawnEvent.SpawnReason source = InventoryUtil.getSource(this.key, item, CreatureSpawnEvent.SpawnReason.class);
-            this.updateSources(item, this.boost.mobSources, source);
+            this.updateSources(item, this.boost.mobSources, source, (Player) event.getWhoClicked());
         }
         else {
             this.logger.error("GUI Error: Please report this in the discord");
@@ -87,18 +88,28 @@ public class SourcesPage extends SettingsInventory {
         }
     }
 
-    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source){
+    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source, Player player){
         ItemMeta itemMeta = item.getItemMeta();
+        String sourceName = WordUtils.capitalizeFully(source.name().replaceAll("_", " "));
+        String sourceType = this.sourceType == ExperienceOrb.SpawnReason.class ? "XP Sources" : "Mob Sources";
         if(sources.remove(source)){
             item.setType(this.disabled);
             InventoryUtil.updateLore(itemMeta, false);
             item.setItemMeta(itemMeta);
+            qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
+                    .parse("source", sourceName)
+                    .parse("value", "disabled")
+                    .parse("source_type", sourceType));
             return;
         }
         sources.add(source);
         item.setType(this.active);
         InventoryUtil.updateLore(itemMeta, true);
         item.setItemMeta(itemMeta);
+        qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
+                .parse("source", sourceName)
+                .parse("value", "enabled")
+                .parse("source_type", sourceType));
     }
 
     public <E extends Enum<E>> int getNeededSlots(Class<E> sourceType){
