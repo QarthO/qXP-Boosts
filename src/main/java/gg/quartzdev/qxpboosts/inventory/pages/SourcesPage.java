@@ -12,7 +12,9 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.Comparator;
 import java.util.EnumSet;
+import java.util.stream.Collectors;
 
 public class SourcesPage extends SettingsInventory {
 
@@ -35,6 +37,7 @@ public class SourcesPage extends SettingsInventory {
         else {
             return;
         }
+
         this.createInv(this.getNeededSlots(sourceType), title);
 
 
@@ -66,11 +69,19 @@ public class SourcesPage extends SettingsInventory {
 
     }
     public <E extends Enum<E>> void fill(EnumSet<E> sources){
+
+//        If no sources are found
         if(!sources.stream().findAny().isPresent()){
             return;
         }
+
+//        Get all the available sources
         EnumSet<E> all = EnumSet.allOf(sources.stream().findAny().get().getDeclaringClass());
-        for(E source : all){
+
+//        Alphabetically sort the sources, then loops through them all
+        for(E source : all.stream().sorted(Comparator.comparing(Enum::name)).collect(Collectors.toList())){
+
+//            Green Pane if enabled, red pane if disabled
             ItemStack item = InventoryUtil.setSource(this.key, source, sources.contains(source));
             this.getInventory().addItem(item);
         }
