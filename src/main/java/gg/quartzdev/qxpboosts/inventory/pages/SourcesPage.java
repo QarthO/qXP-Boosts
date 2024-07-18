@@ -56,11 +56,11 @@ public class SourcesPage extends SettingsInventory {
         }
         if(this.sourceType == ExperienceOrb.SpawnReason.class){
             ExperienceOrb.SpawnReason source = InventoryUtil.getSource(this.key, item, ExperienceOrb.SpawnReason.class);
-            this.updateSources(item, this.boost.xpSources, source, (Player) event.getWhoClicked());
+            this.updateSources(item, this.boost.xpSources, source, (Player) event.getWhoClicked(), this.boost.getName());
         }
         else if(this.sourceType == CreatureSpawnEvent.SpawnReason.class){
             CreatureSpawnEvent.SpawnReason source = InventoryUtil.getSource(this.key, item, CreatureSpawnEvent.SpawnReason.class);
-            this.updateSources(item, this.boost.mobSources, source, (Player) event.getWhoClicked());
+            this.updateSources(item, this.boost.mobSources, source, (Player) event.getWhoClicked(), this.boost.getName());
         }
         else {
             this.logger.error("GUI Error: Please report this in the discord");
@@ -88,7 +88,7 @@ public class SourcesPage extends SettingsInventory {
         }
     }
 
-    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source, Player player){
+    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source, Player player, String boostName){
         ItemMeta itemMeta = item.getItemMeta();
         String sourceName = WordUtils.capitalizeFully(source.name().replaceAll("_", " "));
         String sourceType = this.sourceType == ExperienceOrb.SpawnReason.class ? "XP Sources" : "Mob Sources";
@@ -99,7 +99,8 @@ public class SourcesPage extends SettingsInventory {
             qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
                     .parse("source", sourceName)
                     .parse("value", "disabled")
-                    .parse("source_type", sourceType));
+                    .parse("source_type", sourceType)
+                    .parse("boost", WordUtils.capitalizeFully(boostName)));
             return;
         }
         sources.add(source);
@@ -109,7 +110,8 @@ public class SourcesPage extends SettingsInventory {
         qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
                 .parse("source", sourceName)
                 .parse("value", "enabled")
-                .parse("source_type", sourceType));
+                .parse("source_type", sourceType)
+                .parse("boost", WordUtils.capitalizeFully(boostName)));
     }
 
     public <E extends Enum<E>> int getNeededSlots(Class<E> sourceType){
