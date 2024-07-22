@@ -11,7 +11,7 @@ public class InventoryListener implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event){
-        if(!(event.getInventory().getHolder() instanceof SettingsInventory)){
+        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory inv)){
             return;
         }
         if(event.getClickedInventory() == null || event.getClickedInventory().getType() == InventoryType.PLAYER){
@@ -20,12 +20,12 @@ public class InventoryListener implements Listener {
         if(event.getCurrentItem() == null){
             return;
         }
-        ((SettingsInventory) event.getInventory().getHolder()).onClick(event);
+        inv.onClick(event);
     }
 
     @EventHandler
     public void onInventoryDrag(InventoryDragEvent event){
-        if(!(event.getInventory().getHolder() instanceof SettingsInventory)){
+        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory)){
             return;
         }
         event.setCancelled(true);
