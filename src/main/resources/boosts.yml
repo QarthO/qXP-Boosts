@@ -21,7 +21,7 @@ boosts:
     mob-sources:
       - ALL
       - "!SPAWNER"
-# Custom boosts
+  # Custom boosts
   double:
     ==: qBoost
     multiplier: 2.0

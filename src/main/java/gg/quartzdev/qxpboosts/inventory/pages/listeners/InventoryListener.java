@@ -7,25 +7,32 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.inventory.InventoryType;
 
-public class InventoryListener implements Listener {
+public class InventoryListener implements Listener
+{
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent event){
-        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory inv)){
+    public void onInventoryClick(InventoryClickEvent event)
+    {
+        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory inv))
+        {
             return;
         }
-        if(event.getClickedInventory() == null || event.getClickedInventory().getType() == InventoryType.PLAYER){
+        if(event.getClickedInventory() == null || event.getClickedInventory().getType() == InventoryType.PLAYER)
+        {
             return;
         }
-        if(event.getCurrentItem() == null){
+        if(event.getCurrentItem() == null)
+        {
             return;
         }
         inv.onClick(event);
     }
 
     @EventHandler
-    public void onInventoryDrag(InventoryDragEvent event){
-        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory)){
+    public void onInventoryDrag(InventoryDragEvent event)
+    {
+        if(!(event.getInventory().getHolder(false) instanceof SettingsInventory))
+        {
             return;
         }
         event.setCancelled(true);

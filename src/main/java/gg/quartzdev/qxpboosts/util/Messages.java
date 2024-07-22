@@ -1,14 +1,15 @@
 package gg.quartzdev.qxpboosts.util;
 
-public enum Messages {
+public enum Messages
+{
 
-//    Plugin info
+    //    Plugin info
     CONSOLE_PREFIX("<gray>[<red>q<aqua>XP-Boosts<gray>]"),
     CHAT_PREFIX("<red>q<aqua>XP-Boosts <bold><gray>></bold>"),
     PLUGIN_INFO("<prefix> <green>Running version <gray><version>"),
     RELOAD_COMPLETE("<prefix> <green>Config reloaded"),
 
-//    ERRORS
+    //    ERRORS
     ERROR_NO_PERMISSION("<prefix> <red>Error: You don't have access to that command"),
     ERROR_XP_SOURCE_NOT_FOUND("<prefix> <red>Error: XP source not found: <yellow><xp-source>"),
     ERROR_MOB_SOURCE_NOT_FOUND("<prefix> <red>Error: Mob source not found: <yellow><mob-source>"),
@@ -18,14 +19,14 @@ public enum Messages {
     ERROR_CMD_NOT_FOUND("<prefix> <red>Error: Command not found: <yellow><cmd>"),
     ERROR_CORRUPT_FILE("<prefix> <red>Error: Corrupt file: <yellow><file></yellow><newline>Please reset the file."),
 
-//    File
+    //    File
     ERROR_CREATE_FILE("<prefix> Error creating file: <yellow><file>"),
     ERROR_SAVE_FILE("<prefix> Error saving file: <yellow><file>"),
     FILE_CREATED("<prefix> <green>Created file: <yellow><file>"),
     ERROR_BOOST_LOAD_EXCEPTION("<prefix> <red>Error: Loading boosts from file failed"),
     ERROR_PLAYER_ONLY("<prefix> <red>Error: You can't run this command from the console"),
 
-//    Syntax
+    //    Syntax
     SYNTAX_ENABLE("<prefix> <red>Syntax: /<label> enable <boost>"),
     SYNTAX_DISABLE("<prefix> <red>Syntax: /<label> disable <boost>"),
     SYNTAX_LIST("<prefix> <red>Syntax: /<label> list"),
@@ -35,11 +36,11 @@ public enum Messages {
     SYNTAX_SET("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
     SYNTAX_SET_SETTING("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
 
-//    Messages
+    //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><multiplier>x <green>XP"),
     XP_CHAT_GAIN("<prefix> <green>Gained <blue><multiplier>x <green>XP"),
 
-//    Boost
+    //    Boost
     BOOST_ENABLED("<prefix> <green>Enabled boost: <light_purple><boost>"),
     BOOST_DISABLED("<prefix> <green>Disabled boost: <light_purple><boost>"),
     BOOST_STATUS_ERROR("<red>Error"),
@@ -71,23 +72,27 @@ public enum Messages {
     private final String message;
     private String parsedMessage;
 
-    Messages(String msg){
+    Messages(String msg)
+    {
         this.message = msg;
         this.parsedMessage = msg;
     }
 
     @Override
-    public String toString(){
+    public String toString()
+    {
         return this.message;
     }
 
-    public String get(){
+    public String get()
+    {
         String result = this.parsedMessage;
         this.parsedMessage = this.message;
         return result;
     }
 
-    public Messages parse(String placeholder, String value){
+    public Messages parse(String placeholder, String value)
+    {
         this.parsedMessage = this.parsedMessage.replaceAll("<" + placeholder + ">", value);
         return this;
     }

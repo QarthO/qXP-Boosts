@@ -9,11 +9,13 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Locale;
 
-public class CMDenable extends qCMD {
+public class CMDenable extends qCMD
+{
 
     BoostManager boostManager;
 
-    public CMDenable(String cmdName, String group) {
+    public CMDenable(String cmdName, String group)
+    {
         super(cmdName, group);
         this.permissionGroup = "qxpboosts.admin";
         this.permissionNode = "qxpboosts.command.enable";
@@ -23,10 +25,12 @@ public class CMDenable extends qCMD {
     }
 
     @Override
-    public boolean logic(CommandSender sender, String label,  String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args)
+    {
 
 //        Incorrect Syntax
-        if(args.length != 2){
+        if(args.length != 2)
+        {
             qUtil.sendMessage(sender, Messages.SYNTAX_ENABLE.parse("label", label));
             return false;
         }
@@ -36,12 +40,14 @@ public class CMDenable extends qCMD {
         Boost boost = boostManager.getBoost(boostName);
 
 //        Boost not found
-        if(boost == null){
+        if(boost == null)
+        {
             qUtil.sendMessage(sender, Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
             return false;
         }
 
-        if(boost.isActive()){
+        if(boost.isActive())
+        {
             qUtil.sendMessage(sender, Messages.ERROR_BOOST_ALREADY_ENABLED
                     .parse("boost", boost.getName()));
             return false;
@@ -58,7 +64,8 @@ public class CMDenable extends qCMD {
     }
 
     @Override
-    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args)
+    {
         return args.length == 2 ? this.boostManager.getDisabledBoostNames() : null;
     }
 

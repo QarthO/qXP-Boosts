@@ -7,18 +7,21 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Set;
 
-public class CMDlist extends qCMD{
+public class CMDlist extends qCMD
+{
 
-    public CMDlist(String cmdName, String group) {
+    public CMDlist(String cmdName, String group)
+    {
         super(cmdName, group);
         this.permissionGroup = "qmbde.admin";
         this.permissionNode = "qmbde.command.reload";
     }
 
 
-//    /command args[0] args[1] args[2] ....
+    //    /command args[0] args[1] args[2] ....
     @Override
-    public boolean logic(CommandSender sender, String label, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args)
+    {
 //        Boost list
         Set<String> boostList = qXpBoosts.getInstance().boostManager.listBoosts();
         String boosts = String.join(", ", boostList);
@@ -31,7 +34,8 @@ public class CMDlist extends qCMD{
     }
 
     @Override
-    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args)
+    {
         return null;
     }
 

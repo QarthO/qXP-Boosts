@@ -7,12 +7,14 @@ import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
-public class CMDreload extends qCMD {
+public class CMDreload extends qCMD
+{
 
     qConfig config;
     BoostManager boostManager;
 
-    public CMDreload(String cmdName, String group) {
+    public CMDreload(String cmdName, String group)
+    {
         super(cmdName, group);
         this.permissionGroup = "qxpboosts.admin";
         this.permissionNode = "qxpboosts.command.reload";
@@ -22,7 +24,8 @@ public class CMDreload extends qCMD {
     }
 
     @Override
-    public boolean logic(CommandSender sender, String label, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args)
+    {
         config.reload();
         boostManager.reload();
         qUtil.sendMessage(sender, Messages.RELOAD_COMPLETE);
@@ -30,7 +33,8 @@ public class CMDreload extends qCMD {
     }
 
     @Override
-    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args)
+    {
         return null;
     }
 

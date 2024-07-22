@@ -14,42 +14,47 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class CommandManager extends Command {
+public class CommandManager extends Command
+{
 
     List<String> aliases = new ArrayList<>();
     HashMap<String, qCMD> commandsMap = new HashMap<>();
 
-    public CommandManager(String name){
+    public CommandManager(String name)
+    {
         super(name);
         aliases.add("xpboosts");
 //        super.setPermission("qxpboosts.command");
         super.setAliases(aliases);
 
-        commandsMap.put("",         new CMD("version", "admin"));
-        commandsMap.put("reload",   new CMDreload("reload", "admin"));
-        commandsMap.put("create",   new CMDcreate("create", "admin"));
-        commandsMap.put("enable",   new CMDenable("enable", "admin"));
-        commandsMap.put("disable",  new CMDdisable("disable", "admin"));
-        commandsMap.put("list",     new CMDlist("list", "admin"));
-        commandsMap.put("delete",   new CMDdelete("delete", "admin"));
-        commandsMap.put("set",      new CMDset("set", "admin"));
-        commandsMap.put("info",     new CMDinfo("info", "player"));
+        commandsMap.put("", new CMD("version", "admin"));
+        commandsMap.put("reload", new CMDreload("reload", "admin"));
+        commandsMap.put("create", new CMDcreate("create", "admin"));
+        commandsMap.put("enable", new CMDenable("enable", "admin"));
+        commandsMap.put("disable", new CMDdisable("disable", "admin"));
+        commandsMap.put("list", new CMDlist("list", "admin"));
+        commandsMap.put("delete", new CMDdelete("delete", "admin"));
+        commandsMap.put("set", new CMDset("set", "admin"));
+        commandsMap.put("info", new CMDinfo("info", "player"));
 
         Bukkit.getCommandMap().register(name, this);
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String labelOrAlias, @NotNull String[] args) {
+    public boolean execute(@NotNull CommandSender sender, @NotNull String labelOrAlias, @NotNull String[] args)
+    {
 
 //        Send info command
-        if(args.length == 0){
+        if(args.length == 0)
+        {
             return commandsMap.get("").run(sender, labelOrAlias, args);
         }
 
 //        Get command from the label
         qCMD cmd = commandsMap.get(args[0]);
 
-        if(cmd == null){
+        if(cmd == null)
+        {
             qUtil.sendMessage(sender, Messages.ERROR_CMD_NOT_FOUND.parse("cmd", args[0]));
             return false;
         }
@@ -59,23 +64,28 @@ public class CommandManager extends Command {
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String labelOrAlias, String[] args) throws IllegalArgumentException {
+    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String labelOrAlias, String[] args) throws IllegalArgumentException
+    {
         List<String> completions = new ArrayList<>();
 //
-        if(args.length == 1){
+        if(args.length == 1)
+        {
             StringUtil.copyPartialMatches(args[0], commandsMap.keySet(), completions);
         }
 
-        if(args.length > 1){
+        if(args.length > 1)
+        {
             qCMD cmd = commandsMap.get(args[0]);
 
-            if(cmd == null) {
+            if(cmd == null)
+            {
                 return completions;
             }
 
             Iterable<String> rawCompletions = cmd.getTabCompletions(sender, args);
-            if(rawCompletions != null) {
-                StringUtil.copyPartialMatches(args[args.length-1], rawCompletions, completions);
+            if(rawCompletions != null)
+            {
+                StringUtil.copyPartialMatches(args[args.length - 1], rawCompletions, completions);
             }
         }
 

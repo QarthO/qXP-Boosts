@@ -10,19 +10,23 @@ import org.bukkit.command.CommandSender;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CMDcreate extends qCMD {
+public class CMDcreate extends qCMD
+{
 
     BoostManager boostManager;
 
-    public CMDcreate(String cmdName, String group) {
+    public CMDcreate(String cmdName, String group)
+    {
         super(cmdName, group);
         this.boostManager = qXpBoosts.getInstance().boostManager;
     }
 
     @Override
-    public boolean logic(CommandSender sender, String label, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args)
+    {
 
-        if(args.length != 3){
+        if(args.length != 3)
+        {
             qUtil.sendMessage(sender, Messages.SYNTAX_CREATE.parse("label", label));
             return false;
         }
@@ -30,16 +34,19 @@ public class CMDcreate extends qCMD {
         String boostName = args[1];
 
         Boost boost = this.boostManager.getBoost(boostName);
-        if(boost != null){
+        if(boost != null)
+        {
             qUtil.sendMessage(sender, Messages.ERROR_BOOST_ALREADY_EXISTS
                     .parse("boost", boostName));
             return false;
         }
 
         double multiplier = 0.0;
-        try {
+        try
+        {
             multiplier = Double.parseDouble(args[2]);
-        } catch(NumberFormatException exception){
+        } catch(NumberFormatException exception)
+        {
 
             return false;
         }
@@ -51,13 +58,16 @@ public class CMDcreate extends qCMD {
     }
 
     @Override
-    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args)
+    {
         Collection<String> rawCompletions = new ArrayList<>();
-        if(args.length == 2){
+        if(args.length == 2)
+        {
             rawCompletions.add("<boost>");
         }
 
-        if(args.length == 3){
+        if(args.length == 3)
+        {
             rawCompletions.add("<multiplier>");
         }
 

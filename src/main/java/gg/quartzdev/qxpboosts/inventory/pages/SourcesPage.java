@@ -17,25 +17,28 @@ import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
 
-public class SourcesPage extends SettingsInventory {
+public class SourcesPage extends SettingsInventory
+{
 
     Class<? extends Enum<?>> sourceType;
     EnumSet<?> sources;
 
-    public <E extends Enum<E>> SourcesPage(Player player, Boost boost, Class<E> sourceType) {
+    public <E extends Enum<E>> SourcesPage(Player player, Boost boost, Class<E> sourceType)
+    {
         super(boost);
         this.sourceType = sourceType;
         String title = Messages.INVENTORY_TITLE_SOURCES.
                 parse("boost", WordUtils.capitalizeFully(boost.getName())).get();
-        if(sourceType == ExperienceOrb.SpawnReason.class){
+        if(sourceType == ExperienceOrb.SpawnReason.class)
+        {
             this.sources = this.boost.xpSources;
             title = title.replaceAll("<source-type>", "XP-Sources");
-        }
-        else if(sourceType == CreatureSpawnEvent.SpawnReason.class){
+        } else if(sourceType == CreatureSpawnEvent.SpawnReason.class)
+        {
             this.sources = this.boost.mobSources;
             title = title.replaceAll("<source-type>", "Mob-Sources");
-        }
-        else {
+        } else
+        {
             return;
         }
 
@@ -48,31 +51,37 @@ public class SourcesPage extends SettingsInventory {
     }
 
     @Override
-    public void onClick(InventoryClickEvent event) {
+    public void onClick(InventoryClickEvent event)
+    {
         event.setCancelled(true);
         ItemStack item = event.getCurrentItem();
-        if(item == null){
+        if(item == null)
+        {
             return;
         }
-        if(this.sourceType == ExperienceOrb.SpawnReason.class){
+        if(this.sourceType == ExperienceOrb.SpawnReason.class)
+        {
             ExperienceOrb.SpawnReason source = InventoryUtil.getSource(this.key, item, ExperienceOrb.SpawnReason.class);
             this.updateSources(item, this.boost.xpSources, source, (Player) event.getWhoClicked(), this.boost.getName());
-        }
-        else if(this.sourceType == CreatureSpawnEvent.SpawnReason.class){
+        } else if(this.sourceType == CreatureSpawnEvent.SpawnReason.class)
+        {
             CreatureSpawnEvent.SpawnReason source = InventoryUtil.getSource(this.key, item, CreatureSpawnEvent.SpawnReason.class);
             this.updateSources(item, this.boost.mobSources, source, (Player) event.getWhoClicked(), this.boost.getName());
-        }
-        else {
+        } else
+        {
             this.logger.error("GUI Error: Please report this in the discord");
             return;
         }
         this.boostManager.saveBoost(this.boost);
 
     }
-    public <E extends Enum<E>> void fill(EnumSet<E> sources){
+
+    public <E extends Enum<E>> void fill(EnumSet<E> sources)
+    {
 
 //        If no sources are found
-        if(!sources.stream().findAny().isPresent()){
+        if(!sources.stream().findAny().isPresent())
+        {
             return;
         }
 
@@ -80,7 +89,8 @@ public class SourcesPage extends SettingsInventory {
         EnumSet<E> all = EnumSet.allOf(sources.stream().findAny().get().getDeclaringClass());
 
 //        Alphabetically sort the sources, then loops through them all
-        for(E source : all.stream().sorted(Comparator.comparing(Enum::name)).collect(Collectors.toList())){
+        for(E source : all.stream().sorted(Comparator.comparing(Enum::name)).collect(Collectors.toList()))
+        {
 
 //            Green Pane if enabled, red pane if disabled
             ItemStack item = InventoryUtil.setSource(this.key, source, sources.contains(source));
@@ -88,15 +98,17 @@ public class SourcesPage extends SettingsInventory {
         }
     }
 
-    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source, Player player, String boostName){
+    public <E extends Enum<E>> void updateSources(ItemStack item, EnumSet<E> sources, E source, Player player, String boostName)
+    {
         ItemMeta itemMeta = item.getItemMeta();
         String sourceName = WordUtils.capitalizeFully(source.name().replaceAll("_", " "));
         String sourceType = this.sourceType == ExperienceOrb.SpawnReason.class ? "XP Sources" : "Mob Sources";
-        if(sources.remove(source)){
+        if(sources.remove(source))
+        {
             item.setType(this.disabled);
             InventoryUtil.updateLore(itemMeta, false);
             item.setItemMeta(itemMeta);
-            qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
+            qUtil.sendMessage(player, Messages.BOOST_SET_SOURCE
                     .parse("source", sourceName)
                     .parse("value", "disabled")
                     .parse("source_type", sourceType)
@@ -107,17 +119,18 @@ public class SourcesPage extends SettingsInventory {
         item.setType(this.active);
         InventoryUtil.updateLore(itemMeta, true);
         item.setItemMeta(itemMeta);
-        qUtil.sendMessage(player,Messages.BOOST_SET_SOURCE
+        qUtil.sendMessage(player, Messages.BOOST_SET_SOURCE
                 .parse("source", sourceName)
                 .parse("value", "enabled")
                 .parse("source_type", sourceType)
                 .parse("boost", WordUtils.capitalizeFully(boostName)));
     }
 
-    public <E extends Enum<E>> int getNeededSlots(Class<E> sourceType){
+    public <E extends Enum<E>> int getNeededSlots(Class<E> sourceType)
+    {
         int all = EnumSet.allOf(sourceType).size();
-        int rows = all/9 + 1;
-        return Math.min(rows*9, 54);
+        int rows = all / 9 + 1;
+        return Math.min(rows * 9, 54);
     }
 
 }

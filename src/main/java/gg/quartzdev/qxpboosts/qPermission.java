@@ -1,6 +1,7 @@
 package gg.quartzdev.qxpboosts;
 
-public enum qPermission {
+public enum qPermission
+{
 
     PLUGIN_NAME("qxpboosts"),
 
@@ -11,15 +12,18 @@ public enum qPermission {
 
     private String permission;
 
-    qPermission(String permission){
+    qPermission(String permission)
+    {
         this.permission = permission;
     }
 
-    public String getPermission(){
+    public String getPermission()
+    {
         return this.permission;
     }
 
-    public String boost(String boostName){
+    public String boost(String boostName)
+    {
         return this.permission + boostName;
     }
 }

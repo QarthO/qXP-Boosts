@@ -6,14 +6,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 
-public class EDITxpsources extends qEDIT {
-    public EDITxpsources(String settingName, String valueSyntax) {
+public class EDITxpsources extends qEDIT
+{
+    public EDITxpsources(String settingName, String valueSyntax)
+    {
         super(settingName, valueSyntax);
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args, Boost boost) {
-        if(!(sender instanceof Player)){
+    public boolean logic(CommandSender sender, String[] args, Boost boost)
+    {
+        if(!(sender instanceof Player))
+        {
             return false;
         }
         new SourcesPage((Player) sender, boost, ExperienceOrb.SpawnReason.class);
@@ -21,7 +25,8 @@ public class EDITxpsources extends qEDIT {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> getTabCompletions(String[] args)
+    {
         return null;
     }
 }

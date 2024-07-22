@@ -6,15 +6,19 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-public class EDITmobsources extends qEDIT {
+public class EDITmobsources extends qEDIT
+{
 
-    public EDITmobsources(String settingName, String valueSyntax) {
+    public EDITmobsources(String settingName, String valueSyntax)
+    {
         super(settingName, valueSyntax);
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args, Boost boost) {
-        if(!(sender instanceof Player)){
+    public boolean logic(CommandSender sender, String[] args, Boost boost)
+    {
+        if(!(sender instanceof Player))
+        {
             return false;
         }
         new SourcesPage((Player) sender, boost, CreatureSpawnEvent.SpawnReason.class);
@@ -22,7 +26,8 @@ public class EDITmobsources extends qEDIT {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
+    public Iterable<String> getTabCompletions(String[] args)
+    {
         return null;
     }
 

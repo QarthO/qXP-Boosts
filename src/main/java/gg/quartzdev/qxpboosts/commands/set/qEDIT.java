@@ -6,22 +6,22 @@ import gg.quartzdev.qxpboosts.util.qUtil;
 import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.command.CommandSender;
 
-import java.util.Arrays;
-import java.util.Locale;
-
-public abstract class qEDIT {
+public abstract class qEDIT
+{
 
     String syntax;
     String settingName;
     String valueSyntax;
     String value;
 
-    public qEDIT(String settingName, String valueSyntax) {
+    public qEDIT(String settingName, String valueSyntax)
+    {
         this.settingName = settingName;
         this.valueSyntax = valueSyntax;
     }
 
-    public boolean run(CommandSender sender, String label, String[] args, Boost boost){
+    public boolean run(CommandSender sender, String label, String[] args, Boost boost)
+    {
 
 //        <prefix> <red>Syntax: /<label> set <boost> <setting> <value>
         this.syntax = Messages.SYNTAX_SET_SETTING
@@ -30,16 +30,19 @@ public abstract class qEDIT {
                 .parse("setting", this.settingName)
                 .get();
 
-        if(args.length >= 4 ){
+        if(args.length >= 4)
+        {
             this.value = args[3];
         }
 
-        if(!this.logic(sender, args, boost)){
+        if(!this.logic(sender, args, boost))
+        {
             return false;
         }
 
         if(this.settingName.equalsIgnoreCase("xpsources") ||
-           this.settingName.equalsIgnoreCase("mobsources")){
+                this.settingName.equalsIgnoreCase("mobsources"))
+        {
             return true;
         }
 
@@ -56,7 +59,8 @@ public abstract class qEDIT {
 
     public abstract Iterable<String> getTabCompletions(String[] args);
 
-    public void sendSetSyntax(CommandSender sender){
+    public void sendSetSyntax(CommandSender sender)
+    {
         qUtil.sendMessage(sender, this.syntax);
     }
 

@@ -12,23 +12,28 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class qXpBoosts extends JavaPlugin {
-
-    static {
-    }
+public final class qXpBoosts extends JavaPlugin
+{
 
     private static qXpBoosts instance;
+
+    static
+    {
+    }
+
     public qConfig config;
     public qLogger logger;
 
     public BoostManager boostManager;
 
-    public static qXpBoosts getInstance(){
+    public static qXpBoosts getInstance()
+    {
         return instance;
     }
 
     @Override
-    public void onEnable() {
+    public void onEnable()
+    {
         instance = this;
 
         ConfigurationSerialization.registerClass(Boost.class, "qBoost");
@@ -47,17 +52,20 @@ public final class qXpBoosts extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
+    public void onDisable()
+    {
         // Plugin shutdown logic
     }
 
-    private void registerHandlers(){
+    private void registerHandlers()
+    {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupExpListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
     }
 
     @SuppressWarnings("UnstableApiUsage")
-    public String getPluginVersion(){
+    public String getPluginVersion()
+    {
         return this.getPluginMeta().getVersion();
     }
 

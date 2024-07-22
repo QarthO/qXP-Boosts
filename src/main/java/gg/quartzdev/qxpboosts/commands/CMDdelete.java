@@ -6,27 +6,34 @@ import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.command.CommandSender;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.Locale;
+import java.util.Set;
 
-public class CMDdelete extends qCMD{
+public class CMDdelete extends qCMD
+{
 
     BoostManager boostManager;
 
-    public CMDdelete(String cmdName, String group) {
+    public CMDdelete(String cmdName, String group)
+    {
         super(cmdName, group);
         this.boostManager = qXpBoosts.getInstance().boostManager;
     }
 
     @Override
-    public boolean logic(CommandSender sender, String label, String[] args) {
+    public boolean logic(CommandSender sender, String label, String[] args)
+    {
 
-        if(args.length != 2){
+        if(args.length != 2)
+        {
             qUtil.sendMessage(sender, Messages.SYNTAX_CREATE.parse("label", label));
             return false;
         }
 
         String boostName = args[1].toLowerCase(Locale.ROOT);
-        if(boostName.equalsIgnoreCase("default")){
+        if(boostName.equalsIgnoreCase("default"))
+        {
             qUtil.sendMessage(sender, Messages.ERROR_DELETE_DEFAULT);
             return false;
         }
@@ -41,8 +48,10 @@ public class CMDdelete extends qCMD{
     }
 
     @Override
-    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args) {
-        if(args.length == 2){
+    public Iterable<String> tabCompletionLogic(CommandSender sender, String[] args)
+    {
+        if(args.length == 2)
+        {
             Set<String> boostNames = new HashSet<>(boostManager.getBoostNames());
             boostNames.remove("default");
             return boostNames;

@@ -1,19 +1,21 @@
 package gg.quartzdev.qxpboosts.boost;
 
 import gg.quartzdev.qxpboosts.qPermission;
+import gg.quartzdev.qxpboosts.qXpBoosts;
 import gg.quartzdev.qxpboosts.storage.YMLboosts;
 import gg.quartzdev.qxpboosts.storage.qConfig;
-import gg.quartzdev.qxpboosts.qXpBoosts;
-import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qLogger;
-import org.apache.commons.lang3.text.WordUtils;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
-public class BoostManager {
+public class BoostManager
+{
 
     qXpBoosts plugin;
     qConfig config;
@@ -22,7 +24,8 @@ public class BoostManager {
     YMLboosts boostStorage;
     HashMap<String, Boost> boostsMap;
 
-    public BoostManager(){
+    public BoostManager()
+    {
         this.plugin = qXpBoosts.getInstance();
         this.config = this.plugin.config;
         this.logger = this.plugin.logger;
@@ -32,12 +35,15 @@ public class BoostManager {
         this.loadBoosts();
     }
 
-    public @NotNull Boost getBoost(Player player){
+    public @NotNull Boost getBoost(Player player)
+    {
         Boost boost = boostsMap.get("default");
 
 //        Checks player permissions if they have any of the custom boosts
-        for(String boostName : boostsMap.keySet()){
-            if(player.hasPermission(qPermission.BOOST.boost(boostName))){
+        for(String boostName : boostsMap.keySet())
+        {
+            if(player.hasPermission(qPermission.BOOST.boost(boostName)))
+            {
                 boost = boostsMap.get(boostName);
                 break;
             }
@@ -46,49 +52,62 @@ public class BoostManager {
         return boost;
     }
 
-    public @Nullable Boost getBoost(String boostName){
+    public @Nullable Boost getBoost(String boostName)
+    {
         return boostsMap.get(boostName);
     }
 
-    public boolean isActive(String boostName){
+    public boolean isActive(String boostName)
+    {
         return boostsMap.get(boostName).isActive();
     }
 
-    public void loadBoosts(){
+    public void loadBoosts()
+    {
         Set<Boost> boosts = this.boostStorage.loadAll();
-        for(Boost boost : boosts){
+        for(Boost boost : boosts)
+        {
             this.boostsMap.put(boost.getName(), boost);
         }
     }
 
-    public Set<String> getBoostNames(){
+    public Set<String> getBoostNames()
+    {
         return boostsMap.keySet();
     }
 
-    public Set<String> getActiveBoostNames(){
+    public Set<String> getActiveBoostNames()
+    {
         Set<String> activeBoostNames = new HashSet<>();
-        for(Boost boost : boostsMap.values()){
-            if(boost.isActive()){
+        for(Boost boost : boostsMap.values())
+        {
+            if(boost.isActive())
+            {
                 activeBoostNames.add(boost.getName());
             }
         }
         return activeBoostNames;
     }
 
-    public Set<String> getDisabledBoostNames(){
+    public Set<String> getDisabledBoostNames()
+    {
         Set<String> disabledBoostNames = new HashSet<>();
-        for(Boost boost : boostsMap.values()){
-            if(!boost.isActive()){
+        for(Boost boost : boostsMap.values())
+        {
+            if(!boost.isActive())
+            {
                 disabledBoostNames.add(boost.getName());
             }
         }
         return disabledBoostNames;
     }
 
-    public Set<String> listBoosts(){
+    public Set<String> listBoosts()
+    {
         Set<String> boostList = new HashSet<>();
 
-        for(Boost boost : boostsMap.values()) {
+        for(Boost boost : boostsMap.values())
+        {
             String statusColor = boost.isActive() ? "<green>" : "<red>";
             String interact = "<hover:show_text:'<light_purple>" + boost.getName() + " <gray>- <green>Click for info'><click:run_command:/xpboosts info " + boost.getName() + ">";
             boostList.add(interact + statusColor + boost.getName() + "<reset>");
@@ -96,15 +115,18 @@ public class BoostManager {
         return boostList;
     }
 
-    public void saveBoost(Boost boost){
+    public void saveBoost(Boost boost)
+    {
         this.boostStorage.save(boost);
     }
 
-    private String formattedInfoValue(String string, int spaces){
+    private String formattedInfoValue(String string, int spaces)
+    {
         return String.format("%-" + spaces + "s", string.substring(0, Math.min(string.length(), spaces)));
     }
 
-    public void createBoost(String boostName, double multiplier){
+    public void createBoost(String boostName, double multiplier)
+    {
         Boost boost = new Boost(boostName, multiplier);
         Boost defaultBoost = boostsMap.get("default");
         boost.xpSources = EnumSet.copyOf(defaultBoost.xpSources);
@@ -114,8 +136,10 @@ public class BoostManager {
         this.saveBoost(boost);
     }
 
-    public boolean deleteBoost(String boostName){
-        if(boostsMap.get(boostName) == null) {
+    public boolean deleteBoost(String boostName)
+    {
+        if(boostsMap.get(boostName) == null)
+        {
             return false;
         }
         boostsMap.remove(boostName);
@@ -123,7 +147,8 @@ public class BoostManager {
         return true;
     }
 
-    public void reload(){
+    public void reload()
+    {
         boostsMap.clear();
         boostStorage.reload();
         this.loadBoosts();

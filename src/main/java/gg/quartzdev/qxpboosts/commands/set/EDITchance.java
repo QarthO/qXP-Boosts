@@ -5,24 +5,32 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Arrays;
 
-public class EDITchance extends qEDIT {
-    public EDITchance(String settingName, String valueSyntax) {
+public class EDITchance extends qEDIT
+{
+    public EDITchance(String settingName, String valueSyntax)
+    {
         super(settingName, valueSyntax);
     }
 
     @Override
-    public boolean logic(CommandSender sender, String[] args, Boost boost) {
-        if(args.length !=4){
+    public boolean logic(CommandSender sender, String[] args, Boost boost)
+    {
+        if(args.length != 4)
+        {
             this.sendSetSyntax(sender);
             return false;
         }
 
 //        Parse value
         double chance = -1;
-        try{
+        try
+        {
             chance = Double.parseDouble(this.value);
-        } catch(NumberFormatException ignored){}
-        if(chance < 0){
+        } catch(NumberFormatException ignored)
+        {
+        }
+        if(chance < 0)
+        {
             this.sendSetSyntax(sender);
             return false;
         }
@@ -33,8 +41,10 @@ public class EDITchance extends qEDIT {
     }
 
     @Override
-    public Iterable<String> getTabCompletions(String[] args) {
-        if(args.length == 4){
+    public Iterable<String> getTabCompletions(String[] args)
+    {
+        if(args.length == 4)
+        {
             String[] rawCompletions = {"<chance>"};
             return Arrays.asList(rawCompletions);
         }

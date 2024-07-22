@@ -3,9 +3,9 @@ package gg.quartzdev.qxpboosts.listeners;
 import com.destroystokyo.paper.event.player.PlayerPickupExperienceEvent;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.boost.BoostManager;
-import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.qXpBoosts;
+import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.util.BoostUtil;
 import gg.quartzdev.qxpboosts.util.Messages;
 import gg.quartzdev.qxpboosts.util.qUtil;
@@ -23,13 +23,15 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class PlayerPickupExpListener implements Listener {
+public class PlayerPickupExpListener implements Listener
+{
 
     qXpBoosts plugin;
     qConfig config;
     BoostManager boostManager;
 
-    public PlayerPickupExpListener(){
+    public PlayerPickupExpListener()
+    {
         this.plugin = qXpBoosts.getInstance();
         this.config = plugin.config;
         this.boostManager = plugin.boostManager;
@@ -37,18 +39,21 @@ public class PlayerPickupExpListener implements Listener {
 
 
     @EventHandler
-    public void onPlayerPickupExp(PlayerPickupExperienceEvent event){
+    public void onPlayerPickupExp(PlayerPickupExperienceEvent event)
+    {
 
         Player player = event.getPlayer();
         World world = player.getWorld();
 
 //        World check
-        if(config.isDisabledWorld(world)) {
+        if(config.isDisabledWorld(world))
+        {
             return;
         }
 
 //        Permission check
-        if(config.requiresPermission() && !player.hasPermission(qPermission.GROUP_PLAYER.getPermission())){
+        if(config.requiresPermission() && !player.hasPermission(qPermission.GROUP_PLAYER.getPermission()))
+        {
             return;
         }
 
@@ -62,41 +67,51 @@ public class PlayerPickupExpListener implements Listener {
         boolean sendChat = false;
         Sound sound = null;
 
-        for(String boostName : boostNames){
+        for(String boostName : boostNames)
+        {
             Boost boost = this.boostManager.getBoost(boostName);
-            if(boost == null){
+            if(boost == null)
+            {
                 qUtil.sendMessage(Bukkit.getConsoleSender(), Messages.ERROR_BOOST_NOT_FOUND.parse("boost", boostName));
                 continue;
             }
 
 //            Is the boost active
-            if(!boost.isActive()){
+            if(!boost.isActive())
+            {
                 continue;
             }
 
 //            RNG if the boost will run
-            if(boost.getChance() < 100){
+            if(boost.getChance() < 100)
+            {
                 ThreadLocalRandom random = ThreadLocalRandom.current();
                 float rng = random.nextFloat(0.01F, 100.0F);
-                if(rng > boost.getChance() ){
+                if(rng > boost.getChance())
+                {
                     continue;
                 }
             }
 
 //            Checks the xp source
             ExperienceOrb.SpawnReason xpSource = xpOrb.getSpawnReason();
-            if(!boost.xpSources.contains(xpSource)){
+            if(!boost.xpSources.contains(xpSource))
+            {
                 continue;
             }
 
 //            If the xp came from a mob, check the mob source
-            if(xpSource.equals(ExperienceOrb.SpawnReason.ENTITY_DEATH)){
+            if(xpSource.equals(ExperienceOrb.SpawnReason.ENTITY_DEATH))
+            {
                 UUID entityId = xpOrb.getSourceEntityId();
-                if(entityId != null){
+                if(entityId != null)
+                {
                     Entity entity = Bukkit.getEntity(entityId);
-                    if(entity != null){
+                    if(entity != null)
+                    {
                         CreatureSpawnEvent.SpawnReason entitySpawnReason = entity.getEntitySpawnReason();
-                        if(!boost.mobSources.contains(entitySpawnReason)){
+                        if(!boost.mobSources.contains(entitySpawnReason))
+                        {
                             continue;
                         }
                     }
@@ -107,19 +122,22 @@ public class PlayerPickupExpListener implements Listener {
             int amount = xpOrb.getExperience();
 
 //            Running multiplier total
-            multiplier+= boost.getMultiplier();
+            multiplier += boost.getMultiplier();
 
 //            Running notify
-            if(boost.sendsChat()) {
+            if(boost.sendsChat())
+            {
                 sendChat = true;
             }
-            if(boost.sendsActionBar()) {
+            if(boost.sendsActionBar())
+            {
                 sendActionBar = true;
             }
 
 //            Only will play the sound of the highest multiplier
             highestMultiplier = Math.max(highestMultiplier, boost.getMultiplier());
-            if(boost.getSound() != null && boost.getMultiplier() == highestMultiplier){
+            if(boost.getSound() != null && boost.getMultiplier() == highestMultiplier)
+            {
                 sound = boost.getSound();
             }
 

@@ -17,40 +17,46 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class SettingsInventory implements InventoryHolder {
+public abstract class SettingsInventory implements InventoryHolder
+{
 
-    Inventory inventory;
     public qLogger logger;
     public NamespacedKey key;
     public BoostManager boostManager;
     public Boost boost;
     public Material active = Material.LIME_STAINED_GLASS_PANE;
     public Material disabled = Material.RED_STAINED_GLASS_PANE;
+    Inventory inventory;
 
-    public SettingsInventory(Boost boost){
+    public SettingsInventory(Boost boost)
+    {
         this.logger = qXpBoosts.getInstance().logger;
         this.key = new NamespacedKey(qXpBoosts.getInstance(), "source");
         this.boostManager = qXpBoosts.getInstance().boostManager;
         this.boost = boost;
     }
 
-    public void createInv(int size, String titleMsg){
+    public void createInv(int size, String titleMsg)
+    {
         Component title = MiniMessage.miniMessage().deserialize(titleMsg);
         this.inventory = Bukkit.createInventory(this, size, title);
     }
 
-    public void setInventory(Inventory inventory){
-        this.inventory = inventory;
+    @Override
+    public @NotNull Inventory getInventory()
+    {
+        return this.inventory;
     }
 
-    @Override
-    public @NotNull Inventory getInventory() {
-        return this.inventory;
+    public void setInventory(Inventory inventory)
+    {
+        this.inventory = inventory;
     }
 
     public abstract void onClick(InventoryClickEvent event);
 
-    public ItemStack createItem(Enum<?> source, boolean isActive){
+    public ItemStack createItem(Enum<?> source, boolean isActive)
+    {
         ItemStack item = new ItemStack(isActive ? this.active : this.disabled);
         ItemMeta itemMeta = item.getItemMeta();
         Component component = MiniMessage.miniMessage().deserialize(source.name()).decoration(TextDecoration.ITALIC, false);

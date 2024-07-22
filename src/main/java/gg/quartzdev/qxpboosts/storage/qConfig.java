@@ -11,7 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class qConfig {
+public class qConfig
+{
 
     qXpBoosts plugin;
     qLogger logger;
@@ -24,7 +25,8 @@ public class qConfig {
     Set<World> DISABLED_WORLDS;
     Set<ExperienceOrb.SpawnReason> XP_SOURCES;
 
-    public qConfig() {
+    public qConfig()
+    {
         this.plugin = qXpBoosts.getInstance();
         this.logger = plugin.logger;
 
@@ -36,51 +38,61 @@ public class qConfig {
 
     }
 
-    private void save() {
+    private void save()
+    {
         this.plugin.saveConfig();
     }
 
-    public void reload() {
+    public void reload()
+    {
         this.plugin.reloadConfig();
         this.file = this.plugin.getConfig();
         this.save();
         this.loadAll();
     }
 
-    private void loadAll() {
+    private void loadAll()
+    {
         this.loadCheckUpdates();
         this.loadDisabledWorlds();
         this.loadRequiresPermission();
     }
 
-    private void loadCheckUpdates() {
+    private void loadCheckUpdates()
+    {
         this.CHECK_UPDATES = this.file.getBoolean("check-updates");
     }
 
-    public void loadDisabledWorlds(){
+    public void loadDisabledWorlds()
+    {
         this.DISABLED_WORLDS.clear();
         List<String> disabledWorldNames = this.file.getStringList("disabled-worlds");
         if(disabledWorldNames.isEmpty()) return;
-        for(String worldName : disabledWorldNames){
+        for(String worldName : disabledWorldNames)
+        {
             World world = Bukkit.getWorld(worldName);
-            if(world == null){
+            if(world == null)
+            {
 //                    logger.error(Language.ERROR_WORLD_NOT_FOUND.parse("world", worldName));
-            }
-            else {
+            } else
+            {
                 DISABLED_WORLDS.add(world);
             }
         }
     }
 
-    public boolean isDisabledWorld(World world){
+    public boolean isDisabledWorld(World world)
+    {
         return DISABLED_WORLDS.contains(world);
     }
 
-    public void loadRequiresPermission(){
+    public void loadRequiresPermission()
+    {
         this.REQUIRES_PERMISSION = this.file.getBoolean("requires-permission");
     }
 
-    public boolean requiresPermission(){
+    public boolean requiresPermission()
+    {
         return this.REQUIRES_PERMISSION;
     }
 

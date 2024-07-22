@@ -8,23 +8,29 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-public class YMLboosts extends qYML{
-    public YMLboosts(String fileName) {
+public class YMLboosts extends qYML
+{
+    public YMLboosts(String fileName)
+    {
         super(fileName);
     }
 
-    public @NotNull Set<Boost> loadAll(){
+    public @NotNull Set<Boost> loadAll()
+    {
         Set<Boost> boosts = new HashSet<>();
         Set<String> boostNames = this.getBoostsSection().getKeys(false);
-        if(boostNames.isEmpty()){
+        if(boostNames.isEmpty())
+        {
 //            should never get here
 //            TODO: reset boosts.yml (maybe rename broken)
             return boosts;
         }
 
-        for(String boostName : boostNames){
+        for(String boostName : boostNames)
+        {
             Boost boost = load(boostName);
-            if(boost != null){
+            if(boost != null)
+            {
                 boosts.add(boost);
             }
         }
@@ -32,9 +38,11 @@ public class YMLboosts extends qYML{
         return boosts;
     }
 
-    public Boost load(String boostName){
+    public Boost load(String boostName)
+    {
         Object boostData = this.getBoostsSection().get(boostName);
-        if(!(boostData instanceof Boost)){
+        if(!(boostData instanceof Boost))
+        {
             this.logger.error(Messages.ERROR_BOOST_LOAD_EXCEPTION);
             return null;
         }
@@ -43,20 +51,24 @@ public class YMLboosts extends qYML{
         return boost;
     }
 
-    public void delete(String boostName){
+    public void delete(String boostName)
+    {
         this.config.set("boosts." + boostName, null);
         this.saveFile();
     }
 
-    public void save(Boost boost){
+    public void save(Boost boost)
+    {
         String name = boost.getName();
         this.config.set("boosts." + name, boost);
         this.saveFile();
     }
 
-    private @NotNull ConfigurationSection getBoostsSection(){
+    private @NotNull ConfigurationSection getBoostsSection()
+    {
         ConfigurationSection configBoostSection = this.config.getConfigurationSection("boosts");
-        if(configBoostSection == null) {
+        if(configBoostSection == null)
+        {
             ConfigurationSection boostsSection = config.createSection("boosts");
             this.saveFile();
             return boostsSection;
