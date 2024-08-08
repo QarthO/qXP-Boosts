@@ -142,7 +142,7 @@ public class PlayerPickupExpListener implements Listener
             }
 
             double bonus = amount * boost.getMultiplier();
-            player.giveExp((int) bonus);
+            player.giveExp((int) bonus, true);
         }
 
         BoostUtil.notifyPlayerGotBoost(player, multiplier, sendChat, sendActionBar, sound);
