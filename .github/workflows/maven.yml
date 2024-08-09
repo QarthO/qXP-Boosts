@@ -2,7 +2,7 @@ name: Create Plugin.jar
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "1.19.4" ]
 
 jobs:
   build:
