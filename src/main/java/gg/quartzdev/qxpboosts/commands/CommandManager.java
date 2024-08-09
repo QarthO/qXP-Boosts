@@ -12,7 +12,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class CommandManager extends Command
 {
@@ -71,7 +74,17 @@ public class CommandManager extends Command
 //
         if(args.length == 1)
         {
-            StringUtil.copyPartialMatches(args[0], commandsMap.keySet(), completions);
+            Set<String> allowedSubCommands = new HashSet<>();
+            for (Map.Entry<String, qCMD> entry : commandsMap.entrySet())
+            {
+                String commandName = entry.getKey();
+                qCMD cmd = entry.getValue();
+                if (cmd.hasPermission(sender))
+                {
+                    allowedSubCommands.add(commandName);
+                }
+            }
+            StringUtil.copyPartialMatches(args[0], allowedSubCommands, completions);
         }
 
         if(args.length > 1)
