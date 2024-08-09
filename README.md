@@ -8,7 +8,7 @@
  <a href="https://www.quartzdev.gg/donate/" target="_blank">
 <img alt="Paypal Donation Link" src="https://img.shields.io/badge/Donate-00457C?logo=paypal&logoColor=white&style=for-the-badge" height="32"></a>
  <a href="https://modrinth.com/plugin/qXP-Boosts/versions" target="_blank">
-<img alt="Supported Versions: 1.21" src="https://img.shields.io/badge/1.21-blue?style=for-the-badge&label=Minecraft Versions" height="32"></a>
+<img alt="Supported Versions: 1.20-1.20.2" src="https://img.shields.io/badge/1.20.2-blue?style=for-the-badge&label=Minecraft Versions" height="32"></a>
 </p>
 
 ---
@@ -18,8 +18,7 @@
 ---
 
 <h3> Tested Versions </h3>
-<p>Minecraft: 1.21</p>
-<p>Java: 21+</p>
+<p>Minecraft: 1.20 to 1.20.2</p>
 <p>Servers: <a href="https://papermc.io" target="_blank">Paper</a>, <a href="https://pufferfish.host/downloads" target="_blank">Pufferfish</a>, <a href="https://purpurmc.org" target="_blank">Purpur</a> or any other <u>stable</u> paper fork. </p>
 <blockquote>Spigot and modded hybrids will <i>likely</i> not work and will receive no support. If you're still using spigot, it is <b>HIGHLY</b> recommend you upgrade to Paper</blockquote>
 
