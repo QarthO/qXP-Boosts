@@ -36,6 +36,7 @@ public class CommandManager extends Command
         commandsMap.put("delete", new CMDdelete("delete", "admin"));
         commandsMap.put("set", new CMDset("set", "admin"));
         commandsMap.put("info", new CMDinfo("info", "player"));
+        commandsMap.put("givexp", new CMDgivexp("give", "admin"));
 
         Bukkit.getCommandMap().register(name, this);
     }

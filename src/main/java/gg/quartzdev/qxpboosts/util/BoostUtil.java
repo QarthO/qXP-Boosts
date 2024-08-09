@@ -1,7 +1,10 @@
 package gg.quartzdev.qxpboosts.util;
 
+import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.qPermission;
+import gg.quartzdev.qxpboosts.qXpBoosts;
 import org.bukkit.Sound;
+import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
@@ -65,5 +68,17 @@ public class BoostUtil
         }
 
         return boostNames;
+    }
+
+    public static Set<Boost> getBoosts(Player player){
+        Set<Boost> boosts = new HashSet<>();
+        for(String boostName : qXpBoosts.getInstance().boostManager.getActiveBoostNames())
+        {
+            if(!player.hasPermission(qPermission.BOOST.boost(boostName.toLowerCase()))) continue;
+            Boost boost = qXpBoosts.getInstance().boostManager.getBoost(boostName);
+            if(boost == null) continue;
+            boosts.add(boost);
+        }
+        return boosts;
     }
 }

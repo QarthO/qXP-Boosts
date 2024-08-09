@@ -18,6 +18,9 @@ public enum Messages
     ERROR_BOOST_NOT_FOUND("<prefix> <red>Error: Boost not found: <yellow><boost>"),
     ERROR_CMD_NOT_FOUND("<prefix> <red>Error: Command not found: <yellow><cmd>"),
     ERROR_CORRUPT_FILE("<prefix> <red>Error: Corrupt file: <yellow><file></yellow><newline>Please reset the file."),
+    ERROR_PLAYER_NOT_FOUND("<prefix> <red>Error: Player not found: <yellow><player>"),
+    ERROR_NEGATIVE_AMOUNT("<prefix> <red>Error: You can not give negative amounts of XP"),
+    ERROR_NUMBER_FORMAT("<prefix> <red>Error: Invalid number: <yellow><amount>"),
 
     //    File
     ERROR_CREATE_FILE("<prefix> Error creating file: <yellow><file>"),
@@ -35,10 +38,12 @@ public enum Messages
     SYNTAX_CREATE("<prefix> <red>Syntax: /<label> create <boost> <multiplier>"),
     SYNTAX_SET("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
     SYNTAX_SET_SETTING("<prefix> <red>Syntax: /<label> set <boost> <setting> <value>"),
+    SYNTAX_GIVEXP("<prefix> <red>Syntax: /<label> givexp <player> <amount>"),
 
     //    Messages
     XP_ACTIONBAR_GAIN("<bold><green>Gained <blue><multiplier>x <green>XP"),
     XP_CHAT_GAIN("<prefix> <green>Gained <blue><multiplier>x <green>XP"),
+    XP_GIVEN("<prefix> <green>Gave <blue><amount> <green>XP to <yellow><player>"),
 
     //    Boost
     BOOST_ENABLED("<prefix> <green>Enabled boost: <light_purple><boost>"),
