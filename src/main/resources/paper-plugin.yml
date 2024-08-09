@@ -1,4 +1,4 @@
 name: qXP-Boosts
 version: '${project.version}'
 main: gg.quartzdev.qxpboosts.qXpBoosts
-api-version: '1.20'
+api-version: '1.19'
