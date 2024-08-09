@@ -53,7 +53,7 @@ public abstract class qYML
 
     public void saveFile()
     {
-        Bukkit.getAsyncScheduler().runNow(plugin, scheduledTask ->
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, scheduledTask ->
         {
             try
             {
