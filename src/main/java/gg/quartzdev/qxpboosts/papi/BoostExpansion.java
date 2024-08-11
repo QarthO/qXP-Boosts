@@ -51,17 +51,17 @@ public class BoostExpansion extends PlaceholderExpansion
             try {
                 boost = BoostUtil.getSortedBoosts(player).get(sortIndex);
             } catch (IndexOutOfBoundsException ignored) {
-                return null;
+                return "None";
             }
         }
-        if(split.length < 2) return null;
-        if(boost == null) return null;
+        if(split.length < 2) return "error";
+        if(boost == null) return "error";
         return switch(split[1])
         {
             case "chance" -> "" + boost.getChance();
             case "multiplier" -> "" + boost.getMultiplier();
             case "name" -> boost.getName();
-            default -> null;
+            default -> "error";
         };
     }
 
