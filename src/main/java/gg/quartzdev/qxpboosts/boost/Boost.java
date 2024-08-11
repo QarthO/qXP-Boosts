@@ -166,7 +166,6 @@ public class Boost implements ConfigurationSerializable, Comparable<Boost>
     @Override
     public int compareTo(@NotNull Boost boost)
     {
-
 //        Sort by chance
         if(this.chance > boost.chance) return 1;
         if(this.chance < boost.chance) return -1;
