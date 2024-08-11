@@ -35,31 +35,9 @@ public class BoostManager
         this.loadBoosts();
     }
 
-    public @NotNull Boost getBoost(Player player)
-    {
-        Boost boost = boostsMap.get("default");
-
-//        Checks player permissions if they have any of the custom boosts
-        for(String boostName : boostsMap.keySet())
-        {
-            if(player.hasPermission(qPermission.BOOST.boost(boostName)))
-            {
-                boost = boostsMap.get(boostName);
-                break;
-            }
-        }
-
-        return boost;
-    }
-
     public @Nullable Boost getBoost(String boostName)
     {
         return boostsMap.get(boostName);
-    }
-
-    public boolean isActive(String boostName)
-    {
-        return boostsMap.get(boostName).isActive();
     }
 
     public void loadBoosts()
@@ -109,7 +87,7 @@ public class BoostManager
         for(Boost boost : boostsMap.values())
         {
             String statusColor = boost.isActive() ? "<green>" : "<red>";
-            String interact = "<hover:show_text:'<light_purple>" + boost.getName() + " <gray>- <green>Click for info'><click:run_command:/xpboosts info " + boost.getName() + ">";
+            String interact = "<hover:show_text:'<light_purple>" + boost.getName() + " <gray>- <green>Click for info'><click:run_command:/qxpboosts info " + boost.getName() + ">";
             boostList.add(interact + statusColor + boost.getName() + "<reset>");
         }
         return boostList;

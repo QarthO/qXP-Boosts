@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @SerializableAs("qBoost")
-public class Boost implements ConfigurationSerializable
+public class Boost implements ConfigurationSerializable, Comparable<Boost>
 {
 
     public EnumSet<ExperienceOrb.SpawnReason> xpSources;
@@ -29,6 +29,7 @@ public class Boost implements ConfigurationSerializable
     private boolean chat;
     private boolean actionBar;
     private Sound sound;
+    private int sortWeight;
 
     public Boost(String name, double multiplier)
     {
@@ -40,6 +41,7 @@ public class Boost implements ConfigurationSerializable
         this.sound = null;
         this.xpSources = EnumSet.noneOf(ExperienceOrb.SpawnReason.class);
         this.mobSources = EnumSet.noneOf(CreatureSpawnEvent.SpawnReason.class);
+        this.sortWeight = 0;
     }
 
     //    Deserializes from boosts storage file
@@ -156,4 +158,9 @@ public class Boost implements ConfigurationSerializable
     }
 
 
+    @Override
+    public int compareTo(@NotNull Boost boost)
+    {
+        return Integer.compare(this.sortWeight, boost.sortWeight);
+    }
 }

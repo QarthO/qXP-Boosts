@@ -9,7 +9,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class BoostUtil
@@ -70,8 +72,8 @@ public class BoostUtil
         return boostNames;
     }
 
-    public static Set<Boost> getBoosts(Player player){
-        Set<Boost> boosts = new HashSet<>();
+    public static List<Boost> getSortedBoosts(Player player){
+        List<Boost> boosts = new ArrayList<>();
         for(String boostName : qXpBoosts.getInstance().boostManager.getActiveBoostNames())
         {
             if(!player.hasPermission(qPermission.BOOST.boost(boostName.toLowerCase()))) continue;

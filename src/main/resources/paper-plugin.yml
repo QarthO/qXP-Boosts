@@ -2,3 +2,8 @@ name: qXP-Boosts
 version: '${project.version}'
 main: gg.quartzdev.qxpboosts.qXpBoosts
 api-version: '1.19'
+dependencies:
+  server:
+    PlaceholderAPI:
+      load: BEFORE
+      required: false

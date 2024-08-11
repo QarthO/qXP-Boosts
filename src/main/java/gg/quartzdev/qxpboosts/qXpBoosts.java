@@ -5,6 +5,7 @@ import gg.quartzdev.qxpboosts.boost.BoostManager;
 import gg.quartzdev.qxpboosts.commands.CommandManager;
 import gg.quartzdev.qxpboosts.inventory.pages.listeners.InventoryListener;
 import gg.quartzdev.qxpboosts.listeners.PlayerPickupExpListener;
+import gg.quartzdev.qxpboosts.papi.BoostExpansion;
 import gg.quartzdev.qxpboosts.storage.qConfig;
 import gg.quartzdev.qxpboosts.util.qLogger;
 import org.bstats.bukkit.Metrics;
@@ -46,6 +47,8 @@ public final class qXpBoosts extends JavaPlugin
         this.config = new qConfig();
         this.boostManager = new BoostManager();
 
+        registerPlaceholders();
+
         registerHandlers();
 
         new CommandManager("qxpboosts");
@@ -61,6 +64,16 @@ public final class qXpBoosts extends JavaPlugin
     {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerPickupExpListener(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new InventoryListener(), this);
+    }
+
+    private void registerPlaceholders()
+    {
+        if(Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null){
+            this.getLogger().info("Install PlaceholderAPI if you'd like to use the provided placeholders");
+            return;
+        }
+        this.getLogger().info("Registering placeholders...");
+        new BoostExpansion().register();
     }
 
     @SuppressWarnings("UnstableApiUsage")
