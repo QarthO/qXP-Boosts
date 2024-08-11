@@ -157,10 +157,25 @@ public class Boost implements ConfigurationSerializable, Comparable<Boost>
         return map;
     }
 
+    @Override
+    public String toString()
+    {
+        return "{" + name + ", " + multiplier + "x, " + chance + "%}";
+    }
 
     @Override
     public int compareTo(@NotNull Boost boost)
     {
-        return Integer.compare(this.sortWeight, boost.sortWeight);
+
+//        Sort by chance
+        if(this.chance > boost.chance) return 1;
+        if(this.chance < boost.chance) return -1;
+
+//        If chance is the same, sort by multiplier
+        if (this.multiplier > boost.multiplier) return 1;
+        if (this.multiplier < boost.multiplier) return -1;
+
+//        If multiplier is the same, sort by name
+        return this.name.compareTo(boost.name);
     }
 }

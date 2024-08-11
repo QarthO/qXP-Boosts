@@ -69,7 +69,7 @@ public class BoostExpansion extends PlaceholderExpansion
     {
         String[] split = firstParam.split(":");
         try {
-            return Integer.parseInt(split[1]);
+            return Integer.parseInt(split[1])-1;
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored) {
             return 0;
         }

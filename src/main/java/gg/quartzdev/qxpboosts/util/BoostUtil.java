@@ -3,6 +3,7 @@ package gg.quartzdev.qxpboosts.util;
 import gg.quartzdev.qxpboosts.boost.Boost;
 import gg.quartzdev.qxpboosts.qPermission;
 import gg.quartzdev.qxpboosts.qXpBoosts;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.ExperienceOrb;
 import org.bukkit.entity.Player;
@@ -10,6 +11,8 @@ import org.bukkit.permissions.PermissionAttachmentInfo;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -81,6 +84,7 @@ public class BoostUtil
             if(boost == null) continue;
             boosts.add(boost);
         }
+        boosts.sort(Collections.reverseOrder());
         return boosts;
     }
 }
