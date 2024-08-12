@@ -9,19 +9,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Set;
-
 public class BoostExpansion extends PlaceholderExpansion
 {
-
-    private BoostManager boostManager;
-
-    public BoostExpansion()
-    {
-        this.boostManager = qXpBoosts.getInstance().boostManager;
-    }
-
     @Override
     public @NotNull String getIdentifier() {
         return "qxpboosts";
@@ -42,20 +31,30 @@ public class BoostExpansion extends PlaceholderExpansion
         if(offlinePlayer == null || offlinePlayer.getPlayer() == null) return null;
         Player player = offlinePlayer.getPlayer();
 
+//        [boost:index]_[option]
         String[] split = params.toLowerCase().split("_");
+//        if missing option
+        if(split.length != 2) return "error";
 
+//        get the boost
         Boost boost = null;
         if(params.startsWith("boost"))
         {
+//            parse the index from the first param, defaults to 0 if no index given
             int sortIndex = getBoostIndex(split[0]);
-            try {
+            try
+            {
+//                get the boost based on the sort index
                 boost = BoostUtil.getSortedBoosts(player).get(sortIndex);
-            } catch (IndexOutOfBoundsException ignored) {
+            } catch (IndexOutOfBoundsException ignored)
+            {
+//                return "None if player doesn't have a boost at the index
                 return "None";
             }
         }
-        if(split.length < 2) return "error";
         if(boost == null) return "error";
+
+//        parse and return the value off the given option
         return switch(split[1])
         {
             case "chance" -> "" + boost.getChance();
@@ -65,12 +64,19 @@ public class BoostExpansion extends PlaceholderExpansion
         };
     }
 
+    /**
+     * Parses the index from the first param, defaults to 0 if no index given, or if the index is invalid
+     * @param firstParam the first param of the placeholder in format [boost:<index>]
+     * @return the requested index
+     */
     private int getBoostIndex(String firstParam)
     {
         String[] split = firstParam.split(":");
-        try {
+        try
+        {
             return Integer.parseInt(split[1])-1;
-        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException ignored)
+        {
             return 0;
         }
     }
