@@ -2,7 +2,7 @@ name: Create Plugin.jar
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "folia/1.21.1" ]
 
 jobs:
   build:
