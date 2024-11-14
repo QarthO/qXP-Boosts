@@ -13,18 +13,20 @@ public class InventoryListener implements Listener
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event)
     {
+
+//        Ignore if the opened inventory is not our custom inventory (SettingsInventory)
         if(!(event.getInventory().getHolder(false) instanceof SettingsInventory inv))
         {
             return;
         }
+
+//        Ignore if the player is modifying their own inventory, not the custom inventory (SettingsInventory)
         if(event.getClickedInventory() == null || event.getClickedInventory().getType() == InventoryType.PLAYER)
         {
             return;
         }
-        if(event.getCurrentItem() == null)
-        {
-            return;
-        }
+
+//        Call the onClick method of our custom inventory (SettingsInventory)
         inv.onClick(event);
     }
 
