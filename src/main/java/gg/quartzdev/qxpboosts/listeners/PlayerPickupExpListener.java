@@ -38,7 +38,7 @@ public class PlayerPickupExpListener implements Listener
     }
 
 
-    @EventHandler
+    @EventHandler(ignoreCancelled = true)
     public void onPlayerPickupExp(PlayerPickupExperienceEvent event)
     {
 
