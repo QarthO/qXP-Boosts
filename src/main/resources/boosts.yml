@@ -1,5 +1,5 @@
 # qXP-Boosts Boosts
-# Loaded with qXP-Boosts v1.0
+# Loaded with qXP-Boosts ${project.version}
 schema-version: '1.0'
 
 # XP Sources: https://jd.papermc.io/paper/1.20/org/bukkit/entity/ExperienceOrb.SpawnReason.html
