@@ -6,10 +6,13 @@ import gg.quartzdev.qxpboosts.util.qUtil;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 
-import java.util.EnumSet;
+import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
+import java.util.EnumSet;
+import java.util.Arrays;
 
 public class EDITsound extends qEDIT
 {
@@ -50,9 +53,10 @@ public class EDITsound extends qEDIT
     {
         if(args.length == 4)
         {
-            List<String> sounds = EnumSet.allOf(Sound.class).stream().map(Enum::name).collect(Collectors.toList());
-            sounds.add("NONE");
-            return sounds;
+            List<String> soundNames = new ArrayList<>();
+            org.bukkit.Registry.SOUNDS.forEach(sound -> soundNames.add(sound.name()));
+            soundNames.add("NONE");
+            return soundNames;
         }
         return null;
     }
